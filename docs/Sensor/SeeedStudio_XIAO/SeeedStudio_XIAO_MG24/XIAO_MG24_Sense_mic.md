@@ -1,20 +1,20 @@
 ---
-title: Microphone Usage for Sense Version
+title: Microphone and 6-Axis IMU Usage for Sense Version
 description: This article describes how to use the microphone on the XIAO MG24 Sense.
 image: https://files.seeedstudio.com/wiki/mg24_mic/mg24.jpg
-slug: /xiao_mg24_mic_sense
+slug: /xiao_mg24_mic_and_6-Axis_sense
 keywords:
   - XIAO
   - MG24
 last_update:
-  date: 11/19/2024 
+  date: 11/20/2024 
   author: qiu yu wei
 sidebar_position: 2
 ---
 
-# Usage of Seeed Studio XIAO MG24 microphone
+# Usage of Seeed Studio XIAO MG24 microphone and 6-Axis IMU
 
-This tutorial describes how the microphone on the XIAO MG24 will be used, and you will see that the brightness of the led on the development board will change according to the sound level.
+This tutorial describes how the microphone and 6-Axis IMU on the XIAO MG24 will be used.
 
 :::caution
 All contents of this tutorial are applicable to XIAO MG24 Sense only.
@@ -64,15 +64,13 @@ Unzip the file to the target path and change the filename to 2.1.0, reopen the a
 
 With everything in place, we can now start writing the code!
 
-## Software
+## Microphone (software)
 
 ### Header files and macro definitions
 
-**step 6.** Header files and macro definitions.
-
 These header files are libraries for the Silicon Labs EFR32 microcontroller and are used to manipulate the abstract interface to the device hardware.
 
-```
+```cpp
 #include "em_device.h"
 #include "em_chip.h"
 #include "em_core.h"
@@ -100,13 +98,11 @@ const int duration = 3;
 int voice_level = 0;
 ```
 
-### function initialisation
-
-**step 7.** PRS Initialisation.
+### function initialisation.
 
 PRS (Peripheral Reflex System) is a routing system for peripheral signals.
 
-```
+```cpp
 void initPRS(void) {
     CMU_ClockEnable(cmuClock_PRS, true);
     PRS_SourceAsyncSignalSet(PRS_CHANNEL, PRS_ASYNC_CH_CTRL_SOURCESEL_LETIMER0, PRS_LETIMER0_CH0);
@@ -115,11 +111,9 @@ void initPRS(void) {
 
 ```
 
-**step 8.** IADC Initialisation.
-
 **IADC_calcSrcClkPrescale** and **IADC_calcAdcClkPrescale** calculate the divider value of the sampling frequency.
 
-```
+```cpp
 void initIADC(void) {
     IADC_Init_t init = IADC_INIT_DEFAULT;
     IADC_AllConfigs_t initAllConfigs = IADC_ALLCONFIGS_DEFAULT;
@@ -148,11 +142,9 @@ void initIADC(void) {
 }
 ```
 
-**step 9.** LETIMER Initialisation.
-
 Initialise LETIMER as a trigger signal for the sampling clock.
 
-```
+```cpp
 void initLETIMER(void) {
     CMU_LFXOInit_TypeDef lfxoInit = CMU_LFXOINIT_DEFAULT;
     LETIMER_Init_TypeDef letimerInit = LETIMER_INIT_DEFAULT;
@@ -169,11 +161,9 @@ void initLETIMER(void) {
 }
 ```
 
-**step 10.** LDMA Initialisation.
-
 LDMA (Linked Direct Memory Access) is responsible for automatically transferring the sample results from the IADC to the buffer.
 
-```
+```cpp
 void initLDMA(uint32_t *buffer, uint32_t size) {
     LDMA_Init_t init = LDMA_INIT_DEFAULT;
     LDMA_TransferCfg_t transferCfg = LDMA_TRANSFER_CFG_PERIPHERAL(ldmaPeripheralSignal_IADC0_IADC_SINGLE);
@@ -185,11 +175,9 @@ void initLDMA(uint32_t *buffer, uint32_t size) {
 
 ### Volume Handling Functions
 
-**step 11.** Find the maximum average of the volume.
-
 Find the N largest values in the buffer arr and find the average value.
 
-```
+```cpp
 float findMaxAverage(uint32_t arr[], int size, int n) {
     uint32_t maxElements[N];
 
@@ -215,11 +203,9 @@ float findMaxAverage(uint32_t arr[], int size, int n) {
 }
 ```
 
-**step 12.** mapped volume.
-
 Maps the volume value from the original range (960-1500) to the LED's duty cycle range (0-20).
 
-```
+```cpp
 float mapVoiceLevel(int voice_level) {
 
     int original_min = 960;
@@ -241,7 +227,7 @@ float mapVoiceLevel(int voice_level) {
 
 ### Full Code Show
 
-```
+```cpp
 #include "em_device.h"
 #include "em_chip.h"
 #include "em_core.h"
@@ -428,6 +414,417 @@ void loop() {
 If all goes well, you will see the following effect, the brightness of the LEDs will change according to the volume of the sound.
 
 <div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/mg24_mic/test.gif" style={{width:720, height:'auto'}}/></div>
+
+## 6-Axis IMU(Software)
+
+### Macro definitions about IIC
+
+The code implements communication with peripherals (e.g. EEPROM, OLED, sensors, etc.) by emulating the I²C protocol. It defines the pins of the data/clock lines, high and low level control, input/output mode switching, delay, etc., and contains the device address and read/write mode configuration of the EEPROM, which provides a basic operating framework for I²C communication.
+
+```cpp
+//Using IIC2 to mount M24C02,OLED,LM75AD,HT1382  
+#define SDA_PIN   PB2
+#define SCL_PIN   PB3
+
+#define IMU_PWR   PD5
+
+#define I2C_SDA_IN()    pinMode(SDA_PIN, INPUT)
+#define I2C_SDA_OUT()   pinMode(SDA_PIN, OUTPUT)
+ 
+// IO operation functions	 
+#define SCL_H()   digitalWrite(SCL_PIN, 1)
+#define SCL_L()   digitalWrite(SCL_PIN, 0)
+#define SDA_H()   digitalWrite(SDA_PIN, 1)
+#define SDA_L()   digitalWrite(SDA_PIN, 0)
+#define SDA_INPUT()    digitalRead(SDA_PIN) 
+#define I2C_Delay()   delay(2)
+
+#define ACK (0)
+#define NACK (1)
+
+#define EEPROM_DEV_ADDR     (0xD4)
+#define EEPROM_WR           (0x00)
+#define EEPROM_RD           (0x01)
+
+#define EEPROM_WORD_ADDR_SIZE   (0x08)
+```
+
+### IIC
+
+This code provides basic functions for I²C communication, including:
+
+1. **Start and Stop Conditions**: Generate start and stop signals for initiating and terminating I²C communication.
+
+2. **ACK/NACK Signals**: Send acknowledgment (ACK) or non-acknowledgment (NACK) signals during data transfer.
+
+3. **ACK Detection**: Check for acknowledgment from the slave device after data is sent.
+
+   These functions are essential building blocks for implementing I²C communication protocols.
+
+   ```cpp
+   void I2C_Start(void) {
+       I2C_SDA_OUT(); // Set SDA as output
+       
+       SCL_H(); // Set clock line high
+       I2C_Delay(); // Delay for timing
+       
+       SDA_H(); // Set data line high
+       I2C_Delay();
+       
+       SDA_L(); // Pull data line low to indicate start condition
+       I2C_Delay();
+   }
+   
+   // Stop condition
+   void I2C_Stop(void) {
+       I2C_SDA_OUT(); // Set SDA as output
+       
+       SDA_L(); // Pull data line low
+       I2C_Delay();
+       
+       SCL_H(); // Set clock line high
+       I2C_Delay();
+       
+       SDA_H(); // Pull data line high to indicate stop condition
+       I2C_Delay();
+   }
+   
+   // Send an ACK signal
+   void I2C_ACK(void) {
+       I2C_SDA_OUT(); // Set SDA as output
+       
+       SCL_L(); // Pull clock line low
+       I2C_Delay();
+       
+       SDA_L(); // Pull data line low for ACK
+       I2C_Delay();
+       
+       SCL_H(); // Set clock line high
+       I2C_Delay();
+       
+       SCL_L(); // Pull clock line low
+       I2C_Delay();
+   }
+   
+   // Send a NACK signal
+   void I2C_NACK(void) {
+       I2C_SDA_OUT(); // Set SDA as output
+       
+       SCL_L(); // Pull clock line low
+       I2C_Delay();
+       
+       SDA_H(); // Pull data line high for NACK
+       I2C_Delay();
+       
+       SCL_H(); // Set clock line high
+       I2C_Delay();
+       
+       SCL_L(); // Pull clock line low
+       I2C_Delay();
+   }
+   
+   // Wait for an ACK signal from the slave
+   uint8_t I2C_GetACK(void) {
+       uint8_t time = 0;
+       
+       I2C_SDA_IN(); // Set SDA as input
+       
+       SCL_L(); // Pull clock line low
+       I2C_Delay();
+       
+       SDA_H(); // Release SDA
+       I2C_Delay();
+       
+       SCL_H(); // Set clock line high
+       I2C_Delay();
+       
+       while (SDA_INPUT()) { // Wait for SDA to go low (ACK)
+           time++;
+           if (time > 250) {
+               SCL_L(); // Pull clock line low
+               return 1; // No ACK received
+           }
+       }
+       SCL_L(); // Pull clock line low
+       return 0; // ACK received
+   }
+   
+   ```
+
+### Full Code Show
+
+This code demonstrates how to implement a software-based I²C protocol to communicate with devices like an EEPROM (M24C02). It includes I²C bit-banging functions for start, stop, ACK/NACK signaling, sending, and receiving data. It writes and reads accelerometer data to/from the EEPROM, processes the raw data into *g*-force values, and prints the results via the serial monitor. The setup initializes the I²C pins and an IMU power pin, while the loop performs continuous data acquisition and output.
+
+```cpp
+// Using I2C2 to connect M24C02, OLED, LM75AD, HT1382  
+#define SDA_PIN   PB2
+#define SCL_PIN   PB3
+
+#define IMU_PWR   PD5
+
+#define I2C_SDA_IN()    pinMode(SDA_PIN, INPUT)
+#define I2C_SDA_OUT()   pinMode(SDA_PIN, OUTPUT)
+ 
+// IO operation macros	 
+#define SCL_H()   digitalWrite(SCL_PIN, 1)
+#define SCL_L()   digitalWrite(SCL_PIN, 0)
+#define SDA_H()   digitalWrite(SDA_PIN, 1)
+#define SDA_L()   digitalWrite(SDA_PIN, 0)
+#define SDA_INPUT()    digitalRead(SDA_PIN)  // Read SDA input
+#define I2C_Delay()   delay(2)
+
+#define ACK (0)
+#define NACK (1)
+
+#define EEPROM_DEV_ADDR     (0xD4)
+#define EEPROM_WR           (0x00)
+#define EEPROM_RD           (0x01)
+
+#define EEPROM_WORD_ADDR_SIZE   (0x08)
+
+// Start condition
+void I2C_Start(void) {
+    I2C_SDA_OUT(); // Set SDA as output
+    
+    SCL_H(); // Set clock line high
+    I2C_Delay(); // Delay for timing
+    
+    SDA_H(); // Set data line high
+    I2C_Delay();
+    
+    SDA_L(); // Pull data line low to indicate start condition
+    I2C_Delay();
+}
+
+// Stop condition
+void I2C_Stop(void) {
+    I2C_SDA_OUT(); // Set SDA as output
+    
+    SDA_L(); // Pull data line low
+    I2C_Delay();
+    
+    SCL_H(); // Set clock line high
+    I2C_Delay();
+    
+    SDA_H(); // Pull data line high to indicate stop condition
+    I2C_Delay();
+}
+
+// Send an ACK signal
+void I2C_ACK(void) {
+    I2C_SDA_OUT(); // Set SDA as output
+    
+    SCL_L(); // Pull clock line low
+    I2C_Delay();
+    
+    SDA_L(); // Pull data line low for ACK
+    I2C_Delay();
+    
+    SCL_H(); // Set clock line high
+    I2C_Delay();
+    
+    SCL_L(); // Pull clock line low
+    I2C_Delay();
+}
+
+// Send a NACK signal
+void I2C_NACK(void) {
+    I2C_SDA_OUT(); // Set SDA as output
+    
+    SCL_L(); // Pull clock line low
+    I2C_Delay();
+    
+    SDA_H(); // Pull data line high for NACK
+    I2C_Delay();
+    
+    SCL_H(); // Set clock line high
+    I2C_Delay();
+    
+    SCL_L(); // Pull clock line low
+    I2C_Delay();
+}
+
+// Wait for an ACK signal from the slave
+uint8_t I2C_GetACK(void) {
+    uint8_t time = 0;
+    
+    I2C_SDA_IN(); // Set SDA as input
+    
+    SCL_L(); // Pull clock line low
+    I2C_Delay();
+    
+    SDA_H(); // Release SDA
+    I2C_Delay();
+    
+    SCL_H(); // Set clock line high
+    I2C_Delay();
+    
+    while (SDA_INPUT()) { // Wait for SDA to go low (ACK)
+        time++;
+        if (time > 250) {
+            SCL_L(); // Pull clock line low
+            return 1; // No ACK received
+        }
+    }
+    SCL_L(); // Pull clock line low
+    return 0; // ACK received
+}
+
+// Send one byte of data
+void I2C_SendBYTE(uint8_t data) {
+    uint8_t cnt = 0;
+    I2C_SDA_OUT();
+    for (cnt = 0; cnt < 8; cnt++) {
+        SCL_L();
+        I2C_Delay();
+        if (data & 0x80) {
+            SDA_H();
+        } else {
+            SDA_L();
+        }
+        data <<= 1;
+        SCL_H();
+        I2C_Delay();
+    }
+    SCL_L(); // Finish sending data
+    I2C_Delay();
+    I2C_GetACK();
+}
+
+// Read one byte of data
+uint8_t I2C_ReadBYTE(uint8_t ack) {
+    uint8_t cnt = 0;
+    uint8_t data = 0xFF; // Initialize data
+    
+    SCL_L();
+    I2C_Delay();
+    
+    for (cnt = 0; cnt < 8; cnt++) {
+        SCL_H(); // Set SCL high to read data
+        I2C_Delay();
+        data <<= 1;
+        if (SDA_INPUT()) {
+            data |= 0x01;
+        }
+        SCL_L();
+        I2C_Delay();
+    }
+    // Send ACK or NACK signal
+    if (ack == 0) {
+        I2C_ACK();
+    } else {
+        I2C_NACK();
+    }
+    return data;
+}
+
+// Write a byte to EEPROM
+void EEPROM_WriteByte(uint16_t addr, uint8_t data) {
+    I2C_Start(); // Start condition
+    I2C_SendBYTE(EEPROM_DEV_ADDR | EEPROM_WR); // Send device address
+    if (EEPROM_WORD_ADDR_SIZE == 0x08) {
+        I2C_SendBYTE((uint8_t)(addr & 0x00FF)); // Send address
+    } else {
+        I2C_SendBYTE((uint8_t)(addr >> 8));
+        I2C_SendBYTE((uint8_t)(addr & 0x00FF));
+    }
+    I2C_SendBYTE(data); // Send data
+    I2C_Stop(); // Stop condition
+}
+
+// Read a byte from EEPROM
+void EEPROM_ReadByte(uint16_t addr, uint8_t *pdata) {
+    I2C_Start(); // Start condition
+    I2C_SendBYTE(EEPROM_DEV_ADDR | EEPROM_WR); // Send device address
+    if (EEPROM_WORD_ADDR_SIZE == 0x08) {
+        I2C_SendBYTE((uint8_t)(addr & 0x00FF)); // Send address
+    } else {
+        I2C_SendBYTE((uint8_t)(addr >> 8));
+        I2C_SendBYTE((uint8_t)(addr & 0x00FF));
+    }
+    I2C_Start(); // Restart condition
+    I2C_SendBYTE(EEPROM_DEV_ADDR | EEPROM_RD); // Send device address with read flag
+    *pdata = I2C_ReadBYTE(NACK); // Read data
+    I2C_Stop(); // Stop condition
+}
+
+// Write multiple bytes to EEPROM
+void EEPROM_Write_NByte(uint16_t addr, uint8_t *pdata, uint16_t size) {
+    for (uint16_t i = 0; i < size; i++) {
+        EEPROM_WriteByte(addr, pdata[i]);
+        addr++;
+        delay(10); // Delay to prevent write errors
+    }
+}
+
+// Read multiple bytes from EEPROM
+void EEPROM_Read_NByte(uint16_t addr, uint8_t *pdata, uint16_t size) {
+    for (uint16_t i = 0; i < size; i++) {
+        EEPROM_ReadByte(addr, &pdata[i]);
+        addr++;
+    }
+}
+
+void setup() {
+    pinMode(LED_BUILTIN, OUTPUT);
+    pinMode(IMU_PWR, OUTPUT);
+    digitalWrite(IMU_PWR, 1); // Power on IMU
+
+    pinMode(SDA_PIN, OUTPUT);
+    pinMode(SCL_PIN, OUTPUT);
+  
+    Serial.begin(9600);
+    delay(1000);
+
+    uint8_t tmp1 = 0xb0;
+    uint8_t tmp2 = 0x10;
+    EEPROM_WriteByte(0x10, tmp1); // Write to EEPROM
+    EEPROM_WriteByte(0x11, tmp2);
+    delay(500);
+}
+
+void loop() {
+    uint8_t tmp_data[2] = {0};
+
+    // Read accelerometer data from EEPROM
+    EEPROM_Read_NByte(0x22, tmp_data, 2);
+    int16_t accelX = (tmp_data[0] | tmp_data[1] << 8);
+    float accelX_g = accelX * 0.061 / 1000;
+
+    EEPROM_Read_NByte(0x24, tmp_data, 2);
+    int16_t accelY = (tmp_data[0] | tmp_data[1] << 8);
+    float accelY_g = accelY * 0.061 / 1000;
+
+    EEPROM_Read_NByte(0x26, tmp_data, 2);
+    int16_t accelZ = (tmp_data[0] | tmp_data[1] << 8);
+    float accelZ_g = accelZ * 0.061 / 1000;
+
+    EEPROM_Read_NByte(0x28, tmp_data, 2);
+    int16_t LaccelX = (tmp_data[0] | tmp_data[1] << 8);
+    float LaccelX_g = LaccelX * 0.061 / 1000;
+
+    EEPROM_Read_NByte(0x2a, tmp_data, 2);
+    int16_t LaccelY = (tmp_data[0] | tmp_data[1] << 8);
+    float LaccelY_g = LaccelY * 0.061 / 1000;
+
+    EEPROM_Read_NByte(0x2c, tmp_data, 2);
+    int16_t LaccelZ = (tmp_data[0] | tmp_data[1] << 8);
+    float LaccelZ_g = LaccelZ * 0.061 / 1000;
+
+    // Print results to the serial monitor
+    Serial.printf("accelX_g = %f    LaccelX_g = %f\r\n", accelX_g, LaccelX_g);
+    Serial.printf("accelY_g = %f    LaccelY_g = %f\r\n", accelY_g, LaccelY_g);
+    Serial.printf("accelZ_g = %f    LaccelZ_g = %f\r\n\n", accelZ_g, LaccelZ_g);
+
+    delay(500);
+}
+
+```
+
+If all goes well, you will observe the acceleration along the X, Y, and Z axes in the Serial Monitor.
+
+<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/mg24_mic/six.png" style={{width:850, height:'auto'}}/></div>
+
 
 ## Tech Support & Product Discussion
 
