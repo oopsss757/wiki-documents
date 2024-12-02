@@ -649,7 +649,6 @@ If all goes well, you will observe the acceleration along the X, Y, and Z axes i
 <div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/mg24_mic/six.png" style={{width:850, height:'auto'}}/></div>
 
 ## Resources
-
 ### For Seeed Studio XIAO MG24 Sense
 
 - 📄 **[PDF]** [Seeed Studio 6-Axis IMU(LSM6DS3TR-C) datasheet](https://statics3.seeedstudio.com/fusion/opl/sheets/314040211.pdf)
