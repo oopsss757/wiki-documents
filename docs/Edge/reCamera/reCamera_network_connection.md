@@ -1,18 +1,17 @@
 ---
 description: reCamera Getting Started 
-title: reCamera
+title: Network Connection
 keywords:
   - Edge
   - reCamera
 image: https://files.seeedstudio.com/wiki/wiki-platform/S-tempor.png
-slug: /recamera_getting_started
+slug: /recamera_network_connection
 last_update:
   date: 09/29/2024
   author: Parker Hu
 ---
 
-# reCamera Getting Started
-<div align="center"><img width={600} src="https://files.seeedstudio.com/wiki/reCamera/001.jpg" /></div>
+# reCamera Network Connection
 
 reCamera is a combination of a **processor** and a camera **sensor**.
 
@@ -136,38 +135,6 @@ The specific Settings are as follows:
 
 <div align="center"><img width={600} src="https://files.seeedstudio.com/wiki/reCamera/020.png" /></div>
 
-
-## System update and upgrade
-
-You can check out the latest version of the [reCamera OS here.](https://github.com/Seeed-Studio/reCamera-OS)
-
-Manually update the latest OTA firmware:
-```bash
-/mnt/system/upgrade.sh latest https://github.com/Seeed-Studio/reCamera-OS/releases/latest 
-
-/mnt/system/upgrade.sh start
-```
-
-Manually update the specified version of OTA firmware. You can also update the system version in your branch.
-
-```bash
-/mnt/system/upgrade.sh latest https://github.com/Seeed-Studio/reCamera-OS/releases/download/0.0.5/sg2002_reccamera_emmc_md5sum.txt #Replace it with your branch link
-
-/mnt/system/upgrade.sh start
-```
-
-Update the firmware manually using the local ota package.
-
-```bash
-/mnt/system/upgrade.sh start sg2002_reCamera_0.0.5_emmc_ota.zip
-```
-You can change system files to be readable or writable by typing `rootfs_rw on/off`.
-
-Manually restore factory Settings.
-
-```bash
-/mnt/system/upgrade.sh recovery
-```
 
 ## Resources
 

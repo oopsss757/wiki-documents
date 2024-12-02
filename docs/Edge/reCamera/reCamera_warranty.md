@@ -1,6 +1,6 @@
 ---
 description: reCamera Warranty
-title: reCamera Warranty
+title: Warranty
 keywords:
   - Edge
   - reCamera

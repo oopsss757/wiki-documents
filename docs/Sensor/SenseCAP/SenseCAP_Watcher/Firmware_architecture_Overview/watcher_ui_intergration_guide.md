@@ -9,7 +9,7 @@ last_update:
   author: Citric
 ---
 
-# UI Integration Guide
+# Watcher UI Integration Guide
 
 ## 1. **UI Component Structure**
 

@@ -9,7 +9,17 @@ const docList = []
 const excludedPaths = [
   path.join(docsDirectory, 'Seeed_Elderly', 'weekly_wiki'), // weekly wiki 的历史目录
   path.join(docsDirectory, 'zh-CN'), // 排除中文文档的目录
-  path.join(docsDirectory, 'weekly_wiki.md') // 排除 weekly wiki 的文件
+  path.join(docsDirectory, 'weekly_wiki.md'), // 排除 weekly wiki 的文件
+  
+  path.join(docsDirectory, 'Edge', 'reCamera', 'reCamera_model_conversion.md'), // 排除指定文档
+  path.join(docsDirectory, 'Edge', 'reCamera', 'reCamera_warranty.md'), // 排除指定文档
+
+  // 添加排除的五个文档路径
+  path.join(docsDirectory, 'Cloud_Chain', 'SenseCraft', 'SenseCraft_AI', 'Pretrained_Models', 'Grove_vision_AI_V2.md'),
+  path.join(docsDirectory, 'Cloud_Chain', 'SenseCraft', 'SenseCraft_AI', 'Pretrained_Models', 'XIAO_ESP32S3_Sense.md'),
+  path.join(docsDirectory, 'Cloud_Chain', 'SenseCraft', 'SenseCraft_AI', 'SenseCraft_AI_main_page.md'),
+  path.join(docsDirectory, 'Cloud_Chain', 'SenseCraft', 'SenseCraft_AI', 'Training', 'Classification.md'),
+  path.join(docsDirectory, 'Cloud_Chain', 'SenseCraft', 'SenseCraft_AI', 'Training', 'Object_Detection.md')
 ];
 
 // 递归函数，用于遍历多层文件夹
@@ -19,8 +29,6 @@ function processDirectory(directory) {
   if (excludedPaths.includes(directory)) {
     return;
   }
-
-
 
   fs.readdirSync(directory).forEach((file) => {
     const filePath = path.join(directory, file)
@@ -39,14 +47,23 @@ function processDirectory(directory) {
       const fileContents = fs.readFileSync(filePath, 'utf-8')
       const { data, content } = matter(fileContents)
 
+      // 1. 去除 YAML 头部
+      const markdownWithoutYaml = content.replace(/^---[\s\S]+?---\s*/, '')
+
+      // 2. 去除所有代码块（包括以 ``` 开头的块）
+      const markdownWithoutCodeBlocks = markdownWithoutYaml.replace(/```[\s\S]*?```/g, '')
+
       // 优先查找第一个一级标题（以 # 开头的行）
-      const titleMatch = content.match(/^#\s+(.*)/m);
-      const title = titleMatch ? titleMatch[1].trim() : (data.title || '');
+      const titleMatch = markdownWithoutCodeBlocks.match(/^#\s+(.*)/m)
+      const title = titleMatch ? titleMatch[1].trim() : (data.title || '')
+
+      // 3. 获取文件的 path（优先使用 slug，如果没有 slug，则根据路径生成）
+      let filePathRelative = path.relative(docsDirectory, filePath); // 计算相对路径
+      filePathRelative = filePathRelative.replace(/\\/g, '/'); // 将反斜杠换成正斜杠
+      const slug = data.slug || filePathRelative.replace('.md', ''); // 如果没有 slug，则使用相对路径
 
       // 判断是否有 date 字段
       if (data.last_update && data.last_update.date) {
-        // 使用 slug 字段作为路径
-        const slug = data.slug || '';
         docList.push({
           path: slug,
           image: data.image || '',

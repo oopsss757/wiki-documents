@@ -4,8 +4,8 @@ title: 开始
 image: https://files.seeedstudio.com/wiki/wiki-platform/S-tempor.png
 slug: /cn/XIAO_ESP32C3_Getting_Started
 last_update:
-  date: 10/27/2023
-  author: Xin Ping Li
+  date: 11/13/2024
+  author: Agnes
 ---
 
 
@@ -31,7 +31,7 @@ last_update:
 - 蓝牙LE子系统:支持蓝牙5和蓝牙mesh功能
 - 超低功耗:深度睡眠功耗约为43μA
 
--更好的射频性能:包括外部射频天线
+- 更好的射频性能:包括外部射频天线
 - 电池充电芯片:支持锂电池充放电管理
 - 丰富的片上资源:400KB SRAM, 4MB板载闪存
 - 超小尺寸:拇指大小(20x17.5mm) XIAO系列经典外形，适用于可穿戴设备和小型项目
@@ -59,6 +59,8 @@ last_update:
 
 <div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO_WiFi/pin_map-2.png" style={{width:1000, height:'auto'}}/></div>
 
+> *A3（GP105） - 使用 ADC2，由于采样信号错误，ADC2 可能无法工作。为了获得可靠的模拟读数，请改用 ADC1（A0/A1/A2）。请参阅 ESP32-C3 数据表。
+
 ### 组件的概述
 
 <div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO_WiFi/front-label-3.png" style={{width:500, height:'auto'}}/></div>
@@ -83,29 +85,6 @@ last_update:
 ## 开始
 
 首先，我们将XIAO ESP32C3连接到计算机，将LED连接到板上，并从Arduino IDE中上传一个简单的代码，通过闪烁连接的LED来检查板是否正常工作。
-
-### 硬件设置
-
-你需要准备以下内容:
-
-- 1 x [Seeed Studio XIAO ESP32C3](https://www.seeedstudio.com/seeed-xiao-esp32c3-p-5431.html)
-- 1 x 电脑
-- 1 x USB Type-C 数据线
-
-:::提示
-
-部分USB线只能供电，不能传输数据。如果你没有USB线或不知道你的USB线是否可以传输数据，你可以检查[见USB Type-C support USB 3.1](https://www.seeedstudio.com/USB-3-1-Type-C-to-A-Cable-1-Meter-3-1A-p-4085.html)。
-:::
-
-- **步骤 1.** 通过USB Type-C数据线将XIAO ESP32C3连接到计算机。
-
-<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO_WiFi/cable-connect.png" style={{width:120, height:'auto'}}/></div>
-
-- **步骤  2.** 将LED连接到D10引脚，连接方式如下所示
-
-<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO_WiFi/connect-led-2.png" style={{width:500, height:'auto'}}/></div>
-
-**请注意:** 确保串联一个电阻(大约150Ω)，以限制通过LED的电流，并防止电流过大，可能烧毁LED
 
 ### 软件设置
 
@@ -138,24 +117,47 @@ last_update:
 
 切换到**Tools > Port**，选择连接的XIAO ESP32C3的串口名称。这可能是COM3或更高(**COM1**和**COM2**通常留给硬件串口)。
 
+### 硬件设置
+
+你需要准备以下内容:
+
+- 1 x [Seeed Studio XIAO ESP32C3](https://www.seeedstudio.com/seeed-xiao-esp32c3-p-5431.html)
+- 1 x 电脑
+- 1 x USB Type-C 数据线
+
+:::tip
+
+部分USB线只能供电，不能传输数据。如果你没有USB线或不知道你的USB线是否可以传输数据，你可以检查[见USB Type-C support USB 3.1](https://www.seeedstudio.com/USB-3-1-Type-C-to-A-Cable-1-Meter-3-1A-p-4085.html)。
+:::
+
+- **步骤 1.** 通过USB Type-C数据线将XIAO ESP32C3连接到计算机。
+
+<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO_WiFi/cable-connect.png" style={{width:120, height:'auto'}}/></div>
+
+- **步骤  2.** 将LED连接到D10引脚，连接方式如下所示
+
+<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO_WiFi/connect-led-2.png" style={{width:500, height:'auto'}}/></div>
+
+**请注意:** 确保串联一个电阻(大约150Ω)，以限制通过LED的电流，并防止电流过大，可能烧毁LED
+
 ### 闪烁LED
 
 - **步骤 1.** 将下面的代码复制到Arduino IDE中
 
 ```cpp
-// define led according to pin diagram
+// 根据引脚图定义 LED
 int led = D10;
 
 void setup() {
-  // initialize digital pin led as an output
+  // 初始化数字引脚 led 为输出模式
   pinMode(led, OUTPUT);
 }
 
 void loop() {
-  digitalWrite(led, HIGH);   // turn the LED on 
-  delay(1000);               // wait for a second
-  digitalWrite(led, LOW);    // turn the LED off
-  delay(1000);               // wait for a second
+  digitalWrite(led, HIGH);   // 打开 LED
+  delay(1000);               // 等待 1 秒
+  digitalWrite(led, LOW);    // 关闭 LED
+  delay(1000);               // 等待 1 秒
 }
 ```
 
@@ -169,7 +171,7 @@ void loop() {
 ESP32C3可以使用3.7V锂电池作为电源输入。您可以参考下面的图来了解连接方法
 <div align="center"><img src="https://files.seeedstudio.com/wiki/XIAO_WiFi/battery_connect.png" alt="pir" width="600" height="auto"/></div>
 
-:::提醒
+:::caution
 焊接时，请注意不要短路正负端子，烧坏电池和设备。
 :::
 
@@ -210,15 +212,15 @@ void setup() {
 void loop() {
   uint32_t Vbatt = 0;
   for(int i = 0; i < 16; i++) {
-    Vbatt = Vbatt + analogReadMilliVolts(A0); // ADC with correction   
+    Vbatt = Vbatt + analogReadMilliVolts(A0); // 带修正的 ADC
   }
-  float Vbattf = 2 * Vbatt / 16 / 1000.0;     // attenuation ratio 1/2, mV --> V
+  float Vbattf = 2 * Vbatt / 16 / 1000.0;     // 衰减比 1/2，mV 转 V
   Serial.println(Vbattf, 3);
   delay(1000);
 }
 ```
 
-:::提示
+:::tip
 以上内容来自Seeed Studio论坛用户**msfujino**，原发于:
 [https://forum.seeedstudio.com/t/battery-voltage-monitor-and-ad-conversion-for-xiao-esp32c/267535](https://forum.seeedstudio.com/t/battery-voltage-monitor-and-ad-conversion-for-xiao-esp32c/267535).
 我们建议您在尝试测量电池电压之前，有良好的动手能力和更好的焊接技能，并小心危险的行为，如使电池短路。
@@ -234,8 +236,7 @@ void loop() {
 RTC_DATA_ATTR int bootCount = 0;
 
 /*
-Method to print the reason by which ESP32
-has been awaken from sleep
+方法打印 ESP32 从睡眠中唤醒的原因
 */
 void print_wakeup_reason(){
   esp_sleep_wakeup_cause_t wakeup_reason;
@@ -244,36 +245,36 @@ void print_wakeup_reason(){
 
   switch(wakeup_reason)
   {
-    case ESP_SLEEP_WAKEUP_EXT0 : Serial.println("Wakeup caused by external signal using RTC_IO"); break;
-    case ESP_SLEEP_WAKEUP_EXT1 : Serial.println("Wakeup caused by external signal using RTC_CNTL"); break;
-    case ESP_SLEEP_WAKEUP_TIMER : Serial.println("Wakeup caused by timer"); break;
-    case ESP_SLEEP_WAKEUP_TOUCHPAD : Serial.println("Wakeup caused by touchpad"); break;
-    case ESP_SLEEP_WAKEUP_ULP : Serial.println("Wakeup caused by ULP program"); break;
-    default : Serial.printf("Wakeup was not caused by deep sleep: %d\n",wakeup_reason); break;
+    case ESP_SLEEP_WAKEUP_EXT0 : Serial.println("通过 RTC_IO 外部信号唤醒"); break;
+    case ESP_SLEEP_WAKEUP_EXT1 : Serial.println("通过 RTC_CNTL 外部信号唤醒"); break;
+    case ESP_SLEEP_WAKEUP_TIMER : Serial.println("通过定时器唤醒"); break;
+    case ESP_SLEEP_WAKEUP_TOUCHPAD : Serial.println("通过触摸板唤醒"); break;
+    case ESP_SLEEP_WAKEUP_ULP : Serial.println("通过 ULP 程序唤醒"); break;
+    default : Serial.printf("唤醒不是由深度睡眠引起的: %d\n",wakeup_reason); break;
   }
 }
 
 void setup(){
   Serial.begin(115200);
-  delay(1000); //Take some time to open up the Serial Monitor
+  delay(1000); // 给串口监视器一些时间
 
-  //Increment boot number and print it every reboot
+  // 增加启动次数并每次重启时打印
   ++bootCount;
-  Serial.println("Boot number: " + String(bootCount));
+  Serial.println("启动次数: " + String(bootCount));
 
-  //Print the wakeup reason for ESP32
+  // 打印 ESP32 唤醒原因
   print_wakeup_reason();
 
   esp_deep_sleep_enable_gpio_wakeup(BIT(D1), ESP_GPIO_WAKEUP_GPIO_LOW);
 
-  //Go to sleep now
-  Serial.println("Going to sleep now");
+  // 现在进入睡眠模式
+  Serial.println("进入睡眠模式");
   esp_deep_sleep_start();
-  Serial.println("This will never be printed");
+  Serial.println("这行不会被打印");
 }
 
 void loop(){
-  //This is not going to be called
+  // 这个函数不会被调用
 }
 ```
 
@@ -281,13 +282,13 @@ void loop(){
 
 <div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO_WiFi/15.png" style={{width:700, height:'auto'}}/></div>
 
-:::提示
+:::tip
 进入深度睡眠模式后，XIAO的端口将消失，你需要唤醒它才能再次看到它的端口号!
 :::
 
 在程序中，我们使用**D1**低电平来唤醒。这意味着我们可以将一个按钮连接到针D1，当我们按下按钮时，XIAO就会醒来。
 
-:::提醒
+:::caution
 目前XIAO ESP32C3只支持GPIO唤醒，支持唤醒的引脚只有D0~D3。这个程序可能无法在其他引脚上工作。
 :::
 
@@ -372,7 +373,7 @@ void loop(){
 
 <div align="middle"><img width="400" src="https://mjrovai.github.io/XIAO_Big_Power_Small_Board-ebook/cover.jpg" /></div>
 
-- **[Ebook]** [Arduino小型化与TinyML应用 从入门到精通](https://tinkergen.cn/book_xiao)
+- **[电子书]** [Arduino小型化与TinyML应用 从入门到精通](https://tinkergen.cn/book_xiao)
 
 ## 技术支持和产品讨论
 感谢您选择我们的产品!我们在这里为您提供不同的支持，以确保您使用我们的产品的体验尽可能顺利。我们提供多种沟通渠道，以满足不同的喜好和需求。

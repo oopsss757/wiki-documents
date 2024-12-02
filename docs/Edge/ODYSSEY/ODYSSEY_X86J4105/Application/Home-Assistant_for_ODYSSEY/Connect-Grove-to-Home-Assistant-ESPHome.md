@@ -235,163 +235,117 @@ Currently the following Grove modules are supported by ESPHome
 <table>
 <thead>
   <tr>
-    <th>Grove Module</th>
+    <th>Grove</th>
     <th>Category</th>
+    <th>ESPHome Components</th>
   </tr>
 </thead>
 <tbody>
   <tr>
     <td><a href="https://www.seeedstudio.com/Grove-Laser-PM2-5-Sensor-HM3301.html">Grove - Laser PM2.5 Dust Sensor</a></td>
     <td>Gas</td>
+    <td><a href="https://esphome.io/components/sensor/hm3301">The Grove - Laser PM2.5 Sensor (HM3301)</a></td>
   </tr>
   <tr>
     <td><a href="https://www.seeedstudio.com/Grove-All-in-one-Environmental-Sensor-SEN55-p-5373.html">Grove - SEN55 All-in-one environmental sensor</a>, NOx, PM, VOC, RH, Temp</td>
     <td>Gas</td>
+    <td><a href="https://esphome.io/components/sensor/sen5x.html">Sen5x Series Environmental sensor</a></td>
   </tr>
   <tr>
     <td><a href="https://www.seeedstudio.com/Grove-All-in-one-Environmental-Sensor-SEN54-p-5374.html">Grove - SEN54 All-in-one environmental sensor</a>, PM, VOC, RH, Temperature</td>
     <td>Gas</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-CO2-Temperature-Humidity-Sensor-SCD30-p-2911.html">Grove - CO2 &amp; Temperature &amp; Humidity Sensor (SCD30)</a></td>
-    <td>Gas</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-CO2-Temperature-Humidity-Sensor-SCD41-p-5025.html">Grove - CO2 &amp; Temperature &amp; Humidity Sensor - SCD41</a></td>
-    <td>Gas</td>
+    <td><a href="https://esphome.io/components/sensor/sen5x.html">Sen5x Series Environmental sensor</a></td>
   </tr>
   <tr>
     <td><a href="https://www.seeedstudio.com/Grove-VOC-and-eCO2-Gas-Sensor-for-Arduino-SGP30.html">Grove - VOC and eCO2 Gas Sensor - SGP30</a></td>
     <td>Gas</td>
+    <td><a href="https://esphome.io/components/sensor/sgp30.html">SGP30 CO₂ and Volatile Organic Compound Sensor</a></td>
   </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-ADS1115-16-bit-ADC-p-4599.html">Grove - 4 Channel 16-bit ADC (ADS1115)</a></td>
-    <td>ADC</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-Time-of-Flight-Distance-Sensor-VL53L0X.html">Grove - Time of Flight Distance Sensor(VL53L0X)</a></td>
-    <td>Distance</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-Ultrasonic-Distance-Sensor.html">Grove - Ultrasonic Distance Sensor</a></td>
-    <td>Distance</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-AHT20-I2C-Industrial-grade-temperature-and-humidity-sensor-p-4497.html">Grove - AHT20 I2C Industrial Grade Temperature and Humidity Sensor</a></td>
-    <td>Environmental</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-Temperature-Humidity-Sensor-V2-0-DHT20-p-4967.html">Grove - Temperature &amp; Humidity Sensor V2.0 (DHT20)</a></td>
-    <td>Environmental</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-Temperature-Humidity-Sensor-Pro-AM2302-DHT22.html">Grove - Temperature &amp; Humidity Sensor Pro (DHT22/AM2302)</a></td>
-    <td>Environmental</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-BME280-Environmental-Sensor-Temperature-Humidity-Barometer.html">Grove - Temp&amp;Humi&amp;Barometer Sensor (BME280)</a></td>
-    <td>Environmental</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-Temperature-Humidity-Pressure-and-Gas-Sensor-for-Arduino-BME680.html">Grove - Temperature, Humidity, Pressure and Gas Sensor for Arduino - BME680</a></td>
-    <td>Environmental</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-Barometer-Sensor-BMP280.html">Grove Temperature and Barometer Sensor (BMP280)</a></td>
-    <td>Environmental</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/One-Wire-Temperature-Sensor-p-1235.html">One Wire Temperature Sensor - DS18B20</a></td>
-    <td>Environmental</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-Temperature-Humidity-Sensor-DHT11.html">Grove - Temperature &amp; Humidity Sensor (DHT11)</a></td>
-    <td>Environmental</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-Temperature-Humidity-Sensor-SHT31.html">Grove - I2C High Accuracy Temperature Sensor - MCP9808</a></td>
-    <td>Environmental</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-Temperature-Humidity-Sensor-SHT31.html">Grove - Temperature &amp; Humidity Sensor (SHT31)</a></td>
-    <td>Environmental</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-Temp-Humi-Sensor-SHT40-p-5384.html" target="_blank" rel="noopener noreferrer">Grove - Temperature&amp;Humidity Sensor (SHT40)</a></td>
-    <td>Environmental</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-High-Precision-Barometer-Sensor-DPS310-p-4397.html" target="_blank" rel="noopener noreferrer">Grove - High Precision Barometric Pressure Sensor (DPS310)</a></td>
-    <td>Environmental</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-I2C-Thermocouple-Amplifier-MCP9600.html" target="_blank" rel="noopener noreferrer">Grove - I2C Thermocouple Amplifier (MCP9600)</a></td>
-    <td>Environmental</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-I2C-Color-Sensor-V2.html">Grove - I2C Color Sensor V2</a></td>
-    <td>Color</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-I2C-Color-Sensor-V2.html">Grove - Digital Light Sensor - TSL2561</a></td>
-    <td>Light</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-ADC-for-Load-Cell-HX711-p-4361.html">Grove - ADC for Load Cell (HX711)</a></td>
-    <td>Weight</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-12-Key-Capacitive-I2C-Touch-Sensor-V3-MPR121-p-4694.html">Grove - 12 Key Capacitive I2C Touch Sensor V3 (MPR121)</a></td>
-    <td>Capacitive</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-16-Channel-PWM-Driver-PCA9685.html">Grove - 16-Channel PWM Driver (PCA9685)</a></td>
-    <td>PWM</td>
-  </tr>
+<tr>
+  <td><a href="https://www.seeedstudio.com/Grove-Air-Quality-Sensor-SGP40-p-5700.html">Grove - VOC Gas Sensor (SGP40)</a></td>
+  <td>Gas</td>
+  <td><a href="https://esphome.io/components/sensor/sgp4x.html">SGP40 Volatile Organic Compound Sensor and SGP41 VOC and NOx Sensor</a></td>
+</tr>
+<tr>
+  <td><a href="https://www.seeedstudio.com/Grove-Formaldehyde-Sensor-SFA30-p-5204.html">Grove - Formaldehyde Sensor (SFA30) - HCHO Sensor</a></td>
+  <td>Air Quility</td>
+  <td><a href="https://esphome.io/components/sensor/sfa30.html">SFA30 Formaldehyde Sensor</a></td>
+</tr>
   <tr>
     <td><a href="https://www.seeedstudio.com/Grove-4-Digit-Display.html">Grove - 4-Digit Display</a></td>
     <td>Display</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-OLED-Display-0-66-SSD1306-v1-0-p-5096.html">Grove - OLED Display 0.66" (SSD1306)</a></td>
-    <td>Display</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-Relay.html">Grove - Relay</a></td>
-    <td>Relay</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-SPDT-Relay-30A.html">Grove - SPDT Relay(30A)</a></td>
-    <td>Relay</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-Solid-State-Relay-V2-p-3128.html">Grove - Solid State Relay V2</a></td>
-    <td>Relay</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-2-Channel-SPDT-Relay.html">Grove - 2-Channel SPDT Relay</a></td>
-    <td>Relay</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-PIR-Motion-Sensor.html">Grove - PIR Motion Sensor</a></td>
-    <td>Motion</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-mini-PIR-motion-sensor-p-2930.html">Grove - mini PIR motion sensor</a></td>
-    <td>Motion</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-Digital-PIR-Motion-Sensor-p-4524.html">Grove - Digital PIR Motion Sensor(12m)</a></td>
-    <td>Motion</td>
+    <td><a href="https://esphome.io/components/display/tm1637.html">TM1637 7-Segment Display</a></td>
   </tr>
   <tr>
     <td><a href="https://www.seeedstudio.com/Grove-Servo.html" target="_blank" rel="noopener noreferrer">Grove - Servo</a></td>
     <td>Actuator</td>
+    <td><a href="https://esphome.io/components/servo.html">Servo Component</a></td>
   </tr>
   <tr>
-    <td><a href="https://www.seeedstudio.com/Grove-8-Channel-I2C-Hub-TCA9548A-p-4398.html" target="_blank" rel="noopener noreferrer">Grove - 8 Channel I2C Multiplexer/I2C Hub (TCA9548A)</a></td>
-    <td>Multiplexer</td>
+  <td><a href="https://www.seeedstudio.com/Grove-I2C-Motor-Driver-TB6612FNG-p-3220.html">Grove - I2C Motor Driver (TB6612FNG)</a></td>
+  <td>Actuator</td>
+  <td><a href="https://esphome.io/components/grove_tb6612fng.html">Grove TB6612FNG Motor Drive</a></td>
+</tr>
+  <tr>
+    <td><a href="https://www.seeedstudio.com/Grove-RTC-DS1307.html">Grove - DS1307 RTC (Real Time Clock) for Arduino</a></td>
+    <td>Time</td>
+    <td><a href="https://esphome.io/components/time/">Time Component</a></td>
   </tr>
+<tr>
+  <td><a href="https://www.seeedstudio.com/Grove-High-Precision-RTC.html">Grove - High Precision RTC (DS1307)</a></td>
+  <td>Time</td>
+  <td><a href="https://esphome.io/components/time/">Time Component</a></td>
+</tr>
+<tr>
+  <td><a href="https://www.seeedstudio.com/Grove-WS2813-RGB-LED-Strip-Waterproof-30-LED-m-1m.html">Grove - WS2813 RGB LED Strip Waterproof - 30 LED/m - 1m</a></td>
+  <td>Light</td>
+  <td><a href="https://esphome.io/components/light/neopixelbus.html">NeoPixelBus Light</a></td>
+</tr>
+<tr>
+  <td><a href="https://www.seeedstudio.com/Grove-WS2813-RGB-LED-Strip-Waterproof-60-LED-m-1m.html">Grove - WS2813 RGB LED Strip Waterproof - 60 LED/m - 1m</a></td>
+  <td>Light</td>
+  <td><a href="https://esphome.io/components/light/neopixelbus.html">NeoPixelBus Light</a></td>
+</tr>
+<tr>
+  <td><a href="https://www.seeedstudio.com/Grove-RGB-LED-Ring-20-WS2813-Mini.html">Grove - RGB LED Ring (20 - WS2813 Mini)</a></td>
+  <td>Light</td>
+  <td><a href="https://esphome.io/components/light/neopixelbus.html">NeoPixelBus Light</a></td>
+</tr>
+<tr>
+  <td><a href="https://www.seeedstudio.com/Grove-RGB-LED-Stick-10-WS2813-Mini.html">Grove - RGB LED Stick (10 - WS2813 Mini)</a></td>
+  <td>Light</td>
+  <td><a href="https://esphome.io/components/light/neopixelbus.html">NeoPixelBus Light</a></td>
+</tr>
+<tr>
+  <td><a href="https://www.seeedstudio.com/Grove-RGB-LED-Ring-24-WS2813-Mini-p-4202.html">Grove - RGB LED Ring (24-WS2813 Mini)</a></td>
+  <td>Light</td>
+  <td><a href="https://esphome.io/components/light/neopixelbus.html">NeoPixelBus Light</a></td>
+</tr>
+<tr>
+  <td><a href="https://www.seeedstudio.com/Grove-RGB-LED-WS2813-Mini-p-4269.html">Grove - RGB LED (WS2813 Mini)</a></td>
+  <td>Light</td>
+  <td><a href="https://esphome.io/components/light/neopixelbus.html">NeoPixelBus Light</a></td>
+</tr>
+<tr>
+  <td><a href="https://www.seeedstudio.com/Grove-RGB-LED-Stick-20-WS2813-Mini-p-4271.html">Grove - RGB LED Stick (20-WS2813 Mini)</a></td>
+  <td>Light</td>
+  <td><a href="https://esphome.io/components/light/neopixelbus.html">NeoPixelBus Light</a></td>
+</tr>
+<tr>
+  <td><a href="https://www.seeedstudio.com/Grove-RGB-LED-Ring-16-WS2813-Mini-p-4201.html">Grove - RGB LED Ring (16-WS2813 Mini)</a></td>
+  <td>Light</td>
+  <td><a href="https://esphome.io/components/light/neopixelbus.html">NeoPixelBus Light</a></td>
+</tr>
+<tr>
+  <td><a href="https://www.seeedstudio.com/Grove-RGB-LED-Stick-15-WS2813-Mini-p-4270.html">Grove - RGB LED Stick (15-WS2813 Mini)</a></td>
+  <td>Light</td>
+  <td><a href="https://esphome.io/components/light/neopixelbus.html">NeoPixelBus Light</a></td>
+</tr>
+<tr>
+  <td><a href="https://www.seeedstudio.com/Grove-Ultimate-RGB-LED-Ring-p-4203.html">Grove - Ultimate RGB LED Ring</a></td>
+  <td>Light</td>
+  <td><a href="https://esphome.io/components/light/neopixelbus.html">NeoPixelBus Light</a></td>
+</tr>
 </tbody>
 </table>
 

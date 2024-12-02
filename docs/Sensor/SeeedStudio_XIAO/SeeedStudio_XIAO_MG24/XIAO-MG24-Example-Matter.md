@@ -3,9 +3,9 @@ description: XIAO MG24 Example - Matter
 title: Seeed Studio XIAO MG24 Example - Matter
 image: https://files.seeedstudio.com/wiki/XIAO_MG24/Getting_Start/top.jpg
 slug: /xiao_mg24_matter
-sidebar_position: 1
+sidebar_position: 2
 last_update:
-  date: 2024-11-07T14:43:35+08:00
+  date: 11/07/2024
   author: Spencer
 ---
 
@@ -163,7 +163,14 @@ After scanning the QR code, the Matter controller(HomeKit) will prompt you to co
 
 <div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO_MG24/matter-device-online.png" style={{width:480, height: 'auto', "border-radius": '12.8px'}}/></div>
 
-<iframe class="youtube-video-r" src="https://youtube.com/embed/tmCpIWuRojQ" title="MG24 Matter Lightbulb Example" width="560" height="315" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe
+  className="youtube-video-r"
+  src="https://youtube.com/embed/tmCpIWuRojQ"
+  title="MG24 Matter Lightbulb Example"
+  frameBorder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  style={{ width: '380px', height: '640px' }}
+></iframe>
 
 ## Reference & Resources
 

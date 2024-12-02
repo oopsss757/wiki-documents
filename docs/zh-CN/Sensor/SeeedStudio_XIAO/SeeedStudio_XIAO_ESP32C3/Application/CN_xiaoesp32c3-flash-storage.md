@@ -6,8 +6,8 @@ keywords:
 image: https://files.seeedstudio.com/wiki/wiki-platform/S-tempor.png
 slug: /cn/xiaoesp32c3-flash-storage
 last_update:
-  date: 11/2/2023
-  author: Xin Ping Li
+  date: 11/12/2024
+  author: Agnes
 ---
 
 
@@ -224,8 +224,8 @@ preferences.end();
 #include <nvs_flash.h>
 
 void setup() {
-  nvs_flash_erase(); // erase the NVS partition and...
-  nvs_flash_init(); // initialize the NVS partition.
+  nvs_flash_erase(); // 擦除 NVS 分区并...
+  nvs_flash_init(); // 初始化 NVS 分区。
   while(true);
 }
 
@@ -259,7 +259,7 @@ Preferences preferences;
 Serial.begin(115200);
 ```
 
-**步骤4.** 在闪存中创建一个名为“my-app”的读写模式的“存储空间”。你可以给它取别的名字。
+**步骤 4.** 在闪存中创建一个名为“my-app”的读写模式的“存储空间”。你可以给它取别的名字。
 
 ```c
 preferences.begin("my-app", false);
@@ -267,7 +267,7 @@ preferences.begin("my-app", false);
 
 **步骤 5.** 使用get和put方法来获取/存储数据内容。
 
-#### 存储/获取键:值对数据
+#### 存储/获取键：值对数据
 
 使用首选项保存的数据结构如下:
 
@@ -368,39 +368,39 @@ void setup() {
   delay(3000);
   Serial.println();
 
-  // Open Preferences with my-app namespace. Each application module, library, etc
-  // has to use a namespace name to prevent key name collisions. We will open storage in
-  // RW-mode (second parameter has to be false).
-  // Note: Namespace name is limited to 15 chars.
+  // 使用 "my-app" 命名空间打开首选项。每个应用模块、库等
+  // 都必须使用命名空间名称，以防止键名冲突。我们将以
+  // RW（读写）模式打开存储（第二个参数必须为 false）。
+  // 注意：命名空间名称的长度限制为 15 个字符。
   preferences.begin("my-app", false);
 
-  // Remove all preferences under the opened namespace
+  // 删除打开命名空间下的所有首选项
   //preferences.clear();
 
-  // Or remove the counter key only
+  // 或者只删除 "counter" 键
   //preferences.remove("counter");
 
-  // Get the counter value, if the key does not exist, return a default value of 0
-  // Note: Key name is limited to 15 chars.
+  // 获取计数器的值，如果键不存在，则返回默认值 0
+  // 注意：键名的长度限制为 15 个字符。
   unsigned int counter = preferences.getUInt("counter", 0);
 
-  // Increase counter by 1
+  // 将计数器加 1
   counter++;
 
-  // Print the counter to Serial Monitor
-  Serial.printf("Current counter value: %u\n", counter);
+  // 将计数器值打印到串口监视器
+  Serial.printf("当前计数器值: %u\n", counter);
 
-  // Store the counter to the Preferences
+  // 将计数器值存储到首选项中
   preferences.putUInt("counter", counter);
 
-  // Close the Preferences
+  // 关闭首选项
   preferences.end();
 
-  // Wait 10 seconds
-  Serial.println("Restarting in 10 seconds...");
+  // 等待 10 秒
+  Serial.println("10 秒后重启...");
   delay(10000);
 
-  // Restart ESP
+  // 重启 ESP
   ESP.restart();
 }
 
@@ -473,7 +473,7 @@ void setup() {
     Serial.println("No values saved for ssid or password");
   }
   else {
-    // Connect to Wi-Fi
+    // 连接到 Wi-Fi
     WiFi.mode(WIFI_STA);
     WiFi.disconnect();
     delay(100);
@@ -490,7 +490,7 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  // 将你的主代码放在这里，以重复运行：
 }
 ```
 
@@ -507,7 +507,7 @@ EEPROM是ESP32微控制器的内部存储器，允许在重新启动板后保持
 ESP32微控制器有一个闪存区，可以像Arduino的EEPROM一样接口，即使在电路板关闭后也可以将数据保存在内存中。
 
 
-::: cautionAttention
+:::cautionAttention
 
 需要注意的一件重要的事情是EEPROM的大小和寿命有限。内存单元可以被任意多次读取，但写入周期的数量被限制为**100,000**。建议密切关注存储数据的大小以及多久更新一次。EEPROM存储器可以存储从0到255或128个IP地址或RFID标签的512个值。
 
@@ -556,7 +556,7 @@ EEPROM.put(address, value);
 EEPROM.write(0, 9);
 ```
 
-:::提示
+:::tip
 如果我们想存储浮点数据，我们通常使用`EEPROM.put()`方法而不是`EEPROM.write()`方法。如果你想使用write()方法存储它，那么你需要使用`EEPROM.writeFloat()`。
 :::
 
@@ -582,7 +582,7 @@ EEPROM.read(0);
 
 这将返回**9**，这是存储在该位置的值。
 
-:::提示
+:::tip
 如果我们想获取浮点数数据，我们通常使用`EEPROM.get()`方法而不是`EEPROM.read()`方法。如果你想使用read()方法获取它，那么你需要使用`EEPROM.readFloat()`。
 :::
 
@@ -606,7 +606,7 @@ EEPROM.update(0, 9);
 
 它不会再次写入EEPROM，因为当前保存的值与我们想要写入的值相同。
 
-:::请注意
+:::note
 要了解有关EEPROM操作的更多信息，您可以阅读[官方Arduino文档](https://docs.arduino.cc/learn/programming/eeprom-guide#eeprom-clear)。
 :::
 
@@ -633,18 +633,18 @@ EEPROM.update(0, 9);
 我们还定义了其他变量，需要使这个草图工作。
 
 ```c
-// constants won't change. They're used here to set pin numbers:
-const int ledPin = D10;      // the number of the LED pin
+// 常量不会改变。它们在这里用于设置引脚号：
+const int ledPin = D10;      // LED 引脚的编号
 
-// Variables will change:
-int ledState = LOW;  // ledState used to set the LED
+// 变量会发生变化：
+int ledState = LOW;  // 用于设置 LED 的状态
 
-// Generally, you should use "unsigned long" for variables that hold time
-// The value will quickly become too large for an int to store
-unsigned long previousMillis = 0;  // will store last time LED was updated
+// 通常，应该使用 "unsigned long" 类型的变量来存储时间
+// 因为 int 类型的变量存储的值很快就会超过其上限
+unsigned long previousMillis = 0;  // 存储上次 LED 更新的时间
 
-// constants won't change:
-const long interval = 10000;  // interval at which to blink (milliseconds)
+// 常量不会改变：
+const long interval = 10000;  // 间隔时间，用于控制 LED 闪烁的间隔（毫秒）
 ```
 
 在`setup()`中，使用预定义的大小初始化EEPROM。
@@ -665,23 +665,22 @@ digitalWrite (ledPin, ledState);
 在`loop()`函数部分，我们需要做的就是在一段时间内翻转LED的状态。
 
 ```c
-// check to see if it's time to blink the LED; that is, if the difference
-// between the current time and last time you blinked the LED is bigger than
-// the interval at which you want to blink the LED.
+// 检查是否该闪烁 LED；即，如果当前时间与上次闪烁 LED 的时间差大于
+// 设置的闪烁间隔时间，则执行 LED 闪烁。
 unsigned long currentMillis = millis();
 
 if (currentMillis - previousMillis >= interval) {
-    // save the last time you blinked the LED
+    // 保存上次闪烁 LED 的时间
     previousMillis = currentMillis;
-    Serial.println("State changed");
-    // if the LED is off turn it on and vice-versa:
+    Serial.println("状态已改变");
+    // 如果 LED 关闭，则打开它；反之亦然：
     if (ledState == LOW) {
       ledState = HIGH;
     } else {
       ledState = LOW;
     }
 
-    // set the LED with the ledState of the variable:
+    // 使用 ledState 变量的值来设置 LED 状态：
     digitalWrite(ledPin, ledState);
 }
 ```
@@ -699,67 +698,67 @@ EEPROM.commit();
 ```
 
 以下是完成的过程。
-:::注意
-请注意，你**不应该**长时间运行这个例子。在这个例子中，我们每十秒钟写一次EEPROM，长时间运行这个例子会**大大减少** EEPROM的寿命。:::
+:::cautionAttention
+请注意，你**不应该**长时间运行这个例子。在这个例子中，我们每十秒钟写一次EEPROM，长时间运行这个例子会**大大减少** EEPROM的寿命。
+:::
 
 ```c
-// include library to read and write from flash memory
+// 包含用于读写闪存的库
 #include <EEPROM.h>
 
-// define the number of bytes you want to access
+// 定义要访问的字节数
 #define EEPROM_SIZE 1
 
-// constants won't change. They're used here to set pin numbers:
-const int ledPin = D10;      // the number of the LED pin
+// 常量不会改变。它们在这里用于设置引脚号：
+const int ledPin = D10;      // LED 引脚的编号
 
-// Variables will change:
-int ledState = LOW;  // ledState used to set the LED
+// 变量会发生变化：
+int ledState = LOW;  // 用于设置 LED 的状态
 
-// Generally, you should use "unsigned long" for variables that hold time
-// The value will quickly become too large for an int to store
-unsigned long previousMillis = 0;  // will store last time LED was updated
+// 通常，应该使用 "unsigned long" 类型的变量来存储时间
+// 因为 int 类型的变量存储的值很快就会超过其上限
+unsigned long previousMillis = 0;  // 存储上次 LED 更新的时间
 
-// constants won't change:
-const long interval = 10000;  // interval at which to blink (milliseconds)
+// 常量不会改变：
+const long interval = 10000;  // 间隔时间，用于控制 LED 闪烁的间隔（毫秒）
 
 void setup() { 
   Serial.begin(115200);
   
-  // initialize EEPROM with predefined size
+  // 初始化 EEPROM，使用预定义的大小
   EEPROM.begin(EEPROM_SIZE);
 
   pinMode(ledPin, OUTPUT);
 
-  // read the last LED state from flash memory
+  // 从闪存中读取最后的 LED 状态
   ledState = EEPROM.read(0);
-  // set the LED to the last stored state
+  // 设置 LED 为最后保存的状态
   digitalWrite(ledPin, ledState);
 }
 
 void loop() {
-  // here is where you'd put code that needs to be running all the time.
+  // 这里是运行中需要持续执行的代码。
 
-  // check to see if it's time to blink the LED; that is, if the difference
-  // between the current time and last time you blinked the LED is bigger than
-  // the interval at which you want to blink the LED.
+  // 检查是否该闪烁 LED；即，如果当前时间与上次闪烁 LED 的时间差大于
+  // 设置的闪烁间隔时间，则执行 LED 闪烁。
   unsigned long currentMillis = millis();
 
   if (currentMillis - previousMillis >= interval) {
-    // save the last time you blinked the LED
+    // 保存上次闪烁 LED 的时间
     previousMillis = currentMillis;
-    Serial.println("State changed");
-    // if the LED is off turn it on and vice-versa:
+    Serial.println("状态已改变");
+    // 如果 LED 关闭，则打开它；反之亦然：
     if (ledState == LOW) {
       ledState = HIGH;
     } else {
       ledState = LOW;
     }
-    // save the LED state in flash memory
+    // 将 LED 状态保存到闪存中
     EEPROM.write(0, ledState);
     EEPROM.commit();
-    Serial.println("State saved in flash memory");
+    Serial.println("状态已保存到闪存");
 
-    // set the LED with the ledState of the variable:
+    // 使用 ledState 变量的值来设置 LED 状态：
     digitalWrite(ledPin, ledState);
   }
 }

@@ -7,10 +7,10 @@ keywords:
   - Modbus RTU
   - rs485
 image: https://files.seeedstudio.com/wiki/reComputer-R1000/recomputer_r_images/r1000_connection_1.webp
-slug: /reComputer_r1000_use_rs485_modbus_rtu
+slug: /recomputer_r1000_use_rs485_modbus_rtu
 last_update:
-  date: 10/25/2024
-  author: ShuishengPeng
+  date: 11/14/2024
+  author: Joshua Lee
 ---
 
 ## Introduction
@@ -59,16 +59,100 @@ For ModbusTCP, we use Ethernet cables to connect the W10 PC and reComputer R1000
 
 <div align="center"><img src="https://files.seeedstudio.com/wiki/reComputer-R1000/fuxa/r1000_connection.png" alt="pir" width="500" height="auto" /></div>
 
-## Configuration required for reComputer R1000 V1.0
-For reComputer R1000 V1.0,we need to control the DE pin of the 485 transceiver, which is used by the device to switch between data sending mode and receiving mode. By default, R1000 does not control the DE pin, so when the user does not control this pin, the 485 can only communicate in one direction.
-  
-We wrote a [**C program**](https://github.com/Seeed-Studio/seeed-linux-dtoverlays/tree/master/tools/rs485_control_DE) to manage the DE pin, If your application is only responsible for receiving/sending data, you can use this program to ensure that the sending and receiving of the RS485 interface is normal.
+## Action required for reComputer R1000 v1.0
+
+For reComputer R1000 v1.0, the DE pin of the built-in 485 transceiver is out of control by default, which means the interfaces can only transmit data unidirectionally (receive or send only).
+
+:::note
+To distinguish between the hardware revision (v1.0 and v1.1), you can refer to [reComputer R1000 V1.1 Product change details](https://wiki.seeedstudio.com/recomputer_r1000_v1_1_description/).
+:::
+
+We now have two solutions, one is to **load a kernel module that hooks the UART driver, which we recommend you to use**, and the other is an application layer based solution that simply calls the `libgpiod` to control the DE pins. You can choose one based on your needs.
+
+### Kernel module solution (recommended)
+
+#### Installation
+
+Firstly, you need to download the source code of the kernel module. It's a standalone repository, so you can directly clone it.
+
+```shell
+git clone https://github.com/bclswl0827/r1000v1-rs485-autoflow
+cd r1000v1-rs485-autoflow
+```
+
+Next, you need to compile the kernel module.
+
+```shell
+make
+```
+
+If you are getting errors while compiling, you may need to install the kernel headers corresponding to your current running kernel. We assume that you are using Raspberry Pi OS, so you can use the following command to install the kernel headers.
+
+```shell
+sudo apt-get install linux-headers-$(uname -r)
+```
+
+After that, you can compile the kernel module again.
+
+#### Load the kernel module
+
+After it's got compiled, you can load the kernel module by running the following command.
+
+```shell
+sudo insmod r1000v1-rs485-autoflow.ko
+```
+
+If the kernel module loaded successfully, you should see the following message in the kernel log, check it with `dmesg` command.
+
+```shell
+[  256.037465] r1000v1_rs485_autoflow: RS-485 interface has been hooked successfully
+```
+
+Now, you can use the `minicom` tool to test the RS485 communication. You can also use other serial port testing tools (e.g., `picocom`).
+
+To load the kernel at boot time, you can add this module to the `/etc/modules` file using the following command.
+
+```shell
+echo "r1000v1_rs485_autoflow" | sudo tee -a /etc/modules
+```
+
+After the module is registered, you need to reboot the system to make the changes take effect.
+
+```shell
+sudo reboot
+```
+
+#### Unload the kernel module
+
+To unload the kernel module, you can run the following command, and the built-in RS485 interface will return to receive-only mode.
+
+```shell
+sudo rmmod r1000v1-rs485-autoflow
+```
+
+#### Add the module with DKMS
+
+DKMS (Dynamic Kernel Module Support) is a system that automates the building and installation of kernel modules, making it useful for managing modules across multiple kernel versions. By using DKMS, you can ensure that your modules remain compatible even after a kernel update.
+
+To add this kernel module with DKMS, use the following command:
+
+```shell
+sudo make dkms_install
+```
+
+This command will register the module with DKMS, compile it, and install it for the current kernel version. When the kernel is upgraded in the future, DKMS will automatically rebuild and install the module for the new version, so you don't need to manually recompile it.
+
+### Application layer solution
+
+#### Using script
+
 - In addition to the methods mentioned in this article, we also provide a script that you can execute using the following command. This script can automatically create a new /dev/ttyx and then use the newly created device number to perform rs485/modbus rtu communication is enough
   ```shell
   curl -sSL https://raw.githubusercontent.com/Seeed-Projects/R1000-RS485-Util/main/setup_rs485.sh | sudo bash
   ```
 
-### Manual configuration
+#### Manual setup
+
 First, you need to download the [**C program**](https://github.com/Seeed-Studio/seeed-linux-dtoverlays/tree/master/tools/rs485_control_DE) provided by us, and then refer to the contents of the ReadMe. Compile and run. 
 
 ```shell

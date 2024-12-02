@@ -6,8 +6,8 @@ keywords:
 image: https://files.seeedstudio.com/wiki/wiki-platform/S-tempor.png
 slug: /cn/XIAO_ESP32C3_Bluetooth_Usage
 last_update:
-  date: 10/27/2023
-  author: Xin Ping Li
+  date: 11/13/2024
+  author: Agnes
 ---
 
 # 使用 XIAO ESP32C3 的蓝牙功能
@@ -39,37 +39,42 @@ ESP32C3支持蓝牙5 (LE)连接。本wiki将介绍在此板上使用蓝牙的基
 #include <BLEScan.h>
 #include <BLEAdvertisedDevice.h>
 
-int scanTime = 5; //In seconds
+int scanTime = 5; // 扫描时间，单位：秒
 BLEScan* pBLEScan;
 
 class MyAdvertisedDeviceCallbacks: public BLEAdvertisedDeviceCallbacks {
     void onResult(BLEAdvertisedDevice advertisedDevice) {
-      Serial.printf("Advertised Device: %s \n", advertisedDevice.toString().c_str());
+      Serial.printf("广告设备: %s \n", advertisedDevice.toString().c_str());
     }
 };
 
 void setup() {
   Serial.begin(115200);
-  Serial.println("Scanning...");
+  Serial.println("开始扫描...");
 
   BLEDevice::init("");
-  pBLEScan = BLEDevice::getScan(); //create new scan
+  pBLEScan = BLEDevice::getScan(); // 创建新的扫描
   pBLEScan->setAdvertisedDeviceCallbacks(new MyAdvertisedDeviceCallbacks());
-  pBLEScan->setActiveScan(true); //active scan uses more power, but get results faster
+  pBLEScan->setActiveScan(true); // 启用主动扫描，使用更多电力，但可以更快地获得结果
   pBLEScan->setInterval(100);
-  pBLEScan->setWindow(99);  // less or equal setInterval value
+  pBLEScan->setWindow(99);  // 设置窗口，值应小于或等于setInterval的值
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  // 在这里写入你的主程序，重复运行：
   BLEScanResults foundDevices = pBLEScan->start(scanTime, false);
-  Serial.print("Devices found: ");
+  Serial.print("发现设备数量: ");
   Serial.println(foundDevices.getCount());
-  Serial.println("Scan done!");
-  pBLEScan->clearResults();   // delete results fromBLEScan buffer to release memory
+  Serial.println("扫描完成！");
+  pBLEScan->clearResults();   // 从BLEScan缓冲区清除结果以释放内存
   delay(2000);
 }
 ```
+:::tip
+如果您已经将 ESP32 开发板升级到了 3.0.0 以上版本，则需要更改一些代码以兼容它。
+1. ```BLEScanResults foundDevices = pBLEScan->start(scanTime, false);``` 改为 ```BLEScanResults* foundDevices = pBLEScan->start(scanTime, false);```
+2. ```Serial.println(foundDevices.getCount());``` 改为 ```Serial.println(foundDevices->getCount());```
+:::
 
 **步骤 2.** 上传代码并打开串行监视器开始扫描蓝牙设备
 
@@ -87,7 +92,7 @@ void loop() {
 #include <BLEUtils.h>
 #include <BLEServer.h>
 
-// See the following for generating UUIDs:
+// 有关生成 UUID 的信息，请参阅以下内容：
 // https://www.uuidgenerator.net/
 
 #define SERVICE_UUID        "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
@@ -134,10 +139,15 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  // 将你的主代码放在这里，以重复运行：
   delay(2000);
 }
 ```
+
+:::tip
+如果您已经将 ESP32 开发板升级到了 3.0.0 以上版本，则需要更改一些代码以兼容它。
+1.  ```std::string value = pCharacteristic->getValue();``` 改为 ```String value = pCharacteristic->getValue();```
+:::
 
 - **步骤 2.**上传代码并打开串行监视器
 

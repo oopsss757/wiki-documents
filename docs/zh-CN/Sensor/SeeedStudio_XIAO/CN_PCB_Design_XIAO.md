@@ -1,184 +1,155 @@
 ---
-description: PCB Design for XIAO
-title: PCB Design for XIAO
+description: XIAO 的 PCB 设计
+title: XIAO 的 PCB 设计
 image: https://files.seeedstudio.com/wiki/seeed_logo/logo_2023.png
 slug: /cn/PCB_Design_XIAO
 last_update:
-  date: 11/07/2023
-  author: Matthew
+  date: 11/27/2024
+  author: Agnes
 ---
 
-# Creating XIAO Components on Flux.ai 中文版
+# 在 Flux.ai 上创建 XIAO 组件 中文版
 
-Flux is a browser-based PCB design tool that enables seamless collaboration between electronics teams. The tool's intuitive interface allows users to create schematics and layouts quickly and easily, while its built-in simulation capabilities help to ensure that designs are accurate and error-free. 
+Flux 是一个基于浏览器的 PCB 设计工具，旨在实现电子团队之间的无缝协作。该工具具有直观的界面，使用户能够快速轻松地创建原理图和布局，同时其内置的仿真功能有助于确保设计准确无误。
 
-In this section we are going to cover Creating Seeed Studio XIAO series Components on Flux.ai.
+在本节中，我们将介绍如何在 Flux.ai 上创建 Seeed Studio XIAO 系列组件。
 
-## Browser Seeed Studio XIAO Series PCB design
+## 浏览器上的 Seeed Studio XIAO 系列 PCB 设计
 
 ### Seeed Studio XIAO SAMD21
 
 <iframe height={450} width={800} allowFullScreen src="https://www.flux.ai/cnaville89/seeed-xiao-samd21?editor=pcb_3d&embed=1">
 </iframe>
 
-
 ### Seeed Studio XIAO RP2040
 
 <iframe height={450} width={800} allowFullScreen src="https://www.flux.ai/gokux/seeed-studio-xiao-rp2040?editor=schematic&embed=1">
 </iframe>
-
 
 ### Seeed Studio XIAO nRF52840
 
 <iframe height={450} width={800} allowFullScreen src="https://www.flux.ai/gokux/seeed-studio-xiao-nrf52840?editor=schematic&embed=1">
 </iframe>
 
-
 ### Seeed Studio XIAO nRF52840 Sense
 
 <iframe height={450} width={800} allowFullScreen src="https://www.flux.ai/gokux/seeed-studio-xiao-nrf52840-sense?editor=pcb_3d&embed=1">
 </iframe>
-
 
 ### Seeed Studio XIAO ESP32C3
 
 <iframe height={450} width={800} allowFullScreen src="https://www.flux.ai/gokux/seeed-studio-xiao-esp32c3?editor=schematic&embed=1">
 </iframe>
 
-
 ### Seeed Studio XIAO ESP32S3
 
 <iframe height={450} width={800} allowFullScreen src="https://www.flux.ai/gokux/seeed-studio-xiao-esp32s3?editor=schematic&embed=1">
 </iframe>
-
 
 ### Seeed Studio XIAO ESP32S3 Sense
 
 <iframe height={450} width={800} allowFullScreen src="https://www.flux.ai/gokux/seeed-studio-xiao-esp32s3-sense?editor=schematic&embed=1">
 </iframe>
 
+## Flux.ai 知识 - 创建部件
 
-## Knowledge about Flux.ai - Creating parts
+Flux 中的部件由 5 个主要组件构成。所有这些组件都是可选的，但缺少某个组件的部件将无法提供完整的功能：
 
-Parts in Flux are made of 5 main components. All these components are optional, but a part missing a component won't offer its full capabilities:
-
-| Concept | Description |
+| 概念 | 描述 |
 | --- | --- |
-| Schematic | The "inside" view of a part, represented by terminals only. |
-| Symbol | The representation of a part when it is dragged into another project, usually familiar to users from other tools. |
-| Footprint | Represents how the physical part will sit on the board. |
-| 3D model | Shows the 3D shape and dimensions of the part. |
-| Simulation model | Describes how the part should behave during simulation. |
+| 原理图 | 部件的“内部”视图，仅由端子表示。 |
+| 符号 | 当部件拖入另一个项目时的表示，通常为用户熟悉的其他工具中的符号。 |
+| 封装 | 表示部件如何在 PCB 上放置。 |
+| 3D 模型 | 显示部件的 3D 形状和尺寸。 |
+| 仿真模型 | 描述部件在仿真过程中应如何表现。 |
 
-## Getting Started
+## 入门指南
 
-### Step 1 - Creating a new part schematic
+### 步骤 1 - 创建新的部件原理图
 
-The very first step is to create a new blank project, you can do so in the main Flux menu in the top-right corner. Terminals are the basis of every part that is created in Flux. They allow the part to interact with the rest of the circuit. To add terminals to a new part, go to the library, search "Terminal" and drag in as many as you need.
+第一步是创建一个新的空白项目，可以在 Flux 主菜单的右上角完成。端子是每个部件的基础，它们使部件能够与电路的其余部分进行交互。要向新部件添加端子，进入库，搜索“端子”，然后拖动所需数量的端子。
 
-In this example we are going to add Seeed Studio XIAO ESP32S3 so i just added 14 terminal pins and given the names and numbers
+在本示例中，我们将添加 Seeed Studio XIAO ESP32S3，因此我添加了 14 个端子引脚，并为它们命名和编号。
 
-You can give more information’s about your parts in part properties like manufacturer part number (MPN)manufacturer name , data sheet URL ....etc. entering MPN of the component will help you find current stock availability and price of the components.
+您可以在部件属性中提供更多关于部件的信息，如制造商部件号（MPN）、制造商名称、数据表 URL 等。输入部件的 MPN 号将帮助您查看部件的当前库存和价格。
 
 <div align="center"><img width={600} src="https://files.seeedstudio.com/wiki/wiki-ranger/Contributions/PCB_Design_Flux_XIAO/PCB_Design_XIAO.png" /></div>
 
-### Step 2 - Creating a symbol
+### 步骤 2 - 创建符号
 
-Flux works slightly differently than other tools you might be used to. In Flux, parts have two
-different views, the schematic, and the symbol. The schematic view from step 1 only
-contains the terminals. Symbols are only visible when a part is placed into a project. Now
-let's create a symbol for our xiao but for the we need to use some external tool like
-illustrator or Inkscape. the designed symbol format needs to be in .svg
+Flux 的工作方式与您可能使用的其他工具略有不同。在 Flux 中，部件有两种不同的视图：原理图视图和符号视图。步骤 1 中的原理图视图只包含端子，符号则仅在部件放置到项目中时可见。现在，让我们为 XIAO 创建一个符号，但我们需要使用一些外部工具，如 Illustrator 或 Inkscape。设计的符号格式需要是 .svg。
 
 <div align="center"><img width={600} src="https://files.seeedstudio.com/wiki/wiki-ranger/Contributions/PCB_Design_Flux_XIAO/PCB_Design_XIAO2.png" /></div>
 
-Things need to consider designing the symbol ,
-- every shape and line should be white, with 1px stroke width and no fill.,
-- Pins are typically 10 to 18 pixels long.
-Now export the symbol as an SVG file.
+设计符号时需要注意的事项：
+- 每个形状和线条应为白色，线条宽度为 1px，且没有填充。
+- 引脚通常长 10 至 18 像素。
 
-### Step 3 - Add the SVG as an asset.
+现在将符号导出为 SVG 文件。
 
-Once you have the SVG file, add it as an asset. To add an external file as an asset. Make
-sure no object has been selected (click on the empty canvas).On the right drawer, scroll
-down until you find the assets panel. Open it and click on "Add" (or "Manage"). This will
-open the assets dialogue. Then click on "Add item" and select the file from your local drive.
-**Match the pin position with the custom symbol.**
-By default, all terminals will be located at the centre of the symbol. To position the
-terminals to the desired location, there are a few more step.
+### 步骤 3 - 将 SVG 作为资产添加
 
-1. Publish the part to the library.
-2. Create a New blank project and drag the part you're importing.
-3. You'll notice that both terminals are at the centre of the symbol. Now go back to the
-    imported part.
-4. You'll need to do this process for every terminal in your part.
-a) Select the terminal and find the "Properties" menu in the right-side panel.
-b) In the "Symbol Pin Position" field, type the desired x and y coordinates for the
-    terminal to sit on the symbol.
-c) Publish the part and go back to the new project. You'll see a "Update available for
-    your parts" legend in the bottom left. Click on "Review" and accept the changes.
-d) You'll notice that the terminals have moved. You might need to repeat this process
-    a few times to nail the perfect position.
+一旦您拥有了 SVG 文件，就可以将其作为资产添加。在添加外部文件作为资产之前，请确保没有选中任何对象（点击空白画布）。在右侧面板中，滚动到底部找到“资产”面板，点击展开并点击“添加”（或“管理”）。这将打开资产对话框。然后点击“添加项目”并从您的本地驱动器中选择文件。
+
+**匹配引脚位置与自定义符号。**
+默认情况下，所有端子都位于符号的中心。要将端子放置到所需位置，您需要执行以下几个步骤：
+
+1. 将部件发布到库中。
+2. 创建一个新的空白项目，并拖入您导入的部件。
+3. 您会注意到，两个端子都位于符号的中心。现在回到导入的部件。
+4. 您需要为部件中的每个端子执行此过程：
+   a) 选择端子并在右侧面板中找到“属性”菜单。
+   b) 在“符号引脚位置”字段中，输入端子应放置的 x 和 y 坐标。
+   c) 发布部件并返回到新项目。您会看到底部左侧有“您的部件有更新”提示。点击“查看”并接受更改。
+   d) 您会注意到端子已经移动。您可能需要重复此过程几次，直到找到完美的位置。
 
 <div align="center"><img width={600} src="https://files.seeedstudio.com/wiki/wiki-ranger/Contributions/PCB_Design_Flux_XIAO/PCB_Design_XIAO3.png" /></div>
 
+### 步骤 4 - 创建封装
 
-### Step 4 - Creating a footprint
-
-Footprints are very simple to create in Flux. They consist of pads, lines, shapes, and text nodes that can be added directly in the Flux PC editor.
+在 Flux 中创建封装非常简单。封装由焊盘、线条、形状和文本节点组成，这些元素可以直接在 Flux PCB 编辑器中添加。
 
 <div align="center"><img width={600} src="https://files.seeedstudio.com/wiki/wiki-ranger/Contributions/PCB_Design_Flux_XIAO/PCB_Design_XIAO4.png" /></div>
 
+当你第一次在 Flux 中创建封装时，所有焊盘会集中在一个位置，显示为小点。
+- 要改变焊盘位置：
+  - 选择要移动的焊盘，在右侧面板的“对象特定规则”中找到“位置规则”，
+  - 输入所需的 x 和 y 坐标，单位为毫米。
 
-When you first create a footprint on flux ,all of the pads will be in one place, which will
-appear as small dots.
- For changing the pad position
- Select the pad to move on the right panel on object specific rules find position rule ,
- Enter the desired x and y positions in millimetres.
-
-
-### Step 5 - Modifying pad size and shape
+### 步骤 5 - 修改焊盘大小和形状
 
 <div align="center"><img width={600} src="https://files.seeedstudio.com/wiki/wiki-ranger/Contributions/PCB_Design_Flux_XIAO/PCB_Design_XIAO5.png" /></div>
 
+点击焊盘后，您可以修改其形状、位置、孔径和其他属性。对于 XIAO，我使用了 3mm x 2mm 的焊盘，孔径为 1.1mm。通过调整 x 和 y 坐标，确保每个引脚间隔 2.54mm。
 
-By clicking the one of the pads you can change its shape , position , hole diameter and
-other properties .for xiao i gone with 3mm*2mm size pad and 1.1mm hole. Placed each pin
-2.54mm apart by utilizing the x and y position millimetres.
-**Adding 3d model**
+**添加 3D 模型**
 
-Now we need to add a 3d model of xiao, flux support .step file for 3d models , you can
-download it from official wiki page.
+现在，我们需要添加 XIAO 的 3D 模型，Flux 支持 .step 格式的 3D 模型，您可以从官方 Wiki 页面下载该文件。
 
 <div align="center"><img width={600} src="https://files.seeedstudio.com/wiki/wiki-ranger/Contributions/PCB_Design_Flux_XIAO/PCB_Design_XIAO6.png" /></div>
 
+您可以从“辅助”部分上传 3D 模型。关于如何添加 3D 模型的详细信息，您可以参考视频教程。您可以通过“对象特定规则”来调整模型的 x、y、z 位置和旋转角度。使用这些设置，您可以将 3D 模型定位在焊盘的顶部。
 
-You can upload the 3d model form the assist section. more detailed about adding the 3d
-model is available in the video.
-You can change the x y z position and rotation form the object specified rule. Using this
-you can position the 3d model in top of the soldering pads.
-**Publishing to the library**
-After creating a component, it is time to publish it
+**发布到库中**
+
+创建完部件后，就可以将其发布了。
 
 <div align="center"><img width={600} src="https://files.seeedstudio.com/wiki/wiki-ranger/Contributions/PCB_Design_Flux_XIAO/PCB_Design_XIAO7.png" /></div>
 
+选择左上角的 Flux 图标，然后选择“发布更改”。现在，我们的部件将出现在我们的个人资料中，同时也会显示在公共库的搜索结果中。
 
-Select the flux logo in the top left corner then select publish changes.
-Now our components well be available in our profile , also it will show up in the public
-library search
+## 更多内容 - 教程视频
 
-## What's More - Video of Tutorial
+<iframe width={560} height={315} src="https://www.youtube.com/embed/5cGg5n6sXJE?si=nSYvVSl-q3axb4Ss" title="YouTube 视频播放器" frameBorder={0} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
 
-<iframe width={560} height={315} src="https://www.youtube.com/embed/5cGg5n6sXJE?si=nSYvVSl-q3axb4Ss" title="YouTube video player" frameBorder={0} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
+## ✨ 贡献者项目
 
-## ✨ Contributor Project
+- 本项目得到了 [Seeed Studio 贡献者项目](https://github.com/orgs/Seeed-Studio/projects/6) 的支持。
+- 感谢 [Gokul](https://github.com/orgs/Seeed-Studio/projects/6/views/1?pane=issue&itemId=42323283) 的努力，您的作品将被 [展示](https://wiki.seeedstudio.com/Honorary-Contributors/)。
 
-- This project is supported by the [Seeed Studio Contributor Project](https://github.com/orgs/Seeed-Studio/projects/6).
-- Thanks [Gokul](https://github.com/orgs/Seeed-Studio/projects/6/views/1?pane=issue&itemId=42323283)'s efforts and your work will be [exhibited](https://wiki.seeedstudio.com/Honorary-Contributors/).
+## 技术支持与产品讨论
 
-## Tech Support & Product Discussion
-
-Thank you for choosing our products! We are here to provide you with different support to ensure that your experience with our products is as smooth as possible. We offer several communication channels to cater to different preferences and needs.
+感谢您选择我们的产品！我们在这里为您提供不同的支持，确保您使用我们的产品时能够享受到顺畅的体验。我们提供多种沟通渠道，以满足不同的需求和偏好。
 
 <div class="button_tech_support_container">
 <a href="https://forum.seeedstudio.com/" class="button_forum"></a> 

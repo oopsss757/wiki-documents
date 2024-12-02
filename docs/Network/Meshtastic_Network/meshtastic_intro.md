@@ -14,7 +14,7 @@ last_update:
 
 [Meshtastic®](https://meshtastic.org/) is an open source, off-grid, decentralized, mesh network built to run on affordable, low-power devices, it enables you to use inexpensive LoRa radios as a long range off-grid communication platform in areas without existing or reliable communications infrastructure.
 
-<p style={{textAlign: 'center'}}><img src="https://meshtastic.org/assets/images/lora-topology-2-c80684f1eafdf2a71fbaf26e494fb26d.webp" alt="pir" width={800} height="auto" /></p>
+<p style={{textAlign: 'center'}}><img src="https://media-cdn.seeedstudio.com/media/wysiwyg/T1000-E-_-05.jpg" alt="pir" width={800} height="auto" /></p>
 
 
 ## Features
@@ -45,13 +45,14 @@ Click [here](https://meshtastic.org/docs/) to learn more about Meshtastic networ
 
 ## Supported Hardware
 
-* [Tracker Dev Kit for Meshtastic® – Wio Tracker 1110](https://www.seeedstudio.com/Wio-Tracker-1110-Dev-Kit-for-Meshtastic.html)
 
 * [SenseCAP Card Tracker T1000-E for Meshtastic](https://www.seeedstudio.com/SenseCAP-Card-Tracker-T1000-E-for-Meshtastic-p-5913.html)
 
 * [SenseCAP Indicator for Meshtastic](https://www.seeedstudio.com/SenseCAP-Indicator-D1Pro-p-5644.html)
 
 * [XIAO ESP32S3 for Meshtastic & LoRa](https://www.seeedstudio.com/Wio-SX1262-with-XIAO-ESP32S3-p-5982.html)
+
+* [Tracker Dev Kit for Meshtastic® – Wio Tracker 1110](https://www.seeedstudio.com/Wio-Tracker-1110-Dev-Kit-for-Meshtastic.html)
 
 
 :::note

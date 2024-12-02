@@ -6,8 +6,8 @@ keywords:
 image: https://files.seeedstudio.com/wiki/wiki-platform/S-tempor.png
 slug: /cn/XIAO-RP2040
 last_update:
-  date: 11/2/2023
-  author: 金 菊
+  date: 11/13/2024
+  author: Agnes
 ---
 
 #  Seeed Studio XIAO RP2040 开发板
@@ -63,15 +63,15 @@ Seeed Studio XIAO RP2040与Seeed Studio XIAO扩展板兼容。
 <!-- ![](https://files.seeedstudio.com/wiki/XIAO-RP2040/img/xinpin.jpg) -->
   <p style={{textAlign: 'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO-RP2040/img/xinpin.jpg" alt="pir" width={600} height="auto" /></p>
 
-:::注意
+:::caution
 
-    对于一般的I/O引脚：
-    MCU的工作电压为3.3V。如果将高于3.3V的电压输入连接到一般的I/O引脚上，可能会导致芯片损坏。
+  对于一般的I/O引脚：
+  MCU的工作电压为3.3V。如果将高于3.3V的电压输入连接到一般的I/O引脚上，可能会导致芯片损坏。
 
-    对于电源引脚：
-    内置的DC-DC转换器电路能够将5V电压转换为3.3V，可以通过VIN引脚和5V引脚使用5V电源来供电设备。
+  对于电源引脚：
+  内置的DC-DC转换器电路能够将5V电压转换为3.3V，可以通过VIN引脚和5V引脚使用5V电源来供电设备。
 
-    请注意使用，不要抬起盖板。
+  请注意使用，不要抬起盖板。
 :::    
     
 ### **进入Bootloader模式**
@@ -97,11 +97,11 @@ Seeed Studio XIAO RP2040与Seeed Studio XIAO扩展板兼容。
 <!-- ![](https://files.seeedstudio.com/wiki/XIAO-RP2040/img/xinfront.jpg) -->
   <p style={{textAlign: 'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO-RP2040/img/xinfront.jpg" alt="pir" width={600} height="auto" /></p>
 
-<!-- ## 示意图在线查看器
+## 示意图在线查看器
 
 
 <div className="altium-ecad-viewer" data-project-src="https://files.seeedstudio.com/wiki/XIAO-RP2040/res/XIAO_RP2040_v1.22_SCH&PCB.zip" style={{borderRadius: '0px 0px 4px 4px', height: 500, borderStyle: 'solid', borderWidth: 1, borderColor: 'rgb(241, 241, 241)', overflow: 'hidden', maxWidth: 1280, maxHeight: 700, boxSizing: 'border-box'}}>
-</div> -->
+</div> 
 
 
 ## 资源文件

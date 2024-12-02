@@ -160,20 +160,18 @@ Navigate to **LoRa** > **LoRa Network**
 2. **Server**: Select LNS or CUPS
 Check the previous step for more details about the servers.
 
-3. **URL:**:
-CUPS uses the URI: https://server-address:443
-
-LNS uses the URI: wss://server-address:8887
+3. **URL:**
+CUPS uses the URI: https://server-address:443, LNS uses the URI: wss://server-address:8887
 
 <p style={{textAlign: 'center'}}><img src="https://files.seeedstudio.com/wiki/SenseCAP/M2_Multi-Platform/url.png" alt="pir" width={600} height="auto" /></p>
 
 
 4. **Authentication Mode:** TLS server authentication and Client token
-The Things Stack supports TLS server authentication and client token. This requires a *.trust file and a *.key file. .
+The Things Stack supports TLS server authentication and client token. This requires a *.trust* file and a *.key* file. .
 
 5. **trust:** This is the [CA certificate](https://en.wikipedia.org/wiki/Certificate_authority) which secures your domain. 
 A .pem file containing common certificates is available in the [Root Certificates Reference](https://www.thethingsindustries.com/docs/reference/root-certificates/).
-Copy the data content of the certificate file (the certificate can be opened in text form).
+Download the **minimal certificate list**, then copy the data content of the certificate file (the certificate can be opened in text form).
 
 
 

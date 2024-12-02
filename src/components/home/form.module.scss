@@ -276,7 +276,7 @@
 
       img {
         width: 100%;        /* 图片宽度占满容器宽度 */
-        aspect-ratio: 1;    /* 宽高比为 1:1 */
+        aspect-ratio: 4 / 3;    /* 宽高比为 4:3 */
         border-radius: 12px; /* 圆角效果 */
 
       }
@@ -328,7 +328,7 @@
         
         img {
           height: auto;           /* 高度自动调整 */
-          aspect-ratio: 1;        /* 保持 1:1 的宽高比 */
+          aspect-ratio: 4 / 3;        /* 保持 4:3 的宽高比 */
         }
 
         &:nth-child(2n) {

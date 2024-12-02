@@ -71,12 +71,16 @@ It is a high-performance tracker designed for Meshtastic, as small as a credit c
 ### Hardware overview
 
 
-<p style={{textAlign: 'center'}}><img src="https://files.seeedstudio.com/wiki/SenseCAP/Meshtastic/t1000-e.png" alt="pir" width={800} height="auto" /></p>
 
-### PIN
+<p style={{textAlign: 'center'}}><img src="https://files.seeedstudio.com/wiki/SenseCAP/Meshtastic/4-pogo.png" alt="pir" width={800} height="auto" /></p>
 
-|Power to Sensor|P0.4|GPIO|
+
+### Pin List
+
+
+||||
 |- |- |- |
+|Power to Sensor|P0.4|GPIO|
 |Temperature|P0.31|NTC (analog)|
 |Light|P0.29|LUX(analog)|
 |3-Axis Accelerometer<br/>(Not currently used in the Meshtastic firmware)|SDA: P0.26<br/>SCL: P0.27|Via IIC|
@@ -88,6 +92,7 @@ It is a high-performance tracker designed for Meshtastic, as small as a credit c
 |Power to sensor|P1.6|GPIO|
 |LR1110|P1.08: SPI MISO<br/>P1.09: SPI MOSI<br/>P0.11: SPI Clock<br/>P0.12: SPI NSS<br/>P1.10: LoRa Reset<br/>P1.01: LoRa DIO1<br/>P0.07: LoRa DIO2<br/>LR11X0\_DIO3\_TCXO\_VOLT<br/>AGE 1.6V|SPI|
 |GPS|RX: P0.14<br/>TX: P0.13|Serial1 <br/>BAUDRATE:115200|
+
 
 
 

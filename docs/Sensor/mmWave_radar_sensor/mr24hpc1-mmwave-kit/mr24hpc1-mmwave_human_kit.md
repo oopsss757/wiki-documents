@@ -6,6 +6,7 @@ keywords:
 - mmwave kit
 image: https://files.seeedstudio.com/wiki/seeed_logo/logo_2023.png
 slug: /mmwave_human_detection_kit
+sidebar_position: 0
 last_update:
   date: 08/17/2023
   author: Citric

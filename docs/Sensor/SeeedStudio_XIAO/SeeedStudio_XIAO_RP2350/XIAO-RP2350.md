@@ -1,8 +1,8 @@
 ---
-title: Getting Started with Seeed Studio XIAO RP2350
+title: Getting Started with Seeed Studio XIAO RP2350(MicroPython)
 description: |
   XIAO RP2350, a cutting-edge microcontroller from Seeed Studio. It features a dual-core processor, increased SRAM and flash memory, and enhanced connectivity.
-image: https://files.seeedstudio.com/wiki/XIAO-RP2350/img/RP2350-thumbnail.png
+image: https://files.seeedstudio.com/wiki/XIAO-RP2350/img/RP2350-thumbnail.webp
 slug: /getting-started-xiao-rp2350
 keywords:
   - xiao
@@ -10,7 +10,7 @@ keywords:
 sidebar_position: 0
 last_update:
   author: Spencer
-  date: 2024-08-14T06:25:44.889Z
+  date: 2024-11-22T05:59:15.764Z
 ---
 
 import Tabs from '@theme/Tabs';
@@ -19,9 +19,9 @@ import TabItem from '@theme/TabItem';
 ## Seeed Studio XIAO RP2350
 
 <div style={{ textAlign: 'center' }}>
-  <img 
-    src="https://files.seeedstudio.com/wiki/XIAO-RP2350/img/2-102010550%20XIAO%20RP2350-45font.jpg" 
-    style={{ width: 480, height: 'auto', "border-radius": '12.8px' }} 
+  <img
+    src="https://files.seeedstudio.com/wiki/XIAO-RP2350/img/2-102010550%20XIAO%20RP2350-45font.jpg"
+    style={{ width: 480, height: 'auto', "border-radius": '12.8px' }}
   />
 </div>
 
@@ -97,8 +97,8 @@ The XIAO RP2350 packs the power of the Raspberry Pi RP2350 (dual Cortex-M33 core
     </tr>
     <tr>
         <td>Software compatibility</td>
-        <td>Support Micropython/CircuitPython, Arduino</td>
-        <td>Support Micropython, C/C++</td>
+        <td>Support MicroPython/CircuitPython, Arduino</td>
+        <td>Support MicroPython, C/C++</td>
     </tr>
     <tr>
         <td>Working Temperature</td>
@@ -114,24 +114,24 @@ The XIAO RP2350 packs the power of the Raspberry Pi RP2350 (dual Cortex-M33 core
 
 <div class="table-center">
 <table align="center">
-	<tr>
-	    <th>XIAO RP2350 Front Pinout</th>
-	</tr>
-	<tr>
-	    <td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO-RP2350/img/XIAO-RP2350-front.png" style={{width:680, height:'auto'}} alt="XIAO RP2350 Front Pinout" /></div></td>
-	</tr>
+ <tr>
+     <th>XIAO RP2350 Front Pinout</th>
+ </tr>
+ <tr>
+     <td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO-RP2350/img/XIAO-RP2350-front.png" style={{width:680, height:'auto'}} alt="XIAO RP2350 Front Pinout" /></div></td>
+ </tr>
     <tr>
-	    <th>XIAO RP2350 Back Pinout</th>
-	</tr>
+     <th>XIAO RP2350 Back Pinout</th>
+ </tr>
     <tr>
-	    <td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO-RP2350/img/XIAO-RP2350-back.png" style={{width:680, height:'auto'}} alt="XIAO RP2350 Back Pinout" /></div></td>
-	</tr>
+     <td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO-RP2350/img/XIAO-RP2350-back.png" style={{width:680, height:'auto'}} alt="XIAO RP2350 Back Pinout" /></div></td>
+ </tr>
     <tr>
-	    <th>XIAO RP2350 Components</th>
-	</tr>
+     <th>XIAO RP2350 Components</th>
+ </tr>
     <tr>
-	    <td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO-RP2350/img/XIAO-RP2350-components.png" style={{width:480, height:'auto'}} alt="XIAO RP2350 Components" /></div></td>
-	</tr>
+     <td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO-RP2350/img/XIAO-RP2350-components.png" style={{width:480, height:'auto'}} alt="XIAO RP2350 Components" /></div></td>
+ </tr>
 </table>
 </div>
 
@@ -164,21 +164,22 @@ The XIAO RP2350, powered by the RP2350, supports MicroPython and the C/C++ SDK p
 This page primarily focuses on MicroPython users. For those interested in learning SDK programming or for advanced users, you may want to start with the [Raspberry Pi Pico-series C/C++ SDK](https://datasheets.raspberrypi.com/pico/raspberry-pi-pico-c-sdk.pdf). This guide will help you set up the environment and get started with example code. Additionally, you can visit [XIAO RP2350 with C/C++ SDK](/xiao-rp2350-c-cpp-sdk) for more specific instructions related to the XIAO RP2350.
 :::
 
-:::note micropython is still not released
-As of August 9, 2024, the stable MicroPython firmware for the XIAO RP2350 is still awaiting release from Raspberry Pi. In the meantime, you can use the preview-compiled MicroPython firmware available at [RPI_PICO2 | MicroPython.org](https://micropython.org/download/RPI_PICO2/).
+:::warning MicroPython Firmware Issue
 
-For the latest documentation, you can always refer to the [Raspberry Pi Python SDK](https://datasheets.raspberrypi.com/pico/raspberry-pi-pico-python-sdk.pdf).
+As of **November 10, 2024**, the stable MicroPython firmware version **`1.24.0`** available for download at [MicroPython.org for RPI_PICO2](https://micropython.org/download/RPI_PICO2/) is currently **incompatible with certain devices due to variations in the flash chip**.
+
+The **Seeed Team** is actively working to resolve this issue in collaboration with the official MicroPython maintainers. In the meantime, you can use a **preview version** of the MicroPython firmware as a temporary solution: [RP2350 MicroPython Firmware Preview](https://files.seeedstudio.com/wiki/XIAO-RP2350/res/RPI_PICO2-20240809-v1.24.0-preview.201.g269a0e0e1.uf2)
+
 :::
-
 
 ### Step 1: Installing MicroPython on XIAO RP2350
 
 To install the MicroPython firmware on the XIAO RP2350, follow these steps:
 
-
 **Step 1.1. Download the MicroPython Firmware:**  
-   - Navigate to the [MicroPython Downloads](https://micropython.org/download/RPI_PICO2/) page.
-   - Download the latest `.uf2` firmware file compatible with the XIAO RP2350.
+
+- Navigate to the [MicroPython Downloads](https://micropython.org/download/RPI_PICO2/) page.
+- Download the latest `.uf2` firmware file compatible with the XIAO RP2350.
 
 **Step 1.2 Enter BOOTSEL Mode:**  
 
@@ -217,8 +218,9 @@ You can enter BOOTSEL mode on the XIAO RP2350 using either of the two methods be
 </Tabs>
 
 **Step 1.3. Install the Firmware:**  
-   - **Drag and drop** the downloaded `.uf2` file into the XIAO RP2350's removable storage drive.
-   - The board will automatically reboot after the file is copied, completing the firmware installation.
+
+- **Drag and drop** the downloaded `.uf2` file into the XIAO RP2350's removable storage drive.
+- The board will automatically reboot after the file is copied, completing the firmware installation.
 
 ### Step 2: Installing Thonny IDE
 
@@ -262,7 +264,6 @@ You're now ready to write and upload MicroPython code to your XIAO RP2350 using 
   </TabItem>
 </Tabs>
 
-
 If your device is ready with MicroPython, let's start with a simple project:
 
 ### Let's Make It Blink! ✨
@@ -270,7 +271,7 @@ If your device is ready with MicroPython, let's start with a simple project:
 Getting the board to blink an LED is often the first program everyone runs. The same goes for the XIAO RP2350.
 
 :::note
-The `USER LED`, the yellow LED on the XIAO RP2350, is connected to `GPIO25/D19` according to the schematic diagram. 
+The `USER LED`, the yellow LED on the XIAO RP2350, is connected to `GPIO25/D19` according to the schematic diagram.
 For all XIAO family boards, the `USER LED` will **light up** when set to a `low level` and **turn off** when set to a `high level`.
 :::
 
@@ -302,10 +303,10 @@ while True:
 ```
 
 <table>
-	<tr>
-	    <td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO-RP2350/img/tonny-blink-led.png" style={{width:680, height:'auto'}}/></div></td>
-	    <td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO-RP2350/img/rp2350-blink.gif" style={{width:400, height:'auto'}}/></div></td>
-	</tr>
+ <tr>
+     <td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO-RP2350/img/tonny-blink-led.png" style={{width:680, height:'auto'}}/></div></td>
+     <td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO-RP2350/img/rp2350-blink.gif" style={{width:400, height:'auto'}}/></div></td>
+ </tr>
 </table>
 
   </TabItem>
@@ -313,9 +314,6 @@ while True:
 
 ```python title="examples/rp2/pwm_fade.py"
 # Example using PWM to fade an LED.
-# Note: this does not work on Pico W because it uses Pin(25) for LED output.
-# this exmaple is from https://github.com/micropython/micropython
-# ruff: noqa: F821 - @asm_pio decorator adds names to function scope
 
 import time
 from machine import Pin, PWM
@@ -528,10 +526,11 @@ The XIAO RP2350 harnesses the power of the Raspberry Pi RP2350, leveraging a wea
 - 📄 **[PDF]** [Getting Started with Raspberry Pi Pico-series](https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf): A comprehensive guide to setting up and programming Raspberry Pi Pico boards, ideal for beginners looking to learn MicroPython or C/C++.
 - 📄 **[PDF]** [Raspberry Pi Pico-series Python SDK](https://datasheets.raspberrypi.com/pico/raspberry-pi-pico-python-sdk.pdf) the book which documents the MicroPython setup tutorials and APIs
 - 📄 **[PDF]** [Raspberry Pi Pico-series C/C++SDK](https://datasheets.raspberrypi.com/pico/raspberry-pi-pico-c-sdk.pdf) the book which documents the Pico C/C++ SDK APIs
+- 🔗 **[Kicad]** [Seeed Studio XIAO RP2350 FootPrint](https://github.com/Seeed-Studio/OPL_Kicad_Library/tree/master/Seeed%20Studio%20XIAO%20Series%20Library)
 
 ### Expansion and Applications
 
-[The XIAO series](/xiao_topic_page) has a huge range of peripherals and peripheral accessories for you to learn and use, whether you want a colorful screen that allows for perfect interaction, an integrated board with bright and simple RGB lights, and so on, just waiting to be checked out. 
+[The XIAO series](/xiao_topic_page) has a huge range of peripherals and peripheral accessories for you to learn and use, whether you want a colorful screen that allows for perfect interaction, an integrated board with bright and simple RGB lights, and so on, just waiting to be checked out.
 
 As a member of the XIAO family, the XIAO RP2350 does the same. Of course, to make better use of the extra pins drawn out, new *peripherals and boards* will keep coming along, fully utilizing the performance for which it was created.
 
@@ -558,11 +557,11 @@ And more, you're always welcome to share your projects on our [Seeed Studio Disc
 Thank you for choosing our products! We are here to provide you with different support to ensure that your experience with our products is as smooth as possible. We offer several communication channels to cater to different preferences and needs.
 
 <div class="button_tech_support_container">
-<a href="https://forum.seeedstudio.com/" class="button_forum"></a> 
+<a href="https://forum.seeedstudio.com/" class="button_forum"></a>
 <a href="https://www.seeedstudio.com/contacts" class="button_email"></a>
 </div>
 
 <div class="button_tech_support_container">
-<a href="https://discord.gg/kpY74apCWj" class="button_discord"></a> 
+<a href="https://discord.gg/kpY74apCWj" class="button_discord"></a>
 <a href="https://github.com/Seeed-Studio/wiki-documents/discussions/69" class="button_discussion"></a>
 </div>

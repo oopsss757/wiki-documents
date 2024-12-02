@@ -28,17 +28,16 @@ The ODYSSEY – STM32MP157C is a single board computer that based on STM32MP157C
 
 ## Specification
 
-<div>
-  |Item|Values|
-  |----|------|
-  |Peripheral Interface| 2 x USB Host<br />1 x gigabit Ethernet interface<br />1 x 3.5mm audio interface<br />1 x MIPI DSI display interface<br />1 x DVP camera interface<br />2 x Grove (GPIO &amp; I2C)<br />1 x SD card interface (on the back of the board)|
-  |WiFi/Bluetooth|WiFi 802.11 b/g/n 2.4GHz<br />Bluetooth 4.1|
-  |On-board LED|1 x reset LED<br />3 x user-defined LED<br />1 x power LED|
-  |Power|1 x DC interface (12V/2A power input is recommended)<br />1 x USB Type - C|
-  |Button|1 x reset button<br />1 x user button<br />1 x dial code key|
-  |dimension|56mm x 85mm|
-  |Operating temperature | 0 ~ 75 ℃ |
-</div>
+|Item|Values|
+|----|------|
+|Peripheral Interface| 2 x USB Host<br />1 x gigabit Ethernet interface<br />1 x 3.5mm audio interface<br />1 x MIPI DSI display interface<br />1 x DVP camera interface<br />2 x Grove (GPIO &amp; I2C)<br />1 x SD card interface (on the back of the board)|
+|WiFi/Bluetooth|WiFi 802.11 b/g/n 2.4GHz<br />Bluetooth 4.1|
+|On-board LED|1 x reset LED<br />3 x user-defined LED<br />1 x power LED|
+|Power|1 x DC interface (12V/2A power input is recommended)<br />1 x USB Type - C|
+|Button|1 x reset button<br />1 x user button<br />1 x dial code key|
+|dimension|56mm x 85mm|
+|Operating temperature | 0 ~ 75 ℃ |
+
 
 
 ## Application

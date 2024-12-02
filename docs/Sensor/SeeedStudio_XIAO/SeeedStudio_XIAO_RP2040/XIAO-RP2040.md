@@ -126,6 +126,8 @@ Please note: The behavior of the built-in programmable Single-colour LEDs (They 
 
 - **[ZIP]** [Seeed Studio XIAO RP2040 Certification files](https://files.seeedstudio.com/wiki/XIAO-RP2040/res/XIAO-RP2040-Certification.zip)
 
+- 🔗 **[Kicad]** [Seeed Studio XIAO RP2040 FootPrint](https://github.com/Seeed-Studio/OPL_Kicad_Library/tree/master/Seeed%20Studio%20XIAO%20Series%20Library)
+
 ## Course Resources
 
 <div align="middle"><img width="400" src="https://mjrovai.github.io/XIAO_Big_Power_Small_Board-ebook/cover.jpg" /></div>

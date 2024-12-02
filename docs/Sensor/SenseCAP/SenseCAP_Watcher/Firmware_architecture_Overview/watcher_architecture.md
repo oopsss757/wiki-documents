@@ -9,7 +9,7 @@ last_update:
   author: Citric
 ---
 
-# Software Architecture
+# Watcher Software Architecture
 
 The software architecture of SenseCAP Watcher is shown in the figure below, mainly divided into three parts: APP applications, UI and interaction, task flow.
 

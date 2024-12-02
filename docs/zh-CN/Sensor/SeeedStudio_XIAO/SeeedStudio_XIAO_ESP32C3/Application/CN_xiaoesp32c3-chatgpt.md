@@ -6,8 +6,8 @@ keywords:
 image: https://files.seeedstudio.com/wiki/wiki-platform/S-tempor.png
 slug: /cn/xiaoesp32c3-chatgpt
 last_update:
-  date: 1/11/2023
-  author: Xin Ping Li
+  date: 11/12/2024
+  author: Agnes
 ---
 # 在 XIAO ESP32C3 上调用大语言模型接口
 
@@ -155,7 +155,7 @@ void WiFiConnect(void){
 `ssid`和`password`变量保存了你想要连接的网络的ssid和密码。
 
 ```c
-// Replace with your network credentials
+// 替换为您的网络凭证
 const char* ssid = "REPLACE_WITH_YOUR_SSID";
 const char* password = "REPLACE_WITH_YOUR_PASSWORD";
 ```
@@ -180,7 +180,7 @@ WiFiClient client1;
 在上面的步骤中，我们让XIAO ESP32C3连接WiFi。WiFi连接成功后，就可以从串口监视器上获取XIAO的当前IP地址。此时，XIAO已经成功地设置好了web服务器。您可以通过XIAO的IP地址访问此web服务器。
 
 
-假设你的XIAO ESP32C3的IP地址是' 192.168.7.152 '。然后你就可以通过浏览器输入这个IP地址了。
+假设你的XIAO ESP32C3的IP地址是`192.168.7.152`。然后你就可以通过浏览器输入这个IP地址了。
 
 
 输入这个IP地址后，我们可能只能看到一个空白页。这是因为我们还没有发布该页面的页面内容。
@@ -192,8 +192,8 @@ WiFiClient client1;
 const char html_page[] PROGMEM = {
     "HTTP/1.1 200 OK\r\n"
     "Content-Type: text/html\r\n"
-    "Connection: close\r\n"  // the connection will be closed after completion of the response
-    //"Refresh: 1\r\n"         // refresh the page automatically every n sec
+    "Connection: close\r\n"  // 响应完成后，连接将关闭
+    //"刷新: 1\r\n"         // 每 N 秒自动刷新一次页面
     "\r\n"
     "<!DOCTYPE HTML>\r\n"
     "<html>\r\n"
@@ -224,7 +224,7 @@ const char html_page[] PROGMEM = {
 
 <div align="center"><img width ="800" src="https://files.seeedstudio.com/wiki/xiaoesp32c3-chatgpt/7.png"/></div>
 
-:::提示
+:::tip
 网页的HTML语法超出了本教程的范围。您可以自己学习使用HTML，或者，我们可以使用现有的生成工具来完成代码生成工作。我们推荐使用[HTML生成器](https://webcode.tools/generators/html)。
 
 值得注意的是，在C程序中，"\\"和""是特殊字符，如果你想在程序中保留这些特殊字符的功能，就需要在它们前面添加一个右斜杠。
@@ -235,18 +235,18 @@ Client1是指建立web服务器后的Socket客户端，下面的代码是web服�
 ```c
 client1 = server.available();
 if (client1){
-    Serial.println("New Client.");           // print a message out the serial port
-    // an http request ends with a blank line
+    Serial.println("New Client.");           // 在串口输出一条新客户端消息
+    // 一个 HTTP 请求以空行结束
     boolean currentLineIsBlank = true;    
     while (client1.connected()){
-        if (client1.available()){  // Check if the client is connected
+        if (client1.available()){  // 检查客户端是否连接
             char c = client1.read();
             json_String += c;
             if (c == '\n' && currentLineIsBlank) {                                 
                 dataStr = json_String.substring(0, 4);
                 Serial.println(dataStr);
                 if(dataStr == "GET "){
-                    client1.print(html_page);  //Send the response body to the client
+                    client1.print(html_page);  // 向客户端发送响应体
                 }         
                 else if(dataStr == "POST"){
                     json_String = "";
@@ -257,7 +257,7 @@ if (client1){
                     dataStart = json_String.indexOf("chatgpttext=") + strlen("chatgpttext=");
                     chatgpt_Q = json_String.substring(dataStart, json_String.length());                    
                     client1.print(html_page);        
-                    // close the connection:
+                    // 关闭连接：
                     delay(10);
                     client1.stop();       
                 }
@@ -265,11 +265,11 @@ if (client1){
                 break;
             }
             if (c == '\n') {
-                // you're starting a new line
+                // 开始新的一行
                 currentLineIsBlank = true;
             }
             else if (c != '\r') {
-                // you've gotten a character on the current line
+                // 当前行有字符
                 currentLineIsBlank = false;
             }
         }
@@ -284,15 +284,15 @@ void setup()
 {
     Serial.begin(115200);
  
-    // Set WiFi to station mode and disconnect from an AP if it was previously connected
+    // 设置WiFi为站点模式，并断开与之前连接的AP
     WiFi.mode(WIFI_STA);
     WiFi.disconnect();
     while(!Serial);
 
-    Serial.println("WiFi Setup done!");
+    Serial.println("WiFi 设置完成！");
     WiFiConnect();
 
-    // Start the TCP server server
+    // 启动 TCP 服务器
     server.begin();
 }
 ```
@@ -316,7 +316,7 @@ Serial.println(json_String);
 dataStart = json_String.indexOf("chatgpttext=") + strlen("chatgpttext=");
 chatgpt_Q = json_String.substring(dataStart, json_String.length());                    
 client1.print(html_page);        
-// close the connection:
+// 关闭连接：
 delay(10);
 client1.stop();      
 ```
@@ -349,7 +349,7 @@ client1.stop();
 char chatgpt_token[] = "sk**********Rj9DYiXLJJH";
 ```
 
-:::提示
+:::tip
 截至2023年2月15日，OpenAI将向每个新用户免费赠送价值**18美元**的积分。详细的费率可以在OpenAI的[文档](https://openai.com/api/pricing/)中找到。
 
 <div align="center"><img width ="800" src="https://files.seeedstudio.com/wiki/xiaoesp32c3-chatgpt/11.png"/></div>
@@ -398,12 +398,12 @@ if (https.begin(chatgpt_server)) {  // HTTPS
     https.addHeader("Content-Type", "application/json"); 
     String token_key = String("Bearer ") + chatgpt_token;
     https.addHeader("Authorization", token_key);
-    String payload = String("{\"model\": \"text-davinci-003\", \"prompt\": \"") + chatgpt_Q + String("\", \"temperature\": 0, \"max_tokens\": 100}"); //Instead of TEXT as Payload, can be JSON as Paylaod
-    httpCode = https.POST(payload);   // start connection and send HTTP header
+    String payload = String("{\"model\": \"text-davinci-003\", \"prompt\": \"") + chatgpt_Q + String("\", \"temperature\": 0, \"max_tokens\": 100}"); // 可以使用 JSON 作为 Payload，而不是文本
+    httpCode = https.POST(payload);   // 启动连接并发送 HTTP 头
     payload = "";
 }
 else {
-    Serial.println("[HTTPS] Unable to connect");
+    Serial.println("[HTTPS] 无法连接");
     delay(1000);
 }
 ```

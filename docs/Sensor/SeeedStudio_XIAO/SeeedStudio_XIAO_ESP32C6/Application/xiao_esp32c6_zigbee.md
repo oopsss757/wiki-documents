@@ -1,14 +1,12 @@
 ---
 description: In this tutorial, we will embark on a journey to explore Zigbee application development using the XIAO ESP32C6 development board. The XIAO ESP32C6 is a compact yet powerful board that features the ESP32-C6 chip, which offers integrated Wi-Fi and Bluetooth Low Energy (BLE) connectivity. By leveraging the ESP Zigbee SDK, we can harness the full potential of the XIAO ESP32C6 and extend its capabilities to include Zigbee functionality.
-title: Quick start with Zigbee on XIAO ESP32C6 by IDF
+title: XIAO ESP32C6 Zigbee Quick Start Guide (ESP-IDF)
 image: https://files.seeedstudio.com/wiki/xiaoc6_zigbee/3.jpg
 slug: /xiao_esp32c6_zigbee
 last_update:
   date: 05/30/2024
   author: Citric
 ---
-
-# Quick start with Zigbee on XIAO ESP32C6 by IDF
 
 Zigbee is a widely adopted wireless communication protocol that finds extensive use in home automation, smart energy management, and Internet of Things (IoT) applications. Known for its low power consumption, reliable data transmission, and mesh network capabilities, Zigbee is an excellent choice for building scalable and efficient wireless networks.
 

@@ -48,6 +48,8 @@ last_update:
         <th><a href="https://www.seeedstudio.com/XIAO-ESP32S3-p-5627.html">Seeed Studio XIAO ESP32S3</a></th>
         <th><a href="https://www.seeedstudio.com/XIAO-ESP32S3-Sense-p-5639.html">Seeed Studio XIAO ESP32S3 Sense</a></th>
         <th><a href="https://www.seeedstudio.com/Seeed-XIAO-RA4M1-p-5943.html">Seeed Studio XIAO RA4M1</a></th>
+        <th><a href="https://www.seeedstudio.com/Seeed-Studio-XIAO-MG24-p-6247.html">Seeed Studio XIAO MG24</a></th>
+        <th><a href="https://www.seeedstudio.com/Seeed-XIAO-MG24-Sense-p-6248.html">Seeed Studio XIAO MG24 Sense</a></th>
 	</tr>
 	<tr>
 	    <th>SKU</th>
@@ -61,6 +63,8 @@ last_update:
         <td align="center">113991114</td>
         <td align="center">113991115</td>
         <td align="center">102010551</td>
+        <td align="center">102010590</td>
+        <td align="center">102010610</td>
 	</tr>
 	<tr>
         <th>Short Description</th>
@@ -74,6 +78,8 @@ last_update:
         <td>With WiFi and BLE, High Performance</td>
         <td>Advanced Version of XIAO ESP32S3 with OV2640 Camera and Microphone</td>
         <td>Renesas 32-bit ARM Cortex-M4 MCU, compatible with Arduino IDE</td>
+        <td>Matter, Open Thread, Zigbee, Bluetooth Low Energy (BLE 5.3), Bluetooth Mesh, Proprietary 2.4 GHz</td>
+        <td>Advanced Version of XIAO MG24 with Six-axis acceleration sensors and Microphone</td>
 	</tr>
 	<tr>
 	    <th>Chip</th>
@@ -87,6 +93,8 @@ last_update:
         <td align="center">Expressif ESP32S3</td>
         <td align="center">Expressif ESP32S3</td>
         <td align="center">Renesas RA4M1</td>
+        <td align="center">Silicon Labs EFR32MG24</td>
+        <td align="center">Silicon Labs EFR32MG24 Sense</td>
 	</tr>
 	<tr>
 	    <th>Architecture</th>
@@ -100,6 +108,8 @@ last_update:
         <td align="center">Dual-core Xtensa LX7<br />running up to 240 MHz</td>
         <td align="center">Dual-core Xtensa LX7<br />running up to 240 MHz</td>
         <td align="center">Cortex-M4<br />running up to 48 MHz with FPU</td>
+        <td align="center">ARM Cortex-M33 <br />running up to 78 MHz</td>
+        <td align="center">ARM Cortex-M33 <br />running up to 78 MHz</td>
 	</tr>
 	<tr>
 	    <th>RAM</th>
@@ -113,6 +123,8 @@ last_update:
         <td align="center">512 KB SRAM<br />8MB PSRAM</td>
         <td align="center">512 KB SRAM<br />8MB PSRAM</td>
         <td align="center">32 KB SRAM</td>
+        <td align="center">256kB RAM</td>
+        <td align="center">256kB RAM</td>
 	</tr>
     <tr>
 	    <th>Flash&ROM (chip)</th>
@@ -126,6 +138,8 @@ last_update:
         <td align="center">384KB</td>
         <td align="center">384KB</td>
         <td align="center">256KB</td>
+        <td align="center">1536KB+4MB</td>
+        <td align="center">1536KB+4MB</td>
 	</tr>
     <tr>
 	    <th>Flash (onboard)</th>
@@ -138,6 +152,8 @@ last_update:
         <td align="center"><font size={"3"}>❌</font></td>
         <td align="center">8MB</td>
         <td align="center">8MB</td>
+        <td align="center"><font size={"3"}>❌</font></td>
+        <td align="center"><font size={"3"}>❌</font></td>
         <td align="center"><font size={"3"}>❌</font></td>
 	</tr>
     <tr>
@@ -152,6 +168,8 @@ last_update:
         <td align="center"><font size={"3"}>❌</font></td>
         <td align="center">OV2640 camera, Microphone</td>
         <td align="center"><font size={"3"}>❌</font></td>
+        <td align="center"><font size={"3"}>❌</font></td>
+        <td align="center">Six-axis acceleration sensors, Microphone</td>
 	</tr>
     <tr>
 	    <th>PWM/Analog Pins</th>
@@ -165,6 +183,8 @@ last_update:
         <td align="center">11/9</td>
         <td align="center">13/11</td>
         <td align="center">19/14</td>
+        <td align="center">22/18</td>
+        <td align="center">22/18</td>
 	</tr>
     <tr>
 	    <th>I2C/UART/SPI</th>
@@ -173,6 +193,8 @@ last_update:
         <td align="center"><font size={"3"}>✅</font></td>
 	    <td align="center"><font size={"3"}>✅</font></td>
 	    <td align="center"><font size={"3"}>✅</font></td>
+        <td align="center"><font size={"3"}>✅</font></td>
+        <td align="center"><font size={"3"}>✅</font></td>
         <td align="center"><font size={"3"}>✅</font></td>
         <td align="center"><font size={"3"}>✅</font></td>
         <td align="center"><font size={"3"}>✅</font></td>
@@ -191,6 +213,8 @@ last_update:
         <td align="center"><font size={"3"}>✅</font></td>
         <td align="center"><font size={"3"}>✅</font></td>
         <td align="center"><font size={"3"}>❌</font></td>
+        <td align="center"><font size={"3"}>✅</font></td>
+        <td align="center"><font size={"3"}>✅</font></td>
 	</tr>
     <tr>
 	    <th>WiFi</th>
@@ -204,6 +228,8 @@ last_update:
         <td align="center"><font size={"3"}>✅</font></td>
         <td align="center"><font size={"3"}>✅</font></td>
         <td align="center"><font size={"3"}>❌</font></td>
+        <td align="center"><font size={"3"}>✅</font></td>
+        <td align="center"><font size={"3"}>✅</font></td>
 	</tr>
     <tr>
 	    <th>Reset Button</th>
@@ -212,6 +238,8 @@ last_update:
         <td align="center"><font size={"3"}>✅</font></td>
 	    <td align="center"><font size={"3"}>✅</font></td>
 	    <td align="center"><font size={"3"}>✅</font></td>
+        <td align="center"><font size={"3"}>✅</font></td>
+        <td align="center"><font size={"3"}>✅</font></td>
         <td align="center"><font size={"3"}>✅</font></td>
         <td align="center"><font size={"3"}>✅</font></td>
         <td align="center"><font size={"3"}>✅</font></td>
@@ -230,6 +258,8 @@ last_update:
         <td align="center"><font size={"3"}>✅</font></td>
         <td align="center"><font size={"3"}>✅</font></td>
         <td align="center"><font size={"3"}>✅</font></td>
+        <td align="center"><font size={"3"}>❌</font></td>
+        <td align="center"><font size={"3"}>❌</font></td>
 	</tr>
     <tr>
 	    <th>User LED</th>
@@ -243,6 +273,8 @@ last_update:
         <td align="center"><font size={"3"}>✅</font></td>
         <td align="center"><font size={"3"}>✅</font></td>
         <td align="center"><font size={"3"}>✅</font></td>
+        <td align="center"><font size={"3"}>✅</font></td>
+        <td align="center"><font size={"3"}>✅</font></td>
 	</tr>
     <tr>
 	    <th>Battery Charge LED and Chip</th>
@@ -251,6 +283,8 @@ last_update:
         <td align="center"><font size={"3"}>✅</font></td>
 	    <td align="center"><font size={"3"}>✅</font></td>
 	    <td align="center"><font size={"3"}>✅</font></td>
+        <td align="center"><font size={"3"}>✅</font></td>
+        <td align="center"><font size={"3"}>✅</font></td>
         <td align="center"><font size={"3"}>✅</font></td>
         <td align="center"><font size={"3"}>✅</font></td>
         <td align="center"><font size={"3"}>✅</font></td>
@@ -269,6 +303,8 @@ last_update:
         <td align="center">14μA</td>
         <td align="center">26.5mA</td>
         <td align="center">45μA</td>
+        <td align="center">1.95μA</td>
+        <td align="center">1.95μA</td>
 	</tr>
    <tr>
 	    <td colspan="11"><div class="get_one_now_container" style={{textAlign: 'center'}}><a class="get_one_now_item" href="https://wiki.seeedstudio.com/xiao_topic_page/"><strong><span><font color={'FFFFFF'} size={"3"}>📚 Compatible Project</font></span></strong></a></div></td>        
@@ -280,6 +316,8 @@ last_update:
 	    <td align="center"><font size={"3"}>✅</font></td>
 	    <td align="center"><font size={"3"}>✅</font></td>
 	    <td align="center"><font size={"3"}>✅</font></td>
+        <td align="center"><font size={"3"}>✅</font></td>
+        <td align="center"><font size={"3"}>✅</font></td>
         <td align="center"><font size={"3"}>✅</font></td>
         <td align="center"><font size={"3"}>✅</font></td>
         <td align="center"><font size={"3"}>✅</font></td>
@@ -298,6 +336,8 @@ last_update:
         <td align="center"><font size={"3"}>✅</font></td>
         <td align="center"><font size={"3"}>✅</font></td>
         <td align="center"><font size={"3"}>❌</font></td>
+        <td align="center"><font size={"3"}>❌</font></td>
+        <td align="center"><font size={"3"}>❌</font></td>
 	</tr>
     <tr>
 	    <th>MicroPython</th>
@@ -311,6 +351,8 @@ last_update:
         <td align="center"><font size={"3"}>✅</font></td>
         <td align="center"><font size={"3"}>✅</font></td>
         <td align="center"><font size={"3"}>❌</font></td>
+        <td align="center"><font size={"3"}>❌</font></td>
+        <td align="center"><font size={"3"}>❌</font></td>
 	</tr>
     <tr>
         <th>CircuitPython</th>
@@ -321,6 +363,8 @@ last_update:
 	    <td align="center"><font size={"3"}>✅</font></td>
         <td align="center"><font size={"3"}>✅</font></td>
         <td align="center"><font size={"3"}>✅</font></td>
+        <td align="center"><font size={"3"}>❌</font></td>
+        <td align="center"><font size={"3"}>❌</font></td>
         <td align="center"><font size={"3"}>❌</font></td>
         <td align="center"><font size={"3"}>❌</font></td>
         <td align="center"><font size={"3"}>❌</font></td>
@@ -336,7 +380,9 @@ last_update:
         <td align="center"><font size={"3"}>❌</font></td>
         <td align="center"><font size={"3"}>✅</font></td>
         <td align="center"><font size={"3"}>✅</font></td>    
-        <td align="center"><font size={"3"}>❌</font></td>    
+        <td align="center"><font size={"3"}>❌</font></td>   
+        <td align="center"><font size={"3"}>❌</font></td>
+        <td align="center"><font size={"3"}>❌</font></td> 
     </tr>
 </font>
 </table>

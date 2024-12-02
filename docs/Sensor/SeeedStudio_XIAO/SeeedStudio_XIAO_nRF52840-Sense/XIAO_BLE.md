@@ -1,29 +1,70 @@
 ---
-description: Getting Started with Seeed Studio XIAO nRF52840 (Sense)
-title: Getting Started with XIAO nRF52840
+description: Getting Started with Seeed Studio XIAO nRF52840 Series
+title: Getting Started with Seeed Studio XIAO nRF52840 Series
 keywords:
   - xiao
 image: https://files.seeedstudio.com/wiki/XIAO-BLE/102010469_Front-14.jpg
 slug: /XIAO_BLE
 last_update:
-  date: 2024-10-15T11:15:24+08:00
-  author: Spencer
+  date: 2024-11-28T11:15:24+08:00
+  author: Clara
 ---
 
-# Getting Started with Seeed Studio XIAO nRF52840 (Sense)
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Getting Started with Seeed Studio XIAO nRF52840 Series
 
 <meta name="google-site-verification" content="2bq3L0F_PFVokQM-qT-al7x9FcSNJOO8TtJfAHW43lE" />
 
-<div style={{ textAlign: 'center' }}>
-  <img src="https://files.seeedstudio.com/wiki/XIAO-BLE/1-102010469-Seeed-Studio-XIAO-nRF52840-Sense-45font.jpg" 
-  style={{ width: 480, height: 'auto', "border-radius": '12.8px' }} 
-  />
+<div class="table-center">
+	<table align="center">
+  <tr>
+    <th>XIAO nRF52840</th>
+    <th>XIAO nRF52840 Sense</th>
+    <th>XIAO nRF52840 Plus</th>
+    <th>XIAO nRF52840 Sense Plus</th>
+  </tr>
+  <tr>
+    <td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO-BLE/1-102010469-Seeed-Studio-XIAO-nRF52840-Sense-45font.jpg" style={{width:250, height:'auto'}}/></div></td>
+    <td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO-BLE/xiaonrf52840sence.png" style={{width:250, height:'auto'}}/></div></td>
+    <td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO-BLE/xiaonrf52840plus.png" style={{width:250, height:'auto'}}/></div></td>
+    <td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO-BLE/xiaonrf52840senceplus.png" style={{width:250, height:'auto'}}/></div></td>
+  </tr>
+  <tr>      
+    <td><div class="get_one_now_container" style={{textAlign: 'center'}}>
+        <a class="get_one_now_item" href="https://www.seeedstudio.com/Seeed-XIAO-BLE-nRF52840-p-5201.html">
+                <strong><span><font color={'FFFFFF'} size={"4"}> Get One Now 🖱️</font></span></strong>
+        </a>
+    </div>
+    </td>
+    <td><div class="get_one_now_container" style={{textAlign: 'center'}}>
+        <a class="get_one_now_item" href="https://www.seeedstudio.com/Seeed-XIAO-BLE-Sense-nRF52840-p-5253.html">
+                <strong><span><font color={'FFFFFF'} size={"4"}> Get One Now 🖱️</font></span></strong>
+        </a>
+    </div>
+    </td>
+    <td><div class="get_one_now_container" style={{textAlign: 'center'}}>
+        <a class="get_one_now_item" href="https://wiki.seeedstudio.com/XIAO_BLE/">
+                <strong><span><font color={'FFFFFF'} size={"4"}> Get One Now 🖱️</font></span></strong>
+        </a>
+    </div>
+    </td>
+    <td><div class="get_one_now_container" style={{textAlign: 'center'}}>
+        <a class="get_one_now_item" href="https://wiki.seeedstudio.com/XIAO_BLE/">
+                <strong><span><font color={'FFFFFF'} size={"4"}> Get One Now 🖱️</font></span></strong>
+        </a>
+    </div>
+    </td>
+  </tr>
+</table>
 </div>
-<br></br>
 
 As the first wireless product in the Seeed Studio XIAO family, **Seeed Studio XIAO nRF52840** is equipped with a powerful **Nordic nRF52840 MCU** which integrates **Bluetooth 5.0** connectivity. Meanwhile, it has a **small and exquisite form-factor** which can be used for wearable devices and Internet of Things projects. The **single-sided surface-mountable design** and the onboard **Bluetooth antenna** can greatly facilitate the rapid deployment of IoT projects.
 
 In addition, there is an advanced version of this board, **Seeed  Studio XIAO nRF52840 Sense**. It is integrated with two extra onboard sensors. One of them is a **Pulse Density Modulation (PDM) Digital Microphone**. It can receive audio data in real-time which allows it to be used for audio recognition. The other one is a **6-axis Inertial Measurement Unit (IMU)**, this IMU can be very useful in TinyML projects like gesture recognition. These onboard sensors provide a great convenience for users while the board is ultra-small.
+
+The newly upgraded **XIAO nRF52840 Plus and XIAO nRF52840 Sense Plus** provide considerable increases in functionality and usability. The number of multifunctional pins has been increased to **20**, **I2S** and **SPI** resources have been added to support more complex projects, **NFC pins** have been exposed for easier integration into IoT and smart card applications, and the **BAT pin** has been repositioned for better soldering convenience, resulting in a more user-friendly hardware experience.
 
 Compared to Seeed Studio XIAO RP2040,  Seeed Studio XIAO nRF52840 contains **richer interfaces**. The first thing to note is that the **Near Field Communication (NFC) interface** is functional on the board. Secondly, there is a tiny **reset button** on the side of the Type-C interface. On the other side, there is a **3-in-one LED (User LED)** along with a **Charge LED** to indicate the charging status when a battery is connected. There are **11 digital I/O** that can be used as **PWM pins** and **6 analog I/O** that can be used as **ADC pins**. It supports all three common serial interfaces such as **UART, I2C, and SPI**. Same as Seeed Studio XIAO RP2040, it has an **onboard 2 MB flash** which means it can also be programmed using **Arduino, MicroPython, CircuitPython, or other programming languages**.
 
@@ -45,31 +86,122 @@ Seeed Studio XIAO nRF52840 Sense is compatible to the Seeed Studio XIAO expansio
 - Onboard PDM microphone (only in Seeed Studio XIAO nRF52840 Sense)
 - Onboard 6-axis LSM6DS3TR-C IMU (only in Seeed Studio XIAO nRF52840 Sense)
 - Ultra Small Size: 21 x 17.8mm, Seeed Studio XIAO series classic form-factor for wearable devices
-- Rich interfaces: 1xUART, 1xI2C, 1xSPI, 1xNFC, 1xSWD, 11xGPIO(PWM), 6xADC
+- Rich interfaces: 1xUART, 1xI2C, 1xSPI, 1xNFC, 1xSWD, 11xGPIO(PWM), 6xADC in XIAO nRF52840 (Sense); and 2xUART, 1xI2C, 2xSPI, 1xI2S, 1xNFC, 1xSWD, 18xGPIO(PWM), 6xADC in XIAO nRF52840 (Sense) Plus
 - Single-sided components, surface mounting design
 
 ## Specifications comparison
 
-|         Item         |    Seeed Studio XIAO SAMD21    |        Seeed Seeed Studio XIAO   RP2040        |               Seeed Seeed Studio XIAO nRF52840              |          Seeed Seeed Studio XIAO nRF52840   Sense          |
-|:--------------------:|:----------------------:|:---------------------------------:|:-----------------------------------------:|:----------------------------------------:|
-|       Processor      |       SAMD21 M0+@48MHz |       RP2040 Dual-core M0+@133Mhz |                        nRF52840 M4F@64MHz |                    nRF52840 M4F@64MHz    |
-|   Wireless Connectivity   |                    N/A |                               N/A |                   Bluetooth   5.0/BLE/NFC |              Bluetooth   5.0/BLE/NFC     |
-|        Memory        | 32 KB SRAM 256KB FLASH |     264 KB SRAM 2MB onboard Flash | 256 KB RAM, 1MB   Flash 2MB onboard Flash | 256 KB RAM,1MB   Flash 2MB onboard Flash |
-|    Built-in Sensors   |                    N/A |                               N/A |                                       N/A |                 6 DOF IMU (LSM6DS3TR-C), PDM Microphone |
-|       Interfaces      |           I2C/UART/SPI |                      I2C/UART/SPI |                              I2C/UART/SPI |                             I2C/UART/SPI |
-|    PWM/Analog Pins    |                  11/11 |                              11/4 |                                      11/6 |                                     11/6 |
-|    Onboard Buttons    |                    N/A |               Reset/ Boot Button |                              Reset Button |                             Reset Button |
-|      Onboard LEDs     |                    N/A |       Full-color RGB/ 3-in-one LED |                              3-in-one LED/ Charge LED |                             3-in-one LED/ Charge LED |
-|    Battery Charge Chip   |                    N/A |                               N/A |                                   BQ25101 |                                  BQ25101 |
-| Programming Languages |                Arduino/ MicroPython/ CircuitPython | Arduino/ MicroPython/ CircuitPython |         Arduino/ MicroPython/ CircuitPython |        Arduino/ MicroPython/ CircuitPython |
+<div class="table-center">
+	<table align="center">
+  <tr>
+      <th>Item</th>
+      <th style={{width:220, height:'auto'}}>Seeed Studio XIAO nRF52840</th>
+      <th style={{width:220, height:'auto'}}>Seeed Studio XIAO nRF52840 Sense</th>
+      <th style={{width:220, height:'auto'}}>Seeed Studio XIAO nRF52840 Plus</th>
+      <th style={{width:220, height:'auto'}}>Seeed Studio XIAO nRF52840 Sense Plus</th>
+  </tr>
+  <tr>
+      <th>Processor</th>
+      <td colspan="4" align="center">Nordic nRF52840, ARM® Cortex®-M4 32-bit processor with FPU, 64 MHz</td>
+  </tr>
+  <tr>
+      <th>Wireless Connectivity</th>
+      <td colspan="4" align="center">Bluetooth 5.0/BLE/NFC</td>
+  </tr>
+  <tr>
+      <th>Memory</th>
+      <td colspan="4" align="center">256 KB RAM,1MB Flash 2MB onboard Flash</td>
+  </tr>
+  <tr>
+      <th>Built-in Sensors</th>
+      <td align="center">N/A</td>
+      <td align="center">6 DOF IMU (LSM6DS3TR-C), PDM Microphone</td>
+      <td align="center">N/A</td>
+      <td align="center">6 DOF IMU (LSM6DS3TR-C), PDM Microphone</td>
+  </tr>
+  <tr>
+      <th>Interfaces</th>
+      <td colspan="2" align="center">1xI2C, 1xUART, 1xSPI</td>
+      <td colspan="2" align="center">1xI2C, 2xUART, 2xSPI, 1xI2S</td>
+  </tr>
+  <tr>
+      <th>PWM/Analog Pins	</th>
+      <td colspan="2" align="center">11/6</td>
+      <td colspan="2" align="center">20/6</td>
+  </tr>
+  <tr>
+      <th>Onboard Buttons</th>
+      <td colspan="4" align="center">Reset Button</td>
+  </tr>
+  <tr>
+      <th>Onboard LEDs</th>
+      <td colspan="4" align="center">3-in-one LED/ Charge LED</td>
+  </tr>
+  <tr>
+      <th>Battery Charge Chip</th>
+      <td colspan="4" align="center">BQ25101</td>
+  </tr>
+  <tr>
+      <th>Programming Languages</th>
+      <td colspan="4" align="center">Arduino/ MicroPython/ CircuitPython</td>
+  </tr>
+  </table>
+</div>
 
 ## Hardware overview
 
-<p style={{textAlign: 'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO-BLE/front-pinout-4.jpg" alt="pir" width={700} height="auto" /></p>
 
-<p style={{textAlign: 'center'}}><img src="https:///files.seeedstudio.com/wiki/XIAO-BLE/pinout2.png" alt="pir" width={800} height="auto" /></p>
+<Tabs>
+<TabItem  value="52540(Sense)" label="XIAO ESP32S3/XIAO NRF52840 Sense" default>
 
-<p style={{textAlign: 'center'}}><img src="https:///files.seeedstudio.com/wiki/XIAO-BLE/back-pinout-5.jpg" alt="pir" width={700} height="auto" /></p>
+<table align="center">
+  <tr>
+    <th>XIAO nRF52840/XIAO nRF52840 Sense front indication diagram</th>
+  </tr>
+  <tr>
+    <td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO-BLE/front-pinout-4.jpg" style={{width:700, height:'auto'}}/></div></td>
+  </tr>
+  <tr>
+    <th>XIAO nRF52840/XIAO nRF52840 Sense back indication diagram</th>
+  </tr>
+  <tr>
+    <td><div style={{textAlign:'center'}}><img src="https:///files.seeedstudio.com/wiki/XIAO-BLE/back-pinout-5.jpg" style={{width:700, height:'auto'}}/></div></td>
+  </tr>
+  <tr>
+    <th>XIAO nRF52840/XIAO nRF52840 Sense Pin List</th>
+  </tr>
+  <tr>
+    <td><div style={{textAlign:'center'}}><img src="https:///files.seeedstudio.com/wiki/XIAO-BLE/pinout2.png" style={{width:1000, height:'auto'}}/></div></td>
+  </tr>
+</table>
+
+ </TabItem>
+ <TabItem value="52840Plus" label="XIAO ESP32S3 Plus" default>
+
+ <table align="center">
+  <tr>
+    <th>XIAO nRF52840 Plus front indication diagram</th>
+  </tr>
+  <tr>
+    <td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO-BLE/plus_front.png" style={{width:700, height:'auto'}}/></div></td>
+  </tr>
+  <tr>
+    <th>XIAO nRF52840 Plus back indication diagram</th>
+  </tr>
+    <tr>
+    <td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO-BLE/plus_back.png" style={{width:700, height:'auto'}}/></div></td>
+  </tr>
+  <tr>
+    <th>XIAO nRF52840 Plus Pin List</th>
+  </tr>
+  <tr>
+    <td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO-BLE/plus_pinout.png" style={{width:1000, height:'auto'}}/></div></td>
+  </tr>
+ </table>
+
+</TabItem>
+
+</Tabs>
 
 ## Two Arduino Libraries
 
@@ -402,6 +534,9 @@ For more details, check the PMIC datasheet: [BQ25100](https://www.ti.com/lit/ds/
 
 - **[ZIP]** [Seeed Studio XIAO nRF52840 Certification files](https://files.seeedstudio.com/wiki/XIAO-BLE/XIAO-nRF52840-Certification.zip)
 
+- 🔗 **[Kicad]** [Seeed Studio XIAO nRF52840 FootPrint](https://github.com/Seeed-Studio/OPL_Kicad_Library/tree/master/Seeed%20Studio%20XIAO%20Series%20Library)
+
+
 ### Seeed Studio XIAO nRF52840 Sense
 
 - **[PDF]** [nRF52840 datasheet](https://files.seeedstudio.com/wiki/XIAO-BLE/nRF52840_PS_v1.5.pdf)
@@ -421,6 +556,8 @@ For more details, check the PMIC datasheet: [BQ25100](https://www.ti.com/lit/ds/
 - **[STEP]** [Seeed Studio XIAO nRF52840 Sense 3D Model](https://files.seeedstudio.com/wiki/XIAO-BLE/seeed-studio-xiao-nrf52840-3d-model.zip)
 
 - **[ZIP]** [Seeed Studio XIAO nRF52840 Sense Certification files](https://files.seeedstudio.com/wiki/XIAO-BLE/XIAO-nRF52840-Sense-Certification.zip)
+
+- 🔗 **[Kicad]** [Seeed Studio XIAO nRF52840 Sense FootPrint](https://github.com/Seeed-Studio/OPL_Kicad_Library/tree/master/Seeed%20Studio%20XIAO%20Series%20Library)
 
 ## Course Resources
 

@@ -4,8 +4,8 @@ title: 矽递科技 Wiki 文档平台
 image: https://files.seeedstudio.com/wiki/wiki-platform/S-tempor.png
 slug: /cn/Getting_Started
 last_update:
-  date: 11/23/2023
-  author: 于剑锋
+  date: 11/27/2024
+  author: 于剑锋、聂凡淞
 ---
 
 <p style={{textAlign: 'center'}}><img src="https://files.seeedstudio.com/wiki/seeed_logo/Wiki_Platform_GT_Logo.jpg" alt="pir" width={1000} height="auto" /></p>
@@ -27,7 +27,7 @@ last_update:
 - 您可以在这个文档平台中找到关于现实部署的边缘计算设备和工业物联网场景的资料，同时我们还提供了开放式开发工具的文档和课程，帮助您构建自己的解决方案。
 
 :::tip
-目前内容为测试版。最新更新在：<strong><a><span><font color={'8DC215'} size={"4"}> 2023 年 11 月 23 号 </font></span></a></strong>
+目前内容为测试版。最新更新在：<strong><a><span><font color={'8DC215'} size={"4"}> 2024 年 11 月 27 号 </font></span></a></strong>
 :::
 
 

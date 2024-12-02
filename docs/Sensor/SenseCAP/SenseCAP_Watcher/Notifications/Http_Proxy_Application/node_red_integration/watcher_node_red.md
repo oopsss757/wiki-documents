@@ -14,11 +14,15 @@ last_update:
 
 # Watcher to Node-RED Quick Start
 
+<div class="table-center">
+<iframe width="800" height="450" src="https://www.youtube.com/embed/Ono_v759R0Y" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
 [**Node-RED**](https://nodered.org/) is a programming tool for wiring together hardware devices, APIs and online services in new and interesting ways.
 
 It provides a browser-based editor that makes it easy to wire together flows using the wide range of nodes in the palette that can be deployed to its runtime in a single-click.
 
-<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/watcher_nodered_setup/cover.png" style={{width:1000, height:'auto'}}/></div>
+<!-- <div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/watcher_nodered_setup/cover.png" style={{width:1000, height:'auto'}}/></div> -->
 
 To make it easier for our users to **connect data from the Watcher to various other Paas platforms for more in-depth data processing**. For example. from Watcher to IFTTT, Telegram, Twilio etc. We will do a series of tutorials for **Watcher & Node-RED**.
 
@@ -199,77 +203,67 @@ Paste the following code into it and click **Import** button.
 ```
 [
     {
-        "id": "c467e3e4e56d1d02",
-        "type": "tab",
-        "label": "Flow 3",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "150e7b4abd714e24",
+        "id": "ae13bbcd03f719ce",
         "type": "http in",
-        "z": "c467e3e4e56d1d02",
-        "name": "watcher message",
-        "url": "/",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "url": "/v1/notification/event",
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 230,
-        "y": 280,
+        "x": 280,
+        "y": 360,
         "wires": [
             [
-                "9dee08ae69fa7a80"
+                "139364fe839c4715"
             ]
         ]
     },
     {
-        "id": "9dee08ae69fa7a80",
-        "type": "function",
-        "z": "c467e3e4e56d1d02",
+        "id": "93011c7c05cd8352",
+        "type": "http response",
+        "z": "f6f2187d.f17ca8",
         "name": "",
-        "func": "// process data in here,for example, get alert message:\n// msg.payload = {\n//     alertMsg: msg.payload.events.text\n// }\n msg.payload = {\n    code: 200,\n    msg:\"ok\",\n    data: msg.payload\n}\nreturn msg;",
+        "statusCode": "200",
+        "headers": {},
+        "x": 660,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "139364fe839c4715",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "func": "// 在这个地方处理数据\n// 例如下面的，提取了报警信息\n// msg.payload = {\n//     alertMsg: msg.payload.events.text\n// }\n msg.payload = {\n    code: 200,\n    msg:\"ok\",\n    data: msg.payload\n}\nreturn msg;",
         "outputs": 1,
-        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 470,
-        "y": 280,
+        "x": 480,
+        "y": 360,
         "wires": [
             [
-                "ee52b368d8b7a1ba",
-                "2fca38184da8b0f6"
+                "93011c7c05cd8352",
+                "356cfd540bad72dd"
             ]
         ]
     },
     {
-        "id": "2fca38184da8b0f6",
+        "id": "356cfd540bad72dd",
         "type": "debug",
-        "z": "c467e3e4e56d1d02",
+        "z": "f6f2187d.f17ca8",
         "name": "",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
+        "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 660,
-        "y": 340,
-        "wires": []
-    },
-    {
-        "id": "ee52b368d8b7a1ba",
-        "type": "http response",
-        "z": "c467e3e4e56d1d02",
-        "name": "",
-        "statusCode": "200",
-        "headers": {},
-        "x": 660,
-        "y": 260,
+        "x": 670,
+        "y": 420,
         "wires": []
     }
 ]
@@ -278,6 +272,23 @@ Paste the following code into it and click **Import** button.
 Now, when watcher detect people, it will send message to Node-RED automatically~
 
 <div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/watcher_nodered_setup/23.png" style={{width:800, height:'auto'}}/></div>
+
+## Part 5. Preview image
+
+If you want to preview the image from Watcher, you need to install a library in Node-RED. 
+
+If not, you can ignore this part.
+
+<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/watcher_nodered_setup/n1.png" style={{width:800, height:'auto'}}/></div>
+
+After installation, you can find it in **output part**, drag it to where you want to previwe image and connect.
+
+<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/watcher_nodered_setup/n3.png" style={{width:800, height:'auto'}}/></div>
+
+This step is very important. You need to **double click image preview node** and **fill out base64 url in this node**. Don't forget to **click Done and Depley button** on right upper corner. After that, we will preview the image when Watcher message come again~
+
+<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/watcher_nodered_setup/n2.png" style={{width:800, height:'auto'}}/></div>
+
 
 
 

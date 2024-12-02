@@ -234,6 +234,20 @@ There are a total of two USB-C ports on the Watcher, allowing users to find the 
 
 When charging the Watcher, please make sure to use a regular manufacturer's power adapter, we recommend using a **5V/1A** power specification to power the Watcher. If you want to communicate with the Watcher, you may need to use a compliant USB-C cable with a signal cable.
 
+:::caution
+Please use a power plug that is compatible with the Watcher; the Watcher must be powered by a 5V power supply and may burn out if you use a non-compliant power adapter or a power supply with a voltage greater than 5V!
+
+<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/watcher_getting_started/adapter.jpg" style={{width:350, height:'auto'}}/></div>
+
+The chart above shows the recommended adapter specifications. If you don't know where you can purchase the right adapter, you can choose to buy it directly at the link below.
+
+<div class="get_one_now_container" style={{textAlign: 'center'}}>
+    <a class="get_one_now_item" href="https://www.seeedstudio.com/USB-Power-Adapter-for-Raspberry-Pi-4-5V-3A-p-4089.html">
+            <strong><span><font color={'FFFFFF'} size={"4"}> Get One Now 🖱️</font></span></strong>
+    </a>
+</div>
+:::
+
 ## Connecting to Serial Console
 
 When you connect your Watcher via USB, Windows registers two new serial ports. In my case, COM23 and COM24. I decided to do an experiment and see what would appear on a serial terminal, because I am a Circuitpython fan, and I love the REPL! For this I used Putty and configured it to use the serial port at 115200 baud rate (I was lucky, the first COM23 port was already the one I needed to discover the command console). But the other one, COM24 is used to upgrade firmware using Xmodem protocol in the same way as Grove Vision AI V2.

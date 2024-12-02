@@ -5,7 +5,7 @@ keywords:
 - weeely wiki
 image: https://files.seeedstudio.com/wiki/IndexWiki/logo_image.jpg
 last_update:
-  date: 11/11/2024
+  date: 11/25/2024
   author: Frank
 ---
 
@@ -17,66 +17,47 @@ This is Frank in Seeed Studio and welcome to the Seeed Studio weekly wiki! Each 
 
 ✨ For each week, when a collaborator contributes a project or fixes something important, we put the stars at the end of title of "Weekly Wiki" for more people be able to see their efforts👍.
 
-Today is November 11th, and a brand new week has begun! Check out what Seeed Studio did last week!
+Today is November 25th, and a brand new week has begun! Check out what Seeed Studio did last week!
 
-## Latest Wiki Launched
+<!-- ## Latest Wiki Launched
 
-### [Start running with ESP-NOW protocol on XIAO Series](https://wiki.seeedstudio.com/xiao_espnow/)
+### [Getting Started with reCamera](https://wiki.seeedstudio.com/recamera_get_start/)
 
-<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/img/126.png" style={{width:1100, height:'auto'}}/></div>
-<br />
+<div align="center"><img width={800} src="https://files.seeedstudio.com/wiki/reCamera/recamera_banner.png" /></div>
 
-This Wiki will tell you what the ESP-NOW protocol is,and tech you how to use XIAO ESP32 Series to communicate using this protocol,the process will be very simple,In order to enable everyone to utilize the ESP-NOW protocol in the XIAO ESP32 series,we prepare thress XIAO ESP32 types C6/C3/S3 to comuncate,so let's start this journey!
+Welcome to reCamera! This guide will help you quickly set up your device and start using it to unlock powerful AI-Vision features. Whether you're a beginner or an experienced user, this step-by-step walkthrough will guide you through the installation, configuration, and first use.
 
-### [Build the Watcher Development Environment](https://wiki.seeedstudio.com/build_watcher_development_environment/)
+### [Hardware Interface of reCamera](https://wiki.seeedstudio.com/reCamera_hardware_interface/)
 
-<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/watcher_getting_started/64.jpg" style={{width:1100, height:'auto'}}/></div>
-<br />
+<div align="center"><img width={800} src="https://files.seeedstudio.com/wiki/reCamera/image.png" /></div>
 
-This wiki will introduce how to download the Watcher open-source repository and set up an IDF environment.
+In this wiki, we will introduce you to the various hardware interfaces of the reCamera.
 
-### [Watcher Software Architecture](https://wiki.seeedstudio.com/watcher_software_framework/)
+### [XIAO RP2350 Pin Multiplexing](https://wiki.seeedstudio.com/XIAO_RP2350_Pin_Multiplexing/)
 
-The software architecture of SenseCAP Watcher is shown in the figure below, mainly divided into three parts: APP applications, UI and interaction, task flow.
+<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO-RP2350/img/xiao_rp2350_pins/2350image.png" style={{width:800, height:'auto'}}/></div>
 
-<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/watcher_software_framework/architecture.png" style={{width:800, height:'auto'}}/></div>
+Seeed Studio XIAO RP2350 has rich interfaces. There are **19 digital I/O** that can be used as **PWM pins** and **3 analog inputs** that can be used as **ADC pins**. It supports four serial communication interfaces such as **UART, I2C and SPI**. This wiki will be helpful to learn about these interfaces and implement them in your next projects!
 
-- **APP applications**: Mainly some applications, such as WiFi connection, Bluetooth configuration, communication with the platform, OTA, etc., which also generate some data for UI display.
-- **UI and interaction**: Mainly the implementation of the UI interface and UI interaction.
-- **Task flow**: Mainly the implementation of the task flow engine and various task flow function modules.
 
-### [Watcher Function Module Development Guide](https://wiki.seeedstudio.com/watcher_function_module_development_guide/)
+### [XIAO RA4M1 Demo for Clock](https://wiki.seeedstudio.com/xiao_ra4m1_clock/#tech-support--product-discussion)
 
-<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/watcher_software_framework/watcher_function_module.webp" style={{width:800, height:'auto'}}/></div>
+<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/RA4M1_Application/top2.png" style={{width:600, height:'auto'}}/></div>
 
-In this documentation we're gonna show a step-by-step guide on how to develop a new function module. We're gonna take the `UART Alarm` module as an example.
+This project gained significant popularity on YouTube some time ago. It featured a compact box that housed a development board, a motor, and a motor driver board—an impressive feat of space management. Coincidentally, our XIAO series boasts a very small form factor. Imagine the possibilities if we combined the smallest development board with the smallest motor driver board! Join me on this exciting journey of Clock Demos!  -->
 
-### [Watcher UI Integration Guide](https://wiki.seeedstudio.com/watcher_ui_integration_guide/)
-
-<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/watcher_software_framework/ui_framework.png" style={{width:600, height:'auto'}}/></div>
-
-In this tutorial, you will learn how to integrate your own UI design and related logic functions into the `view` directory. All UI designs and logic functions will be placed in the `view` directory, which contains the `ui` and `ui_manager` subdirectories. Additionally, the `view` directory includes `view.c`, `view_alarm.c`, `view_image_preview.c`, `view_pages.c`, and corresponding `.h` header files.
-
-### [Seeed Studio XIAO MG24 Example - Matter](https://wiki.seeedstudio.com/xiao_mg24_matter/)
-
-Matter is an **open-source, unified standard** for smart home technology that promotes interoperability across devices and ecosystems. Developed by the Connectivity Standards Alliance (CSA), it enables seamless communication between devices from various manufacturers without requiring internet connectivity. Matter supports native compatibility with platforms such as Apple HomeKit, Google Home, and Amazon Alexa, making it easier to integrate devices across smart home setups. For a deeper understanding of Matter, refer to the [official Matter documentation](https://project-chip.github.io/connectedhomeip-doc/index.html).
-
-<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO_MG24/matter-qr-url.png" style={{width:600, height:'auto'}}/></div>
-
-Matter operates efficiently over local networks, offering reliable, low-latency communication without needing internet access. This feature significantly improves both security and device performance. This documentation will guide you through the steps to develop a Matter application on the XIAO MG24, using Arduino.
-
-### [Pin Multiplexing with Seeed Studio XIAO MG24](https://wiki.seeedstudio.com/xiao_mg24_pin_multiplexing/)
-
-<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO_MG24/Pin/top.png" style={{width:700, height:'auto'}}/></div>
-
-***The XIAO MG24*** features up to ***22 regular pins***, ***18 analog pins***, ***18 digital pins***, ***2 SPI***, ***2 UART***, ***2 I2C***, and supports ***all PWM***. It offers a rich variety of pins available for our use. In this wiki, we will teach you how to drive these pins, enabling us to utilize them effectively!
 
 
 ## Existing Wiki Updated
 
-### [reCamera Getting Started](https://wiki.seeedstudio.com/recamera_getting_started/)
+### [Pin Multiplexing with Seeed Studio XIAO RA4M1](https://wiki.seeedstudio.com/xiao_ra4m1_pin_multiplexing/)
 
-We have added [solutions](https://wiki.seeedstudio.com/recamera_getting_started/#mac) for MAC users experiencing Computer network errors.
+We have added an [example](https://wiki.seeedstudio.com/xiao_ra4m1_pin_multiplexing/#software-preparation) of software preparation for using CAN with XIAO RA4M1.
+
+### [Watcher to Node-RED Quick Start](https://wiki.seeedstudio.com/watcher_to_node_red/)
+
+We have added an [example](https://wiki.seeedstudio.com/watcher_to_node_red/#part-5-preview-image) demonstrating how to preview images from Watcher.
+
 
 ## The Efforts of Contributor
 
@@ -87,6 +68,16 @@ We have added [solutions](https://wiki.seeedstudio.com/recamera_getting_started/
 FreeRTOS is a collection of C libraries comprised of a real-time kernel and a set of modular libraries that implement complementary functionality. The FreeRTOS kernel is a real-time kernel (or real-time scheduler) that enables applications built on FreeRTOS to meet their hard real-time requirements. It enables applications to be organized as a collection of independent threads of execution.
 
 This wiki covers [FreeRTOS](https://freertos.org/) support for the [Seeed Studio XIAO ESP32S3](https://wiki.seeedstudio.com/xiao_esp32s3_getting_started/). With the assistance of this guide you will be able to utilize the feature set available to the board.     -->
+
+### [使用 XIAO BLE SENSE 制作头部追踪设备（Head Tracker）](https://wiki.seeedstudio.com/cn/xiao_ble_sense_head_tracker/)
+
+[HeadTracker](https://headtracker.gitbook.io) 是一款开源头部追踪项目，可用于无人机控制、虚拟现实、游戏等领域。该设备通过感应头部的方向和运动，为用户提供实时的视角变化体验。
+
+<div style={{ textAlign: 'center' }}><img src="https://files.seeedstudio.com/wiki/XIAO-BLE-Sense-Head-Tracker/1.png" alt="PCB" width="600" /></div>
+
+本文将逐步指导您使用 XIAO BLE SENSE 完成头部追踪设备（Head Tracker）的制作
+
+
 
 - Check on [GitHub](https://github.com/orgs/Seeed-Studio/projects/6) for more information.
 - We will be really appreciate if you can [share your ideas](https://github.com/orgs/Seeed-Studio/projects/6?pane=issue&itemId=35179519) with us!
@@ -175,5 +166,7 @@ This wiki covers [FreeRTOS](https://freertos.org/) support for the [Seeed Studio
 - [weekly wiki on 2024.10.21th](/Seeed_Elderly/weekly_wiki/wiki241021)
 - [weekly wiki on 2024.10.28th](/Seeed_Elderly/weekly_wiki/wiki241028)
 - [weekly wiki on 2024.11.04th](/Seeed_Elderly/weekly_wiki/wiki241104)
+- [weekly wiki on 2024.11.11th](/Seeed_Elderly/weekly_wiki/wiki241111)
+- [weekly wiki on 2024.11.18th](/Seeed_Elderly/weekly_wiki/wiki241118)
 
 </details>

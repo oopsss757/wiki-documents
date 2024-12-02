@@ -1,0 +1,4 @@
+position: 5 # float position is supported
+label: 'Device Workspace'
+collapsible: true # make the category collapsible
+collapsed: true # keep the category open by default

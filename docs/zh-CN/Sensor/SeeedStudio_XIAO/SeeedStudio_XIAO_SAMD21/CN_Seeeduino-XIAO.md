@@ -6,21 +6,21 @@ keywords:
 image: https://files.seeedstudio.com/wiki/wiki-platform/S-tempor.png
 slug: /cn/Seeeduino-XIAO
 last_update:
-  date: 1/11/2023
-  author: 赵桂莹
+  date: 11/13/2024
+  author: Agnes
 ---
 
-# Seeed Studio XIAO SAMD21 开发板
+# Seeed Studio XIAO SAMD21 开发
 
 <p style={{textAlign: 'center'}}><img src="https://files.seeedstudio.com/wiki/Seeeduino-XIAO/img/Seeeduino-XIAO-preview-1.jpg" alt="pir" width={600} height="auto" /></p>
 
-Seeed Studio XIAO SAMD21是Seeeduino家族中最小的成员。它搭载了强大的ATSAMD21G18A-MU低功耗微控制器。另一方面，这个小板子在处理性能方面表现不俗，但需要更少的电力。实际上，它被设计成微小的尺寸，可以用于可穿戴设备和小型项目。
+Seeed Studio XIAO SAMD21（原名Seeeduino XIAO）是[Seeed Studio XIAO](https://www.seeedstudio.com/xiao-series-page)系列的首次亮相，该系列包括一系列功能强大的拇指大小开发板，兼容Arduino。它搭载了强大的ATSAMD21G18A-MU，这是一款低功耗微控制器。另一方面，这块小板在处理性能上表现出色，但功耗较低。它的尺寸非常紧凑，适合用于可穿戴设备和小型项目。
 
-Seeed Studio XIAO SAMD21 有14个引脚，可以用于11个数字接口，11个模拟接口，10个 PWM 接口（d1-d10），1个 DAC 输出引脚 D0，1个 SWD Pad 接口，1个 I2C 接口，1个 SPI 接口，1个 UART 接口，串行通信指示灯（T/R），通过引脚多路复用可以控制闪烁灯（L）。LED灯的颜色（电源，L，RX，TX）分别为绿色，黄色，蓝色和蓝色。此外，Seeed Studio XIAO SAMD21 还有一个 Type-C 接口，可供电和下载代码。板上有两个复位按钮，可以通过短接它们来重置板子。
+Seeed Studio XIAO SAMD21有14个引脚，其中包括11个数字接口、11个模拟接口、10个PWM接口（d1-d10）、1个DAC输出引脚D0、1个SWD调试接口、1个I2C接口、1个SPI接口、1个UART接口、串行通信指示灯（T/R）、通过引脚复用的闪烁灯（L）。LED灯（电源、L、RX、TX）的颜色分别为绿色、黄色、蓝色和蓝色。此外，Seeed Studio XIAO SAMD21还配备了一个Type-C接口，可以供电并下载代码。板子上有两个重置按钮，您可以将它们短接来重置板子。
 
 <div class="get_one_now_container" style={{textAlign: 'center'}}>
     <a class="get_one_now_item" href="https://www.seeedstudio.com/Seeeduino-XIAO-Arduino-Microcontroller-SAMD21-Cortex-M0+-p-4426.html">
-            <strong><span><font color={'FFFFFF'} size={"4"}> Get One Now 🖱️</font></span></strong>
+            <strong><span><font color={'FFFFFF'} size={"4"}> 立即购买 🖱️</font></span></strong>
     </a>
 </div>
 
@@ -74,15 +74,13 @@ Seeed Studio XIAO SAMD21 有14个引脚，可以用于11个数字接口，11个�
 
 <p style={{textAlign: 'center'}}><img src="https://files.seeedstudio.com/wiki/Seeeduino-XIAO/img/regulator_to_3.3v.png" alt="pir" width={600} height="auto" /></p>
 
-:::提示
+:::note
 **对于普通的 I/O 引脚**：
 MCU的工作电压为3.3V。如果将高于 3.3V 的电压输入连接到普通的 I/O 引脚，可能会导致芯片损坏。
 
 **对于电源引脚**：
-内置的DC-DC转换电路能够将5V电压转换成3.3V电压，因此可以通过VIN引脚和5V引脚使用5V供电来为设备供电。
-
-> 请注意使用，不要拆卸防护盖。
-> :::
+内置的DC-DC转换电路能够将5V电压转换成3.3V电压，因此可以通过VIN引脚和5V引脚使用5V供电来为设备供电。请注意使用，不要拆卸防护盖。
+:::
 
 ### **进入Bootloader模式**
 
@@ -119,28 +117,28 @@ Seeed Studio XIAO SAMD21上的所有引脚都支持中断，但是5号引脚和7
 - 使用引脚 6 作为数字引脚：
 
 ```c
-const int buttonPin = 6;     // the number of the pushbutton pin
-const int ledPin =  13;      // the number of the LED pin
+const int buttonPin = 6;     // 按钮引脚的编号
+const int ledPin =  13;      // LED引脚的编号
 
-int buttonState = 0;         // variable for reading the pushbutton status
+int buttonState = 0;         // 变量用于读取按钮状态
 
 void setup() {
-  // initialize the LED pin as an output:
+  // 初始化LED引脚为输出模式：
   pinMode(ledPin, OUTPUT);
-  // initialize the pushbutton pin as an input:
+  // 初始化按钮引脚为输入模式：
   pinMode(buttonPin, INPUT);
 }
 
 void loop() {
-  // read the state of the pushbutton value:
+  // 读取按钮的状态：
   buttonState = digitalRead(buttonPin);
 
-  // check if the pushbutton is pressed. If it is, the buttonState is HIGH:
+  // 检查按钮是否被按下。如果按下，buttonState为HIGH：
   if (buttonState == HIGH) {
-    // turn LED on:
+    // 打开LED：
     digitalWrite(ledPin, HIGH);
   } else {
-    // turn LED off:
+    // 关闭LED：
     digitalWrite(ledPin, LOW);
   }
 }
@@ -154,20 +152,20 @@ void loop() {
 
 
 void setup() {
-  // declare the ledPin as an OUTPUT:
+  // 将ledPin声明为输出模式：
   pinMode(ledPin, OUTPUT);
 }
 
 void loop() {
-  // read the value from the sensor:
+  // 从传感器读取值：
   sensorValue = analogRead(sensorPin);
-  // turn the ledPin on
+  // 打开LED：
   digitalWrite(ledPin, HIGH);
-  // stop the program for <sensorValue> milliseconds:
+  // 停止程序，延时<sensorValue>毫秒：
   delay(sensorValue);
-  // turn the ledPin off:
+  // 关闭LED：
   digitalWrite(ledPin, LOW);
-  // stop the program for for <sensorValue> milliseconds:
+  // 停止程序，再延时<sensorValue>毫秒：
   delay(sensorValue);
 }
 ```
@@ -194,33 +192,32 @@ void loop() {
 - 使用引脚5作为I2C的SCL引脚（SDA引脚为引脚4）：
 
 ```c
-// Wire Master Writer
+// I2C主机写入示例
 // by Nicholas Zambetti <http://www.zambetti.com>
 
-// Demonstrates use of the Wire library
-// Writes data to an I2C/TWI slave device
-// Refer to the "Wire Slave Receiver" example for use with this
+// 演示使用Wire库
+// 向I2C/TWI从设备写入数据
+// 请参考“Wire Slave Receiver”示例以配合使用
 
-// Created 29 March 2006
+// 创建于2006年3月29日
 
-// This example code is in the public domain.
-
+// 该示例代码属于公共领域。
 
 #include <Wire.h>
 
 void setup()
 {
-  Wire.begin(); // join i2c bus (address optional for master)
+  Wire.begin(); // 加入I2C总线（对于主机来说，地址是可选的）
 }
 
 byte x = 0;
 
 void loop()
 {
-  Wire.beginTransmission(4); // transmit to device #4
-  Wire.write("x is ");        // sends five bytes
-  Wire.write(x);              // sends one byte  
-  Wire.endTransmission();    // stop transmitting
+  Wire.beginTransmission(4); // 向设备#4传输数据
+  Wire.write("x is ");        // 发送5个字节
+  Wire.write(x);              // 发送1个字节  
+  Wire.endTransmission();    // 结束传输
   x++;
   delay(500);
 }
@@ -233,20 +230,21 @@ void loop()
 ```c
 #include <SPI.h>
 const int CS = 7;
+
 void setup (void) {
-   digitalWrite(CS, HIGH); // disable Slave Select
+   digitalWrite(CS, HIGH); // 禁用从设备选择
    SPI.begin ();
-   SPI.setClockDivider(SPI_CLOCK_DIV8);//divide the clock by 8
+   SPI.setClockDivider(SPI_CLOCK_DIV8); // 将时钟分频为8
 }
 
 void loop (void) {
    char c;
-   digitalWrite(CS, LOW); // enable Slave Select
-   // send test string
+   digitalWrite(CS, LOW); // 启用从设备选择
+   // 发送测试字符串
    for (const char * p = "Hello, world!\r" ; c = *p; p++) {
       SPI.transfer (c);
    }
-   digitalWrite(CS, HIGH); // disable Slave Select
+   digitalWrite(CS, HIGH); // 禁用从设备选择
    delay(2000);
 }
 ```
@@ -261,7 +259,7 @@ void loop (void) {
 
 DAC 仅可用于 Arduino 引脚 A0 ，并可使用 analogWrite（A0，`<value>`）进行控制。 DAC 可以设置为 10 位分辨率（确保在设置中调用 [**analogWriteResolution(10)**](https://www.arduino.cc/reference/en/language/functions/zero-due-mkr-family/analogwriteresolution/) ),这意味着 0 到 1023 之间的值将电压设置在 0 到 3.3V 之间的某个位置。
 
-In addition to the DAC, the SAMD21's ADC channels also stand apart from the ATmega328: they're equipped with up to 12-bit resolution. That means the analog input values can range from 0-4095, representing a voltage between 0 and 3.3V. To use the ADC's in 12-bit mode, make sure you call [**analogReadResolution(12)**](https://www.arduino.cc/reference/en/language/functions/zero-due-mkr-family/analogreadresolution/) ，这样才能在 12 位模式下使用 ADC 。
+除了DAC，SAMD21的ADC通道也与ATmega328有所不同：它们支持高达12位的分辨率。这意味着模拟输入值的范围为0到4095，表示的电压范围为0到3.3V。要在12位模式下使用ADC，请确保调用[**analogReadResolution(12)**](https://www.arduino.cc/reference/en/language/functions/zero-due-mkr-family/analogreadresolution/)，这样才能在12位模式下正确使用ADC。
 
 **串行绘制 DAC**
 
@@ -269,7 +267,7 @@ In addition to the DAC, the SAMD21's ADC channels also stand apart from the ATme
 
 <div align="center"><img width="{600}" src="https://files.seeedstudio.com/wiki/Seeeduino-XIAO/img/AO_A1.jpg" /></div>
 
-:::提示
+:::note
 上述图片中 Seeed Studio XIAO SAMD21 正在使用 [**Seeed Studio XIAO SAMD21 拓展板**](https://www.seeedstudio.com/Seeeduino-XIAO-Expansion-board-p-4746.html)
 :::
 
@@ -284,37 +282,37 @@ In addition to the DAC, the SAMD21's ADC channels also stand apart from the ATme
 代码示例
 
 ```cpp
-#define DAC_PIN A0 // Make code a bit more legible
+#define DAC_PIN A0 // 使代码更具可读性
 
-float x = 0; // Value to take the sin of
-float increment = 0.02;  // Value to increment x by each time
-int frequency = 440; // Frequency of sine wave
+float x = 0; // 要取正弦值的变量
+float increment = 0.02;  // 每次增加的x值
+int frequency = 440; // 正弦波的频率
 
 void setup() 
 {
-  analogWriteResolution(10); // Set analog out resolution to max, 10-bits
-  analogReadResolution(12); // Set analog input resolution to max, 12-bits
+  analogWriteResolution(10); // 设置模拟输出分辨率为最大值，10位
+  analogReadResolution(12); // 设置模拟输入分辨率为最大值，12位
 
   SerialUSB.begin(9600);
 }
 
 void loop() 
 {
-  // Generate a voltage value between 0 and 1023. 
-  // Let's scale a sin wave between those values:
-  // Offset by 511.5, then multiply sin by 511.5.
+  // 生成一个0到1023之间的电压值。
+  // 让我们将正弦波的值缩放到这些值之间：
+  // 偏移量为511.5，然后将正弦值乘以511.5。
   int dacVoltage = (int)(511.5 + 511.5 * sin(x));
-  x += increment; // Increase value of x
+  x += increment; // 增加x的值
 
-  // Generate a voltage between 0 and 3.3V.
-  // 0= 0V, 1023=3.3V, 512=1.65V, etc.
+  // 生成一个0到3.3V之间的电压值。
+  // 0 = 0V，1023 = 3.3V，512 = 1.65V，依此类推。
   analogWrite(DAC_PIN, dacVoltage);
 
-  // Now read A1 (connected to A0), and convert that
-  // 12-bit ADC value to a voltage between 0 and 3.3.
+  // 现在读取A1（连接到A0），并将该
+  // 12位ADC值转换为0到3.3V之间的电压。
   float voltage = analogRead(A1) * 3.3 / 4096.0;
-  SerialUSB.println(voltage); // Print the voltage.
-  delay(1); // Delay 1ms
+  SerialUSB.println(voltage); // 打印电压值。
+  delay(1); // 延时1毫秒
 }
 ```
 
@@ -328,7 +326,7 @@ void loop()
 - 电脑x1
 - USB typc数据线 x1
 
-:::提示
+:::tip
 
 有些USB数据线只能供电，不能传输数据。如果你没有USB线或者不知道你的USB线是否可以传输数据，你可以查看 [seeed USB type C support USB 3.1](https://www.seeedstudio.com/USB-Type-C-to-A-Cable-1Meter-p-4085.html).
 :::
@@ -339,7 +337,7 @@ void loop()
 
 ### 软件
 
-:::说明
+:::note
 
 如果这是您第一次使用 Arduino，我们建议您可以参考学习 [Getting Started with Arduino](https://wiki.seeedstudio.com/Getting_Started_with_Arduino)
 :::
@@ -354,7 +352,7 @@ void loop()
 
 双击您之前下载的 Arduino 应用程序 (arduino.exe)。
 
-:::说明
+:::note
 
 如果 Arduino 软件加载的语言与您需要的不同，您可以在首选项对话框中更改。有关详细信息，请参见 [Arduino Software (IDE) page](https://www.arduino.cc/en/Guide/Environment#languages) 。
 :::
@@ -378,15 +376,15 @@ void loop()
 <!-- ![](https://files.seeedstudio.com/wiki/Seeeduino-XIAO/img/XIAO-board.png) -->
   <p style={{textAlign: 'center'}}><img src="https://files.seeedstudio.com/wiki/Seeeduino-XIAO/img/XIAO-board.png" alt="pir" width={600} height="auto" /></p>
 
-- **Step 4. 选择您的开发板和端口**
+- **Step 4. 选择您的板和端口**
 
-在安装完开发板后，点击 Tools-> Board，找到 "**Seeed Studio XIAO SAMD21 M0**" 并选择它。现在，您已经在 Arduino IDE 中设置好了 Seeed Studio XIAO SAMD21 的开发板。
+安装好板子后，点击 **工具-> 板**，找到 **"Seeed Studio XIAO"** 并选择它。现在，您已经为Arduino IDE设置了Seeed Studio XIAO SAMD21板。
 
-<p style={{textAlign: 'center'}}><img src="https://files.seeedstudio.com/wiki/Seeeduino-XIAO/img/board.png" alt="pir" width={600} height="auto" /></p>
+<p style={{textAlign: 'center'}}><img src="https://files.seeedstudio.com/wiki/Seeeduino_GPRS/img/1.jpg" alt="pir" width={600} height="auto" /></p>
 
-从 "工具 | 端口" 菜单中选择 Arduino 开发板。这可能是 COM3 或更高的端口（COM1 和 COM2 通常保留给硬件串行端口）。如果您不确定，请断开 Arduino 开发板并重新打开该菜单；消失的端口选项应该是 Arduino 开发板。重新连接开发板并选择该端口。
+从 **工具 | 串口** 菜单中选择Arduino板的串口设备。它很可能是 COM3 或更高的端口（**COM1** 和 **COM2** 通常保留给硬件串口）。您可以断开Arduino板，重新打开菜单；消失的那一项应该是Arduino板。重新连接板子并选择该串口。
 
-<p style={{textAlign: 'center'}}><img src="https://files.seeedstudio.com/wiki/Seeeduino-XIAO/img/port.png" alt="pir" width={600} height="auto" /></p>
+<p style={{textAlign: 'center'}}><img src="https://files.seeedstudio.com/wiki/Seeeduino_GPRS/img/2.jpg" alt="pir" width={600} height="auto" /></p>
 
 - **Step 5.上传程序**
 
@@ -442,7 +440,7 @@ void loop()
 
 <div align="middle"><img width="400" src="https://mjrovai.github.io/XIAO_Big_Power_Small_Board-ebook/cover.jpg" /></div>
 
-- **[Ebook]** [Arduino小型化与TinyML应用 从入门到精通](https://tinkergen.cn/book_xiao)
+- **[电子书]** [Arduino小型化与TinyML应用 从入门到精通](https://tinkergen.cn/book_xiao)
 
 ## 技术支持和产品讨论
 

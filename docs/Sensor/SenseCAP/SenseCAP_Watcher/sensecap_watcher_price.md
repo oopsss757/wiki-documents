@@ -132,7 +132,7 @@ Once you have confirmed the plan you want, please agree to the service agreement
 
 <div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/watcher_getting_started/pay_page2.png" style={{width:250, height:'auto'}}/></div>
 
-Currently SenseCraft APP supports payment using Palpay. Once the payment is successful, you will see your purchased Requests updated on the Subscription's page.
+Currently SenseCraft APP supports payment using Paypal. Once the payment is successful, you will see your purchased Requests updated on the Subscription's page.
 
 <div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/watcher_getting_started/pay_page3.png" style={{width:250, height:'auto'}}/></div>
 

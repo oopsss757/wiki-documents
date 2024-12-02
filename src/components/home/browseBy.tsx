@@ -11,6 +11,53 @@ function IndexLatestedViki(props) {
   const [theme, setTheme] = useState(props.theme);
   const wikiList = [
     {
+      key: 'edgeAi',
+      image: 'edgeAi',
+      moreLink:'https://wiki.seeedstudio.com/edge_ai_topic/',
+      docList: [
+        {
+          "path": "/Real%20Time%20Subtitle%20Recoder%20on%20Nvidia%20Jetson",
+          "image": "https://files.seeedstudio.com/wiki/Homepage_browseby/speech_subtitle.gif",
+          "title": "Speech Subtitle Generation on Nvidia Jetson",
+        },
+                {
+          "path": "/alwaysAI-Jetson-Getting-Started",
+          "image": "https://files.seeedstudio.com/wiki/Homepage_browseby/object_detection_alwaysai.gif",
+          "title": "Object Detection with AlwaysAI",
+        }
+        , {
+          "path": "/YOLOv8-TRT-Jetson",
+          "image": "https://files.seeedstudio.com/wiki/Homepage_browseby/object_detection_yolov8.gif",
+          "title": "Deploy YOLOv8 on NVIDIA Jetson using TensorRT",
+        },
+        {
+          "path": "/Lumeo-Jetson-Getting-Started",
+          "image": "https://files.seeedstudio.com/wiki/Homepage_browseby/object_detection_lumeo.gif",
+          "title": "Object Detection with Lumeo",
+        },
+        {
+          "path": "/a_loam",
+          "image": "https://files.seeedstudio.com/wiki/Homepage_browseby/fig0.gif",
+          "title": "How to run A-LOAM 3D SLAM on reComputer",
+        },
+        {
+          "path": "/CVEDIA-Jetson-Getting-Started",
+          "image": "https://files.seeedstudio.com/wiki/Homepage_browseby/CVEDIA-RT.gif",
+          "title": "Getting Started with CVEDIA-RT on NVIDIA® Jetson Devices",
+        },
+        {
+          "path": "/No-code-Edge-AI-Tool",
+          "image": "https://files.seeedstudio.com/wiki/Homepage_browseby/no_code_edge_ai_tool.webp",
+          "title": "No code Edge AI Tool",
+        },
+        {
+          "path": "https://wiki.seeedstudio.com/How_to_run_local_llm_text_to_image_on_reComputer/",
+          "image": "https://files.seeedstudio.com/wiki/Homepage_browseby/local_llm_text_to_image.webp",
+          "title": "Run a Local LLM Text-to-Image on reComputer",
+        }
+      ]
+    },
+    {
       key: 'arduino',
       image: 'arduino',
       moreLink:'https://wiki.seeedstudio.com/Arduino/',
@@ -155,11 +202,6 @@ function IndexLatestedViki(props) {
       moreLink:'https://wiki.seeedstudio.com/home_assistant_topic/',
       docList: [
         {
-          "path": "/home_assistant_sensecap",
-          "image": "https://files.seeedstudio.com/wiki/Homepage_browseby/config_11.webp",
-          "title": "SenseCAP Integration for Home Assistant",
-        },
-        {
           "path": "/xiao-esp32c3-esphome",
           "image": "https://files.seeedstudio.com/wiki/Homepage_browseby/c3_accesses_ha.webp",
           "title": "XIAO ESP32C3 accesses Home Assistant via ESPHome service",
@@ -169,75 +211,35 @@ function IndexLatestedViki(props) {
           "image": "https://files.seeedstudio.com/wiki/Homepage_browseby/ha_sensecap.webp",
           "title": "Tango with Home Assistant and SenseCAP Sensors",
         },
-                {
-          "path": "/sensecraft_homeassistant_userguide",
-          "image": "https://files.seeedstudio.com/wiki/Homepage_browseby/SenseCraft-HomeAssistantimage50.webp",
-          "title": "SenseCraft-HomeAssistant User Manual",
-        },
         {
           "path": "/SenseCAP_Indicator_Application_Matter",
           "image": "https://files.seeedstudio.com/wiki/Homepage_browseby/indicator-matter-7.webp",
           "title": "SenseCAP Indicator - Matter Application Development",
         },
         {
-          "path": "/ha_xiao_esp32",
-          "image": "https://files.seeedstudio.com/wiki/Homepage_browseby/ha-xiao5.webp",
-          "title": "XIAO ESP32S3 for Home Assistant",
-        },
-        {
+          "path": "/reterminal-DM-Frigate",
+          "image": "https://files.seeedstudio.com/wiki/Homepage_browseby/frigate_with_reterminal.webp",
+          "title": "Frigate intergrating with reTerminal DM",
+        }, 
+                {
           "path": "/Connect-Grove-to-Home-Assistant-ESPHome",
           "image": "https://files.seeedstudio.com/wiki/Homepage_browseby/grove_to_esphome.webp",
           "title": "Connect Grove Modules to Home Assistant using ESPHome",
         },
         {
-          "path": "/reterminal-DM-Frigate",
-          "image": "https://files.seeedstudio.com/wiki/Homepage_browseby/frigate_with_reterminal.webp",
-          "title": "Frigate intergrating with reTerminal DM",
-        }, 
-      ]
-    }, {
-      key: 'edgeAi',
-      image: 'edgeAi',
-      moreLink:'https://wiki.seeedstudio.com/edge_ai_topic/',
-      docList: [
-        {
-          "path": "/Real%20Time%20Subtitle%20Recoder%20on%20Nvidia%20Jetson",
-          "image": "https://files.seeedstudio.com/wiki/Homepage_browseby/speech_subtitle.webp",
-          "title": "Speech Subtitle Generation on Nvidia Jetson",
+          "path": "/home_assistant_sensecap",
+          "image": "https://files.seeedstudio.com/wiki/Homepage_browseby/config_11.webp",
+          "title": "SenseCAP Integration for Home Assistant",
         },
         {
-          "path": "/Edge/NVIDIA_Jetson/Application/Generative_AI/Whisper_on_Jetson_for_Real_Time_Speech_to_Text",
-          "image": "https://files.seeedstudio.com/wiki/Homepage_browseby/real_time_speech.webp",
-          "title": "Deploy Whisper on NVIDIA Jetson Orin for Real time Speech to Text",
+          "path": "/sensecraft_homeassistant_userguide",
+          "image": "https://files.seeedstudio.com/wiki/Homepage_browseby/SenseCraft-HomeAssistantimage50.webp",
+          "title": "SenseCraft-HomeAssistant User Manual",
         },
         {
-          "path": "https://wiki.seeedstudio.com/How_to_run_local_llm_text_to_image_on_reComputer/",
-          "image": "https://files.seeedstudio.com/wiki/Homepage_browseby/local_llm_text_to_image.webp",
-          "title": "Run a Local LLM Text-to-Image on reComputer",
-        },
-        {
-          "path": "/alwaysAI-Jetson-Getting-Started",
-          "image": "https://files.seeedstudio.com/wiki/Homepage_browseby/object_detection_alwaysai.webp",
-          "title": "Object Detection with AlwaysAI",
-        }
-        , {
-          "path": "/YOLOv8-TRT-Jetson",
-          "image": "https://files.seeedstudio.com/wiki/Homepage_browseby/object_detection_yolov8.webp",
-          "title": "Object Detection with Yolov8",
-        },
-        {
-          "path": "/Lumeo-Jetson-Getting-Started",
-          "image": "https://files.seeedstudio.com/wiki/Homepage_browseby/object_detection_lumeo.webp",
-          "title": "Object Detection with Lumeo",
-        }, {
-          "path": "/No-code-Edge-AI-Tool",
-          "image": "https://files.seeedstudio.com/wiki/Homepage_browseby/no_code_edge_ai_tool.webp",
-          "title": "No code Edge AI Tool",
-        },
-        {
-          "path": "/Jetson-Nano-MaskCam",
-          "image": "https://files.seeedstudio.com/wiki/Homepage_browseby/maskcam.webp",
-          "title": "Maskcam - Crowd Face Mask Usage Monitoring based on Jetson Nano",
+          "path": "/ha_xiao_esp32",
+          "image": "https://files.seeedstudio.com/wiki/Homepage_browseby/ha-xiao5.webp",
+          "title": "XIAO ESP32S3 for Home Assistant",
         }
       ]
     }

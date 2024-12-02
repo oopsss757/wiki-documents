@@ -137,7 +137,7 @@ Once all the connections are done for the Ultrasonic Level Sensor and the Data L
 <div align="center"><img width={500} src="https://files.seeedstudio.com/products/101991101/image9.png"/></div>
 
 
-### 4. Configure Settings for Data Logger and RS485 750cm Ultrasonic Level Sensor Communication
+### 4. Configure Settings for Data Logger and RS485 Air Temperature, Humidity and Barometric Pressure Sensor Communication
 
 - **Step 1:** Select **S2100 Data Logger** and Click **Setup** on the config page.
 

@@ -4,8 +4,8 @@ title: ESP32C3 的 MicroPython 编程
 image: https://files.seeedstudio.com/wiki/wiki-platform/S-tempor.png
 slug: /cn/XIAO_ESP32C3_MicroPython
 last_update:
-  date: 10/28/2023
-  author: Xin Ping Li
+  date: 11/13/2024
+  author: Agnes
 ---
 
 # 使用 XIAO ESP32C3 用 MicroPython 做一个 Wi-Fi跟踪器
@@ -15,6 +15,7 @@ last_update:
 因此，在Wi-Fi跟踪器的指导下，我们可以有效地优化WiFi信号增强器的位置，确保最佳的信号覆盖。
 
 <div style={{textAlign:'center'}}><iframe width={560} height={315} src="https://www.youtube.com/embed/7n72Knh4IIM" title="YouTube video player" frameBorder={0} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen /></div>
+
 ## 硬件准备
 
 我在这里使用Seeed Studio XIAO ESP32C3和扩展板作为硬件。
@@ -67,7 +68,7 @@ last_update:
   </table>
 </div>
 
-:::信息
+:::info
 在使用它之前，它需要我陈述我在这里使用的软件/固件是为ESP32C3芯片设计的。因此，当您尝试使用引脚时，请确保通用输入/输出而不是板上的引脚
 
 例如，当您试图使用左侧第一行中的pin时。确保它是`GPIO2`而不是`A0`或`D0`。
@@ -110,7 +111,7 @@ esptool.exe --chip esp32c3 --port COM10 --baud 921600 --before default_reset --a
 
 <div align="center"><img width={600} src="https://files.seeedstudio.com/wiki/wiki-ranger/Contributions/C3-MicroPy/C3-MicroPython2.png" /></div>
 
-:::注意
+:::note
 如果使用linux操作系统，请将“esptool.exe”修改为“esptool.py”。将“COM10”更改为自己的串口。修改“esp32c3-usb-20230426-v1.20.0.bin”为你下载的最新固件名称。
 :::
 

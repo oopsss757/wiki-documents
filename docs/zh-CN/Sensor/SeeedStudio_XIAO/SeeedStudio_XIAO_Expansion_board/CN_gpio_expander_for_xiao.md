@@ -4,8 +4,8 @@ title: XIAO的IO扩模块
 image: https://files.seeedstudio.com/wiki/seeed_logo/logo_2023.png
 slug: /cn/io_expander_for_xiao
 last_update:
-  date: 10/26/2023
-  author: 金 菊
+  date: 11/20/2024
+  author: Agnes
 ---
 
 <p style={{textAlign: 'center'}}><img src="https://files.seeedstudio.com/wiki/gpio-expander-for-xiao/1.jpg" alt="pir" width={500} height="auto" /></p>
@@ -100,7 +100,8 @@ J1引脚允许用户通过焊接决定是否将MCP23017的RST、INTB和INTA引�
 
 <p style={{textAlign: 'center'}}><img src="https://files.seeedstudio.com/wiki/gpio-expander-for-xiao/4.jpg" alt="pir" width={800} height="auto" /></p>
 
-:::注意：所示的PCB板仅用于展示，且在文章发布时并未上架销售。
+:::note
+所示的PCB板仅用于展示，且在文章发布时并未上架销售。
 :::
 
 **模式2：通过引脚排线，XIAO直接与扩展板连接**
@@ -133,7 +134,7 @@ J1引脚允许用户通过焊接决定是否将MCP23017的RST、INTB和INTA引�
     </a>
 </div><br />
 
-##演示：IO输出高电平和低电平
+## 演示：IO输出高电平和低电平
 
 在Arduino IDE中，打开一个新的代码窗口，并复制以下示例代码：
 
@@ -180,13 +181,14 @@ void loop() {
 
 将上述代码上传到您的XIAO。代码成功上传后，您会发现除了PB7引脚外，所有引脚都是3.3V高电平。
 
-:::注意事项：
+:::caution
 该扩展板只能使用数字输入和输出功能，不支持PWM或模拟输入和输出功能。
 :::
 
 ### 引脚寻址/引脚编号
 
 在使用单引脚操作（如_pinMode(pinId, dir)_，digitalRead(pinId)或_digitalWrite(pinId, val)）时，引脚使用下面的ID进行寻址。例如，要设置_GPB0_的模式，可以使用_pinMode(8, ...)。 注意 MCP23008和MCP23S08只有_GPAx_引脚。
+
 | MCP23x17引脚 # | 引脚名称 | 引脚ID编号 |
 | :------------: | :------: | :----: |
 |       21       |   GPA0   |   0    |

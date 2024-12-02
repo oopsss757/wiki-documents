@@ -394,7 +394,7 @@ const wishRender = (isMobile) => {
 
 			<div className={styles.wrapper}>
 				<div className={styles.title}>Share Your Ideas - Achieve it - Get Rewarded</div>
-				<div className={clsx(styles.add, styles.cursor_pointer)} onClick={showModal}><PlusOutlined />&nbsp;Submit your projects </div>
+				<div className={clsx(styles.add, styles.cursor_pointer)} onClick={showModal}><PlusOutlined />&nbsp;Submit it and See it on GitHub Issue</div>
 				<div className={styles.wishpool_container}>
 
 					<div className={styles.item_radio}>

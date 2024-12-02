@@ -1,7 +1,7 @@
 ---
 title: Pin Multiplexing with Seeed Studio XIAO MG24
 description: Pin multiplexing with Seeed Studio XIAO MG24(Sense).
-image: https://files.seeedstudio.com/wiki/XIAO_MG24/Pin/top.webp
+image: https://files.seeedstudio.com/wiki/XIAO_MG24/Pin/2.webp
 slug: /xiao_mg24_pin_multiplexing
 keywords:
   - XIAO
@@ -17,8 +17,6 @@ sidebar_position: 1
 ***The XIAO MG24*** features up to ***22 regular pins***, ***18 analog pins***, ***18 digital pins***, ***2 SPI***, ***2 UART***, ***2 I2C***, and supports ***all PWM***. It offers a rich variety of pins available for our use. In this wiki, I will teach you how to drive these pins, enabling us to utilize them effectively 😀!
 
 ## Digital
-
-The XIAO MG24(Sense) has up to 22 regular pins , 18 analog pins , 18 Digital, 2xSPI , 2xUART , 2xIIC and ALL PWM.It have a rich variety of pins available for us to use. So in this example, we will use the XIAO MG24
 
 ### Hardware Preparation
 
@@ -52,7 +50,7 @@ The XIAO MG24(Sense) has up to 22 regular pins , 18 analog pins , 18 Digital, 2x
   </tr>
 </table>
 
-Please install XIAO MG24(Sense) or Sense onto the expansion board, and connect the relay to the **A0/D0** interface of the expansion board via a Grove cable. Finally, connect XIAO to the computer via a USB-C cable.
+Please install XIAO MG24(Sense) onto the expansion board, and connect the relay to the **A0/D0** interface of the expansion board via a Grove cable. Finally, connect XIAO to the computer via a USB-C cable.
 
 ### Software Implementation
 
@@ -128,7 +126,7 @@ All GPIO pins on XIAO MG24(Sense) support PWM output. Therefore, you can use any
 </table>
 
 :::tip
-Please install XIAO MG24(Sense) or Sense onto the expansion board, then connect the Variable Color LED to the A0/D0 interface of the expansion board using a Grove cable. Finally, connect XIAO to your computer via USB-C cable.
+Please install XIAO MG24(Sense) onto the expansion board, then connect the Variable Color LED to the A0/D0 interface of the expansion board using a Grove cable. Finally, connect XIAO to your computer via USB-C cable.
 :::
 
 ### Software Implementation
@@ -243,12 +241,12 @@ If everything goes smoothly, after uploading the program, you should see the fol
 
 <div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO_MG24/Pin/4.gif" style={{width:500, height:'auto'}}/></div>
 
-## Serial
+## UART
 
 When working with Arduino IDE, Serial communication is an essential part of many projects. To 
 use Serial in Arduino IDE, you need to start by opening the Serial Monitor window. This can be done by clicking on the **Serial Monitor** icon in the toolbar or by pressing the **Ctrl+Shift+M** shortcut key.
 
-### General Usage
+### General Serial Usage
 
 Some of the commonly used Serial functions include:
 
@@ -311,7 +309,7 @@ void loop() {
 }
 ```
 
-## IIC
+## I2C
 
 XIAO MG24(Sense) has an I2C interface that can be used for data transmission and parsing of many sensors, as well as for using some OLED screens.
 
@@ -411,7 +409,6 @@ void smeil_display() {
         delay(delays[i]); 
     }
 }
-}
 ```
 
 ### Result graph
@@ -424,9 +421,6 @@ The XIAO MG24(Sense) chip integrates multiple peripherals, including an SPI inte
 
 ### Arduino Library Overview
 
-:::tip
-If this is your first time using Arduino, we highly recommend you to refer to [Getting Started with Arduino](https://wiki.seeedstudio.com/Getting_Started_with_Arduino/).
-:::
 <div class="github_container" style={{textAlign: 'center'}}>
     <a class="github_item" href="https://github.com/limengdu/XIAO_ST7789V2_LCD_Display/tree/main">
     <strong><span><font color={'FFFFFF'} size={"4"}> Download the Library</font></span></strong> <svg aria-hidden="true" focusable="false" role="img" className="mr-2" viewBox="-3 10 9 1" width={16} height={16} fill="currentColor" style={{textAlign: 'center', display: 'inline-block', userSelect: 'none', verticalAlign: 'text-bottom', overflow: 'visible'}}><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" /></svg>
@@ -464,9 +458,11 @@ Based on the Arduino example program provided by **Waveshare**, we have written 
 </div>
 
 ### Pin Connect
-<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO_MG24/Pin/3.png" style={{width:700, height:'auto'}}/></div>
 
 After preparing the hardware as mentioned above, use jumper wires to connect the SPI interface of the XIAO and OLED. Please refer to the following diagram for the wiring method.
+
+<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO_MG24/Pin/3.png" style={{width:700, height:'auto'}}/></div>
+
 
 
 ### Installation

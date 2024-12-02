@@ -6,8 +6,8 @@ keywords:
 image: https://files.seeedstudio.com/wiki/seeed_logo/logo_2023.png
 slug: /cn/xiao-esp32c3-esphome
 last_update:
-  date: 1/11/2023
-  author: Xin Ping Li
+  date: 11/11/2024
+  author: Agnes
 ---
 
 # 将 XIAO ESP32C3 应用 Home Assistant 实现屋内无摄像头监控
@@ -23,7 +23,7 @@ last_update:
 
 ## 开始
 
-:::提示
+:::tip
 截至2023年7月31日，之前导致雷达完全死亡的问题现在已经修复，所以请更新这个教程物种的库文件和配置器以正常工作。
 :::
 
@@ -58,15 +58,15 @@ last_update:
 
 本教程的内容大致包括以下步骤。
 
-1. 选择您的HomeAssistant环境
-2. 在HomeAssistant中安装和配置ESPHome
-3. 配置XIAO ESP32C3和ESPHome连接
-4. 配置家庭辅助面板
+1. [选择您的HomeAssistant环境](#select-your-home-assistant-environment)
+2. [在HomeAssistant中安装和配置]ESPHome(#install-and-configure-esphome-in-home-assistant)
+3. [配置XIAO ESP32C3和ESPHome连接](#configure-the-xiao-esp32c3-and-esphome-connection)
+4. [配置家庭辅助面板](#configure-home-assistant-panel)
 
 当然，如果你对XIAO ESP32C3如何在Home Assistant中使用Grove感兴趣，可以直接阅读本章。
 
 
--[使用XIAO ESP32C3连接Grove到Home Assistant](#连接- Grove到Home Assistant-使用- XIAO ESP32C3)
+- [使用XIAO ESP32C3连接Grove到Home Assistant](#connect-grove-to-home-assistant-using-xiao-esp32c3)
 
 本教程的内容大致包括以下步骤。
 
@@ -84,11 +84,11 @@ last_update:
 
 我们也写了如何安装Home Assistant的一些Seeed工作室的产品，请参阅他们。
 
--[在ODYSSEY-X86上开始使用Home Assistant](https://wiki.seeedstudio.com/ODYSSEY-X86-Home-Assistant/)
+- [在ODYSSEY-X86上开始使用Home Assistant](https://wiki.seeedstudio.com/ODYSSEY-X86-Home-Assistant/)
 
--[在reTerminal上使用Home Assistant入门](https://wiki.seeedstudio.com/reTerminal_Home_Assistant/)
+- [在reTerminal上使用Home Assistant入门](https://wiki.seeedstudio.com/reTerminal_Home_Assistant/)
 
--[在LinkStar H68K/reRouter CM4上开始使用Home Assistant](https://wiki.seeedstudio.com/h68k-ha-esphome/)
+- [在LinkStar H68K/reRouter CM4上开始使用Home Assistant](https://wiki.seeedstudio.com/h68k-ha-esphome/)
 
 ## 在Home Assistant中安装ESPHome
 
@@ -114,7 +114,7 @@ last_update:
 我们需要下载ESPHome图像。
 
 ```
-esphome / esphome:最新
+esphome / esphome:latest
 ```
 
 <div align="center"><img width={800} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/17.png" /></div>
@@ -122,7 +122,7 @@ esphome / esphome:最新
 
 在创建容器的页面上，我们需要做一些简单的设置。
 
-—容器名称:容器名称
+- 容器名称:容器名称
 
 - Docker镜像:选择刚下载的**esphome**镜像
 
@@ -167,7 +167,7 @@ panel_iframe:
     icon: mdi:chip
 ```
 
-在Home Assistant容器shell中输入``` Exit ```退出docker容器。完成后，我们重新启动Home Assistant容器。
+在Home Assistant容器shell中输入 ```exit``` 退出docker容器。完成后，我们重新启动Home Assistant容器。
 
 创建一个新的浏览器页面，输入地址`http://homeassistant:8123/` ，并输入您的Home Assistant帐户，您将看到ESPHome出现在左侧的工具栏中。
 
@@ -216,166 +216,104 @@ panel_iframe:
   </tbody></table>
 </div>
 
-### 步骤 3.下载传感器库到您的Home Assistant
+### 步骤 3：将 XIAO ESP32C3 和 Home Assistant 保持在同一局域网中
 
+我相信您的 Home Assistant 已经完成了联网工作，比如通过网线连接您的设备。接下来，您只需要启用一个本地网络（例如 WiFi），以便 XIAO ESP32C3 也能连接到该网络。
 
-- **场景1:在Home Assistant OS下安装ESPHome(带有插件商店)**
+下面我将以 LinkStar H68K 为例，目标是让 XIAO 连接到 LinkStar H68K 的热点。
 
-为了从Home Assistant下载一些文件，我们需要使用终端和SSH服务。
-
-
-请确保您已启用高级模式。
-
-<div align="center"><img width={800} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/81.png" /></div>
-
-
-然后你可以在插件商店中搜索插件**Terminal & SSH**，请安装它。
-
-<div align="center"><img width={800} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/82.png" /></div>
-
-
-安装完成后，您将能够在左手边的工具栏中看到Terminal工具，您可以通过在bash窗口中单击它来访问它。
-
-<div align="center"><img width={800} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/83.png" /></div>
-
-
-在终端输入以下命令。
-
-```
-cd /config/esphome/
-curl -o R24dvd_new.h https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/R24dvd_new.h
-```
-
-这样，您就在“Home Assistant”的指定路径下安装了传感器所需的依赖项。
-
-
-- **场景2:ESPHome安装在OpenWRT Docker/Docker下的Home Assistant下(没有插件存储)**
-
-
-点击ESPHome容器。
-
-<div align="center"><img width="{800}" src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/48.png" /></div>
-
-
-
-我们去ESPHome的终点站。
-
-<div align="center"><img width="{800}" src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/49.png" /></div>
-
-
-
-在终端输入以下命令。
-
-```
-curl -o R24dvd_new.h https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/R24dvd_new.h
-```
-
-等待片刻，传感器库将被下载到ESPHome容器根目录。
-
-<div align="center"><img width="{800}" src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/50.png" /></div>
-
-### 步骤 4.将XIAO ESP32C3和Home Assistant放在同一个局域网中
-
-我相信您的Home Assistant已经完成了进入网络的工作，例如通过网线连接到您的设备。你需要做的就是打开一个本地网络(例如WiFi)，这样XIAO ESP32C3也可以连接到这个网络。
-I will use the LinkStar H68K as an example below. My aim is to get the XIAO connected to the LinkStar H68K's hotspot.
-
-在OpenWRT的**Network**选项卡中，选择**Wireless**——> **ADD**。
+在 OpenWRT 的 **Network** 标签页中，选择 **Wireless** --> **ADD**。
 
 <div align="center"><img width={800} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/58.png" /></div>
 
 
-对于 **Transmit Power** 中的 **Device Configuration**，选择 **auto**.
+在 **Device Configuration** 中的 **Transmit Power** 设置为 **auto**。
 
-**Interface Configuration**设置请填写如下说明。
+对于 **Interface Configuration** 的设置，请按照以下说明填写。
 
--一般设置
-
-—模式:取决于LinkStar连接互联网的方式。如果你使用的是有线连接，那么选择**Client**，如果你连接的是WiFi，那么选择**Access Point**。
-
-—ESSID:输入您的WiFi名称，请尽量不要使用空格或特殊字符。
-
--网络:检查**lan**。
+- 一般设置
+    - 模式：根据 LinkStar 访问互联网的方式选择。如果是通过有线连接，则选择 **Client**，如果是连接到 WiFi，则选择 **Access Point**。
+    - ESSID: 输入您的 WiFi 名称，请尽量避免使用空格或特殊字符。
+    - 网络: 勾选  **lan**.
 
 <div align="center"><img width={800} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/23.png" /></div>
 
 
 - 无线安全
-
-- 加密方式为WPA2-PSK
-
-- Key:输入你想设置的WiFi密码。
+    - 加密：WPA2-PSK
+    - 密钥：输入您想设置的 WiFi 密码。
 
 <div align="center"><img width={800} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/24.png" /></div>
 
 
 
-填完上面的信息后，点击右下角的**Save and Apply**，等待LinkStar打开一个热点。
+填写完以上信息后，点击右下角的 **Save and Apply** 并等待片刻，LinkStar 会启动一个热点。
 
-
-当没有设备连接到该热点时，显示为无信号。
+当没有设备连接到这个热点时，热点会显示为没有信号。
 
 <div align="center"><img width={800} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/60.png" /></div>
 
 
-考虑到所有因素，让我们回到Home Assistant页面。
+一切就绪后，让我们返回到 Home Assistant 页面。
 
 <div align="center"><img width={800} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/61.png" /></div>
 
 
-点击**NEW DEVICE**。然后点击**Continue**。
+点击 **NEW DEVICE**。然后点击 **Continue**。 
 
-
-
-在新弹出的窗口中，请输入您想要设置的应用程序的名称，以及您在LinkStar(或您自己的WiFi)中设置的热点的名称和密码。确保XIAO ESP32C3和Home Assistant在 **same LAN**.
+在弹出的新窗口中，请输入您希望设置的应用名称，以及在 LinkStar 中设置的热点名称和密码（或者您自己的 WiFi）。确保 XIAO ESP32C3 和 Home Assistant 在 **同一局域网** 下。
 
 <div align="center"><img width={400} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/25.png" /></div>
 
 
-之后点击**Next**.
+然后点击 **Next**。
 
-请在设备类型中选择 **ESP32-C3**.
+在设备类型中，选择 **ESP32-C3**。
 
 <div align="center"><img width={400} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/26.png" /></div>
 
-之后点击 **Next**.
+然后点击 **Next**。
 
-<span id="jump1">点击 **Encryption key** 并将其保存在一个安全的位置，我们将在后面的步骤中使用此密钥。</span>
+<span id="jump1">Click on the <strong>Encryption key</strong> and save it in a secure location, we will use this key in a later step.</span>
 
 <div align="center"><img width={800} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/27.png" /></div>
 
-之后点击 **SKIP**。
+然后点击 **SKIP**。
 
-### 步骤 5.修改配置文件“XIAO ESP32C3”
+### 步骤 4：修改 XIAO ESP32C3 配置文件（yaml）
 
-然后，我们点击刚刚创建的device选项卡，在左下角有**EDIT**按钮。
+接下来，我们点击刚刚创建的设备标签，在左下角找到 **EDIT** 按钮。
 
 <div align="center"><img width={400} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/28.png" /></div>
 
 
-请注意，我们需要对这个yaml文件进行更改。我们将需要修改的内容分为两个主要部分，分别对应下图中的1和2。
+请注意，我们需要修改这个 yaml 文件。我们将要修改的内容分为两部分，对应于下图中的 **①** 和 **②** 两个部分。
 
 <div align="center"><img width={800} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/62.png" /></div>
 
 
-- 在 **①** 内容中，除您已配置的设备名称外，请不要更改设备名称，其余内容请参考下面的代码。
+- 在 **①** 部分，除了您已经配置的设备名称外，请不要更改其他内容，其他配置请参考以下代码。
 
-<div class="github_container" style={{textAlign: 'center'}}>
-    <a class="github_item" href="https://github.com/limengdu/MR24HPC1_HomeAssistant/blob/main/xiaoesp32c3-mr24hpc1_part1_new.yaml">
-    <strong><span><font color={'FFFFFF'} size={"4"}> 下载代码</font></span></strong> <svg aria-hidden="true" focusable="false" role="img" className="mr-2" viewBox="-3 10 9 1" width={16} height={16} fill="currentColor" style={{textAlign: 'center', display: 'inline-block', userSelect: 'none', verticalAlign: 'text-bottom', overflow: 'visible'}}><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" /></svg>
-    </a>
-</div>
-
-<br />
-
-```
+```css
 # part 1:
+substitutions:
+  name: "xiao-esp32c3"
+  friendly_name: "XIAO ESP32C3"
+
 esphome:
-  name: <your device name>    //Please note that your device name is retained here
+  name: "${name}"
+  friendly_name: "${friendly_name}"
+  name_add_mac_suffix: true
+  project:
+    name: "seeedstudio.mmwave_kit"
+    version: "2.0"
   platformio_options:
     board_build.flash_mode: dio
     board_build.mcu: esp32c3
-  includes:
-  - R24dvd_new.h
+
+external_components:
+  - source: github://limengdu/mmwave-kit-external-components@main
+    refresh: 0s
 
 esp32:
   board: esp32-c3-devkitm-1
@@ -389,470 +327,139 @@ logger:
   level: DEBUG
 ```
 
-
-- 在 **②**的内容中，删除 "captive_portal:" ，并替换为:
-
-<div class="github_container" style={{textAlign: 'center'}}>
-    <a class="github_item" href="https://github.com/limengdu/MR24HPC1_HomeAssistant/blob/main/xiaoesp32c3-mr24hpc1_part2_new.yaml">
-    <strong><span><font color={'FFFFFF'} size={"4"}> 下载代码</font></span></strong> <svg aria-hidden="true" focusable="false" role="img" className="mr-2" viewBox="-3 10 9 1" width={16} height={16} fill="currentColor" style={{textAlign: 'center', display: 'inline-block', userSelect: 'none', verticalAlign: 'text-bottom', overflow: 'visible'}}><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" /></svg>
-    </a>
-</div>
-
-<br />
+- 在 **②** 部分，复制以下代码并粘贴到 `captive_portal:` 后面。
 
 <details>
 
-<summary>点击这里预览完整的代码</summary>
+<summary>Click here to preview the full code</summary>
 
-```
+```css
+# 设置蓝牙 LE（仅适用于 ESP32），允许用户
+# 向设备提供 Wi-Fi 凭据。
+esp32_improv:
+  authorizer: none
+
+# 通过串行客户端设置 improv 进行 Wi-Fi 配置。
+# 如果您的设备有 USB 端口，方便用户在首次使用时添加凭据。
+# improv_serial: # 注释掉，直到 improv 与 usb-jtag 在 idf 上兼容
+
 uart:
   id: uart_bus
-  baud_rate:  115200
-  rx_pin: 5
-  tx_pin: 4
+  baud_rate: 115200
+  rx_pin: 4
+  tx_pin: 5
+  parity: NONE
+  stop_bits: 1
 
-select:
-  - platform: template
-    name: "Standard Scene mode"
-    id: scene_mode
-    icon: mdi:hoop-house
-    optimistic: true
-    options:
-      - "Living room"
-      - "Area detection"
-      - "Washroom"
-      - "Bedroom"
-    initial_option: "Living room"
-    set_action:
-      - logger.log:
-            format: "set action option: %s"
-            args: ["x.c_str()"]
-      - uart.write: !lambda
-                  auto index = id(scene_mode).index_of(x);
-                  uint8_t value = (uint8_t)index.value() + 1;
-                  uint8_t crc = value + 0xB9;
-                  return {0x53,0x59,0x05,0x07,0x00,0x01,value,crc,0x54,0x43};
+seeed_mr24hpc1:
+  id: my_seeed_mr24hpc1
 
-  - platform: template
-    name: "Standard unmanned time"
-    id: unmanned_time
-    icon: mdi:timeline-clock
-    optimistic: true
-    options:
-      - "None"
-      - "10s"
-      - "30s"
-      - "1min"
-      - "2min" 
-      - "5min" 
-      - "10min"
-      - "30min"
-      - "1hour"
-    initial_option: "None"
-    set_action:
-      - logger.log:
-            format: "Chosen option: %s"
-            args: ["x.c_str()"]
-      - uart.write: !lambda
-                  auto index = id(unmanned_time).index_of(x);
-                  uint8_t value = (uint8_t)index.value();
-                  uint8_t crc = value + 0x37;
-                  return {0x53,0x59,0x80,0x0a,0x00,0x01,value,crc,0x54,0x43};
- 
-  - platform: template
-    name: "Custom Presence of perception boundary"
-    id: custom_presence_of_perception_boundary
-    optimistic: true
-    options:
-      - "0.5m"
-      - "1.0m"
-      - "1.5m"
-      - "2.0m" 
-      - "2.5m" 
-      - "3.0m"
-      - "3.5m"
-      - "4.0m"
-      - "4.5m"
-      - "5.0m"
-    set_action:
-      - logger.log:
-            format: "Chosen option: %s"
-            args: ["x.c_str()"]
-      - uart.write: !lambda
-                  auto index = id(unmanned_time).index_of(x);
-                  uint8_t value = (uint8_t)index.value() + 1;
-                  uint8_t crc = value + 0xBF;
-                  return {0x53,0x59,0x08,0x0a,0x00,0x01,value,crc,0x54,0x43};
- 
-  - platform: template
-    name: "Custom Motion trigger boundary"
-    id: custom_motion_trigger_boundary
-    optimistic: true
-    options:
-      - "0.5m"
-      - "1.0m"
-      - "1.5m"
-      - "2.0m" 
-      - "2.5m" 
-      - "3.0m"
-      - "3.5m"
-      - "4.0m"
-      - "4.5m"
-      - "5.0m"
-    set_action:
-      - logger.log:
-            format: "Chosen option: %s"
-            args: ["x.c_str()"]
-      - uart.write: !lambda
-                  auto index = id(unmanned_time).index_of(x);
-                  uint8_t value = (uint8_t)index.value() + 1;
-                  uint8_t crc = value + 0xC0;
-                  return {0x53,0x59,0x08,0x0b,0x00,0x01,value,crc,0x54,0x43};
- 
-number:
-  - platform: template
-    id: sensitivity
-    name: "Standard sensitivity"
-    icon: mdi:archive-check-outline
-    min_value: 0
-    max_value: 3
-    optimistic: false
-    step: 1
-    update_interval: 2s
-    set_action:
-      - uart.write: !lambda
-                    uint8_t crc = x + 0xBA;
-                    return {0x53,0x59,0x05,0x08,0x00,0x01,(uint8_t)x,crc,0x54,0x43};
- 
-  - platform: template
-    name: "Standard Maximum detectable range of moving target"
-    id: moving_target_detection_max_distance
-    icon: mdi:map-marker-path
-    unit_of_measurement: "cm"
-    min_value: 0
-    max_value: 65536
-    step: 500
-    set_action:
-      - uart.write: !lambda
-                    int h_num = (int)x >> 8;
-                    int l_num = (int)x & 0xff;
-                    int crc = 0xB6 + h_num + l_num;
-                    return {0x53,0x59,0x07,0x01,0x00,0x02,(uint8_t)(h_num),(uint8_t)(l_num),(uint8_t)crc,0x54,0x43};
- 
-  - platform: template
-    name: "Standard Maximum detectable range of stationary target"
-    id: static_target_detection_max_distance
-    icon: mdi:map-marker-path
-    unit_of_measurement: cm
-    min_value: 0
-    max_value: 65536
-    step: 500
-    set_action:
-      - uart.write: !lambda
-                    int h_num = (int)x >> 8;
-                    int l_num = (int)x & 0xff;
-                    int crc = 0xB9 + h_num + l_num;
-                    return {0x53,0x59,0x07,0x04,0x00,0x02,(uint8_t)(h_num),(uint8_t)(l_num),(uint8_t)crc,0x54,0x43};
- 
-  - platform: template
-    name: "Custom Judgment threshold exists"
-    id: custom_judgment_threshold_exists
-    min_value: 0
-    max_value: 250
-    step: 1
-    set_action:
-      - uart.write: !lambda
-                    int crc = 0xBD + (int)x;
-                    return {0x53,0x59,0x08,0x08,0x00,0x01,(uint8_t)x,(uint8_t)crc,0x54,0x43};
- 
-  - platform: template
-    name: "Custom Motion amplitude trigger threshold"
-    id: custom_motion_amplitude_trigger_threshold
-    min_value: 0
-    max_value: 250
-    step: 1
-    set_action:
-      - uart.write: !lambda
-                    int crc = 0xBE + (int)x;
-                    return {0x53,0x59,0x08,0x09,0x00,0x01,(uint8_t)x,(uint8_t)crc,0x54,0x43};
- 
-  - platform: template
-    name: "Custom Mode Settings"
-    id: custom_mode_settings
-    icon: mdi:cog
-    min_value: 0
-    max_value: 250
-    step: 1
-    set_action:
-      - uart.write: !lambda
-                    int crc = 0xBB + (int)x;
-                    return {0x53,0x59,0x05,0x09,0x00,0x01,(uint8_t)x,(uint8_t)crc,0x54,0x43};
- 
-  - platform: template
-    name: "Custom Mode Settings End"
-    id: custom_mode_setting_completed
-    icon: mdi:cog
-    min_value: 0
-    max_value: 250
-    step: 1
-    set_action:
-      - uart.write: !lambda
-                    int crc = 0xBC + (int)x;
-                    return {0x53,0x59,0x05,0x0a,0x00,0x01,(uint8_t)x,(uint8_t)crc,0x54,0x43};
- 
-  - platform: template
-    name: "Custom Custom Mode Query"
-    icon: mdi:cog
-    id: custom_mode_query
-    min_value: 0
-    max_value: 250
-    step: 1
-    set_action:
-      - uart.write: !lambda
-                    int crc = 0x3B + (int)x;
-                    return {0x53,0x59,0x05,0x89,0x00,0x01,(uint8_t)x,(uint8_t)crc,0x54,0x43};
- 
-  - platform: template
-    name: "Custom Motion trigger time"
-    id: custom_motion_trigger_time
-    icon: mdi:camera-timer
-    unit_of_measurement: "ms"
-    min_value: 0
-    max_value: 4294967295
-    step: 5000
-    set_action:
-      - uart.write: !lambda
-                    int crc = 0xC4 + (int)x;
-                    int h24_num = ((int)x >> 24) & 0xff;
-                    int h16_num = ((int)x >> 16) & 0xff;
-                    int h8_num = ((int)x >> 8) & 0xff;
-                    int l8_num = (int)x & 0xff;
-                    return {0x53,0x59,0x08,0x0c,0x00,0x04,(uint8_t)h24_num,(uint8_t)h16_num,(uint8_t)h8_num,(uint8_t)l8_num,(uint8_t)crc,0x54,0x43};
- 
-  - platform: template
-    name: "Custom Movement to rest time"
-    id: custom_movement_to_rest_time
-    icon: mdi:camera-timer
-    unit_of_measurement: "ms"
-    min_value: 0
-    max_value: 4294967295
-    step: 5000
-    set_action:
-      - uart.write: !lambda
-                    int crc = 0xC5 + (int)x;
-                    int h24_num = ((int)x >> 24) & 0xff;
-                    int h16_num = ((int)x >> 16) & 0xff;
-                    int h8_num = ((int)x >> 8) & 0xff;
-                    int l8_num = (int)x & 0xff;
-                    return {0x53,0x59,0x08,0x0d,0x00,0x04,(uint8_t)h24_num,(uint8_t)h16_num,(uint8_t)h8_num,(uint8_t)l8_num,(uint8_t)crc,0x54,0x43};
- 
-  - platform: template
-    name: "Custom Time of entering unmanned state"
-    id: custom_time_of_enter_unmanned
-    icon: mdi:camera-timer
-    unit_of_measurement: "ms"
-    min_value: 0
-    max_value: 4294967295
-    step: 5000
-    set_action:
-      - uart.write: !lambda
-                    int crc = 0xC6 + (int)x;
-                    int h24_num = ((int)x >> 24) & 0xff;
-                    int h16_num = ((int)x >> 16) & 0xff;
-                    int h8_num = ((int)x >> 8) & 0xff;
-                    int l8_num = (int)x & 0xff;
-                    return {0x53,0x59,0x08,0x0e,0x00,0x04,(uint8_t)h24_num,(uint8_t)h16_num,(uint8_t)h8_num,(uint8_t)l8_num,(uint8_t)crc,0x54,0x43};
- 
 text_sensor:
-- platform: custom
-  lambda: |-
-    auto my_custom_sensor = new MyCustomTextSensor();
-    App.register_component(my_custom_sensor);
-    return {my_custom_sensor->Heartbeat};
- 
-  text_sensors:
-    - name: "Standard Heartbeat"
-      icon: mdi:connection
- 
-- platform: template
-  name: "Standard Product model"
-  id: product_mode
-  icon: mdi:information-outline
-  on_raw_value:
-    then:
-      - logger.log: text_sensor on_raw_value
- 
-- platform: template
-  name: "Standard Product ID"
-  id: product_id
-  icon: mdi:information-outline
- 
-- platform: template
-  name: "Standard Hardware model"
-  id: hardware_model
-  icon: mdi:information-outline
- 
-- platform: template
-  name: "Standard Firmware version"
-  id: firmware_version
-  icon: mdi:information-outline
- 
-- platform: template
-  name: "Standard protocol type"
-  id: protocol_type
-  icon: mdi:information-outline
- 
-- platform: template
-  name: "Standard moving direction"
-  id: keep_away
-  icon: mdi:walk
- 
-- platform: template
-  name: "Standard Sports information"
-  id: motion_status
-  icon: mdi:human-greeting
- 
-- platform: template
-  name: "Standard Presence information"
-  id: someoneExists
-  icon: "mdi:motion-sensor"
- 
-- platform: template
-  name: "Custom Presence of detection"
-  id: custom_presence_of_detection
-  icon: mdi:signal-distance-variant
- 
-# - platform: template
-#   name: "Custom Motion distance"
-#   id: custom_motion_distance
- 
-# - platform: template
-#   name: "Custom Static distance"
-#   id: custom_static_distance
- 
-# - platform: template
-#   name: "Custom Spatial static value"
-#   id: custom_spatial_static_value
- 
-# - platform: template
-#   name: "Custom Spatial motion value"
-#   id: custom_spatial_motion_value
- 
-# - platform: template
-#   name: "Custom Motion speed"
-#   id: custom_motion_speed
- 
- 
-button:
-  - platform: template
-    name: "Standard reset"
-    id: "reset"
-    icon: mdi:reload
-    on_press:
-      then:
-        - logger.log: Button Pressed
-        - uart.write: [0x53,0x59,0x01,0x02,0x00,0x01,0x0F,0xBF,0x54,0x43]
- 
-switch:
-  - platform: template
-    id: output_info_switch
-    name: "Custom Infor output switch"
-    icon: mdi:electric-switch
-    assumed_state: true
-    turn_on_action:
-      - uart.write: [0x53,0x59,0x08,0x00,0x00,0x01,0x01,0xB6,0x54,0x43]
-      - delay: 1s
-      - lambda: !lambda |-
-          id(product_mode).publish_state("");
-          id(product_id).publish_state("");
-          id(hardware_model).publish_state("");
-          id(firmware_version).publish_state("");
-          id(protocol_type).publish_state("");
-    turn_off_action:
-      - uart.write: [0x53,0x59,0x08,0x00,0x00,0x01,0x00,0xB5,0x54,0x43]
+  - platform: seeed_mr24hpc1
+    heart_beat:
+      name: "心跳"
+    product_model:
+      name: "产品型号"
+    product_id:
+      name: "产品 ID"
+    hardware_model:
+      name: "硬件型号"
+    hardware_version:
+      name: "硬件版本"
+    keep_away:
+      name: "主动报告接近"
+    motion_status:
+      name: "运动信息"
+    custom_mode_end:
+      name: "自定义模式状态"
+
+binary_sensor:
+  - platform: seeed_mr24hpc1
+    someone_exist:
+      name: "存在信息"
 
 sensor:
-- platform: custom
-  lambda: |-
-    auto my_custom_sensor = new UartReadLineSensor(id(uart_bus));
-    App.register_component(my_custom_sensor);
-    return {
-      my_custom_sensor->movementSigns,
-      my_custom_sensor->inited,
-    };
-  sensors:
-    - name: "Standard body movement"
-      id: movementSigns
-      icon: "mdi:human-greeting-variant"
-      device_class: "temperature"
-      state_class: "measurement"
+  - platform: seeed_mr24hpc1
+    custom_presence_of_detection:
+      name: "静态距离"
+    movement_signs:
+      name: "人体运动参数"
+    custom_motion_distance:
+      name: "运动距离"
+    custom_spatial_static_value:
+      name: "存在能量"
+    custom_spatial_motion_value:
+      name: "运动能量"
+    custom_motion_speed:
+      name: "运动速度"
+    custom_mode_num:
+      name: "当前自定义模式"
 
-    - name: "Standard inited"
-      id: inited
-      icon: mdi:all-inclusive
- 
-- platform: template
-  name: "Custom Motion distance"
-  id: custom_motion_distance
-  icon: mdi:signal-distance-variant
-  on_value:
-    then:
-      # - logger.log: Custom Motion distance on_value
-      - logger.log:
-            format: "Custom Motion distance on_value : %d"
-            args: ["x"]
-  on_raw_value:
-    then:
-      - logger.log:
-            format: "Custom Motion distance on_raw_value : %d"
-            args: ["x"]
- 
- 
-- platform: template
-  name: "Custom Static distance"
-  id: custom_static_distance
-  icon: mdi:signal-distance-variant
+switch:
+  - platform: seeed_mr24hpc1
+    underly_open_function:
+      name: "底层开启功能信息输出开关"
 
-- platform: template
-  name: "Custom Spatial static value"
-  id: custom_spatial_static_value
-  icon: mdi:counter
+button:
+  - platform: seeed_mr24hpc1
+    reset:
+      name: "模块重置"
+    custom_set_end:
+      name: "自定义模式设置结束"
 
-- platform: template
-  name: "Custom Spatial motion value"
-  id: custom_spatial_motion_value
-  icon: mdi:counter
+select:
+  - platform: seeed_mr24hpc1
+    scene_mode:
+      name: "场景模式"
+    unman_time:
+      name: "进入无人状态的时间（标准功能）"
+    existence_boundary:
+      name: "存在边界"
+    motion_boundary:
+      name: "运动边界"
 
-- platform: template
-  name: "Custom Motion speed"
-  id: custom_motion_speed
-  icon: mdi:run-fast
+number:
+  - platform: seeed_mr24hpc1
+    sensitivity:
+      name: "灵敏度"
+    custom_mode:
+      name: "自定义模式"
+    existence_threshold:
+      name: "存在能量阈值"
+    motion_threshold:
+      name: "运动能量阈值"
+    motion_trigger:
+      name: "运动触发时间"
+    motion_to_rest:
+      name: "运动到静止时间"
+    custom_unman_time:
+      name: "进入无人状态时间（底层开启功能）"
 ```
 
 </details>
 
 
-然后，点击右上角的**Save** 按钮。
+然后，请点击右上角的 **Save** 按钮。
 
 <div align="center"><img width={800} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/63.png" /></div>
 
-### 步骤 6.上传固件到XIAO ESP32C3
+### 第五步：上传固件到 XIAO ESP32C3
 
-- **方法一:直接编译上传**
+- **方法一：直接编译并上传**
 
-如果您使用的是x86设备，并且可以在设备端口上看到XIAO，那么您可以将程序编译并上传到XIAO。
+如果您使用的是 x86 设备并且能够看到 XIAO 出现在设备端口中，那么您可以直接编译并将程序上传到 XIAO。
 
-将XIAO连接到你的设备上。
+将 XIAO 连接到您的设备。
 
 <div align="center"><img src="https://files.seeedstudio.com/wiki/ESPHome/49.png" style={{width:700, height:'auto'}}/></div>
 
 
-点击设备栏右下角的三个点并选择 **Install**.
+点击设备栏右下角的三个点，选择 **安装**。
 
 <div align="center"><img width={800} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/84.png" /></div>
 
 
-点击 **Plug into the computer running ESPHome Dashboard**.
+点击 **插入到运行 ESPHome 仪表盘的计算机**。
 
 <div align="center"><img width={500} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/85.png" /></div>
 
@@ -861,185 +468,165 @@ sensor:
 
 <div align="center"><img width={400} src="https://files.seeedstudio.com/wiki/ESPHome/18.png" /></div>
 
-现在它将下载所有必要的板包，并将ESPHome固件flash到XIAO ESP32C3。如果闪烁成功，您将看到以下输出。
+现在，它将下载所有必要的板卡包并将 ESPHome 固件刷入 XIAO ESP32C3。如果刷写成功，您将看到以下输出。
 
 <div align="center"><img width={800} src="https://files.seeedstudio.com/wiki/ESPHome/19.png" /></div>
 
-如果在将XIAO连接到设备后找不到端口，那么可以尝试使用第二种方法。
+如果在连接 XIAO 到设备后无法找到端口，您可以尝试使用第二种方法。
 
-- **方法二:通过主机上传编译好的固件**
+- **方法二：使用主机上传已编译的固件**
 
-LinkStar H68K等软路由不支持外部MCU设备识别，需要先下载编译好的固件，再通过另一台PC上传固件。
+像 LinkStar H68K 这样的软路由不支持识别外部 MCU 设备，我们需要先下载已编译的固件，然后通过另一台 PC 上传固件。
 
-
-点击右上角的**Install**按钮。然后选择最后一个项目**Manual download**。
+点击右上角的 **安装** 按钮。然后选择最后一个项 **手动下载**。
 
 <div align="center"><img width={500} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/30.png" /></div>
 
 
-选择**Modern format**.
+选择 **现代格式**。
 
 <div align="center"><img width={400} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/31.png" /></div>
 
-下载和编译需要很长时间，所以请耐心等待。一旦一切准备就绪，固件将自动下载到您的计算机。
+然后，它将花费较长时间进行下载和编译，请耐心等待。准备好后，固件将自动下载到您的计算机。
 
 <div align="center"><img width={800} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/33.png" /></div>
 
-要上传固件到XIAO ESP32C3，这里有两个选项，我们展示两种方法:
+要将固件上传到 XIAO ESP32C3，有几种选择，我们展示了两种方法：
 
+- 选项 1：使用 [ESPhome Web 工具](https://web.esphome.io/?dashboard_install) 工具 上传。
 
-- 方式一:使用[ESPhome Web工具](https://web.esphome.io/?dashboard_install)上传。
+确保已安装正确的驱动程序。以下是 ESP 设备常用芯片的驱动程序。
 
+1. CP2102 驱动程序： [Windows & Mac](https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers)
 
-确保你安装了正确的驱动程序。下面是ESP设备常用芯片的驱动。
+2. CH342, CH343, CH9102 驱动程序： [Windowns](https://www.wch.cn/downloads/CH343SER_ZIP.html), [Mac](https://www.wch.cn/downloads/CH34XSER_MAC_ZIP.html)
 
+3. CH340, CH341 驱动程序： [Windowns](https://www.wch.cn/downloads/CH341SER_ZIP.html), [Mac](https://www.wch.cn/downloads/CH341SER_MAC_ZIP.html)
 
-1. CP2102驱动程序:[Windows和Mac](https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers)
+在 Chrome 或 Edge 浏览器中打开 [ESPhome Web 工具](https://web.esphome.io/?dashboard_install)。
 
-
-2. CH342, CH343, CH9102的驱动程序:[windows](https://www.wch.cn/downloads/CH343SER_ZIP.html)， [Mac](https://www.wch.cn/downloads/CH34XSER_MAC_ZIP.html)
-
-
-3. CH340, CH341驱动程序:[windows](https://www.wch.cn/downloads/CH341SER_ZIP.html)， [Mac](https://www.wch.cn/downloads/CH341SER_MAC_ZIP.html)
-
-
-
-点击 **CONNECT**.
+点击 **连接**。
 
 <div align="center"><img width={800} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/34.png" /></div>
 
-在弹出的窗口中选择“XIAO ESP32”串口。
+在弹出的窗口中选择 XIAO ESP32 的串口。
 
 <div align="center"><img width={400} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/64.png" /></div>
 
-C点击**INSTALL**，然后选择从上述步骤中下载的`.bin`文件。
+点击 **安装**，然后选择从上述步骤下载的 `.bin` 文件。
 
 <div align="center"><img width={800} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/35.png" /></div>
 
 <div align="center"><img width={400} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/38.png" /></div>
 
 
-- 选项2:使用[esphome-flasher工具](https://github.com/esphome/esphome-flasher)。
+- 选项 2：使用 [esphome-flasher 工具](https://github.com/esphome/esphome-flasher) 工具。 
 
+如果在安装驱动程序并更换浏览器后仍然无法使用方法一上传固件，您可以尝试使用方法二。请参考官方教程，了解具体的安装方法和操作说明。
 
-如果在安装驱动程序和更换浏览器后，仍然无法使用方法一上传固件，那么可以尝试使用方法二。具体的安装方法和说明请参考官方教程。
-:::提示
-如果您想观察该软件的日志消息，也可以通过该软件的 View Logs按钮查看。
+:::tip
+如果您希望查看 XIAO ESP32C3 的日志消息，您也可以通过该软件的 View Logs 按钮来查看。
+
 <div align="center"><img width={500} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/41.png" /></div>
 :::
 
-上传完成后，您可以断开XIAO ESP32C3与PC机的连接(除非您需要查看日志)，并单独打开XIAO。
+上传完成后，您可以断开 XIAO ESP32C3 与 PC 的连接（除非您需要查看日志），然后单独为 XIAO 提供电源。
 
+如果一切顺利，XIAO ESP32C3 将搜索并连接到您为其设置的 Wi-Fi。
 
-如果一切顺利，XIAO ESP32C3将搜索并连接到您为它设置的WiFi。
-
-
-就像我一样，我使用LinkStar H68K的网络。您可以在网络选项中找到它，并看到LinkStar H68K分配给它的IP地址。
+就像我一样，我使用 LinkStar H68K 的网络。您可以在网络选项中找到它，并看到 LinkStar H68K 分配给它的 IP 地址。
 
 <div align="center"><img width={800} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/42.png" /></div>
 
-通常情况下，在Home Assistant这个时候，设备的状态也会从离线变为在线。
+通常，此时在 Home Assistant 中，设备的状态也会从离线变为在线。
 
 <div align="center"><img width={800} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/65.png" /></div>
 
 ## 配置 Home Assistant 面板
 
-### 步骤 7/连接到XIAO ESP32C3
+### 第六步：连接 XIAO ESP32C3
 
-如果您的局域网中没有太多的Home Assistant设备，Home Assistant可以自动搜索并添加您的ESP设备到“设备”页签。你可以在**Settings**的**Devices & Services**选项卡中看到该设备。
+如果您的局域网中没有太多 Home Assistant 设备，Home Assistant 可以自动搜索并将您的 ESP 设备添加到设备标签中。您可以在 **设置** 中的 **设备与服务** 标签页中看到此设备。
 
 <div align="center"><img width={800} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/66.png" /></div>
 
 <div align="center"><img width={800} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/67.png" /></div>
 
-如果没有自动搜索，也可以根据IP地址连接到XIAO ESP32C3
+如果它没有自动搜索，您也可以通过 IP 地址连接到 XIAO ESP32C3。
 
-点击**ADD integration **并搜索**esphome**。
+点击 **添加集成** 并搜索 **esphome**。
 
 <div align="center"><img width={800} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/43.png" /></div>
 
-输入XIAO ESP32C3的IP地址，端口号为**6053**。然后点击**SUBMIT**..
+然后输入 XIAO ESP32C3 的 IP 地址，端口号为 **6053**，然后点击 **提交**。
 
 <div align="center"><img width={800} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/44.png" /></div>
 
-如果输入的IP地址和端口号是正确的，那么你会看到系统要求你输入我们在[step 4](#jump1)中要求保存的加密密钥。
+如果输入的 IP 地址和端口号正确，您将看到提示输入加密密钥，这个密钥是我们在 [第4步](#jump1) 中保存的。
 
+然后点击 **提交**。
 
-然后点击**SUBMIT**。
 <div align="center"><img width={800} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/68.png" /></div>
 
-在这一点上，成功完成了添加设备的步骤。
+此时，设备添加的步骤已经成功完成。
 
 <div align="center"><img width={800} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/51.png" /></div>
 
-### 步骤 8.4GHz毫米波模块Lite功能概述
+### 第七步：24GHz mmWave 模块 Lite 功能概述
 
+为了帮助您快速了解该套件的完整功能和如何使用这些功能，您需要仔细阅读这一部分。如果您想要更详细的信息，我们建议您花时间阅读 [ 产品用户手册](https://files.seeedstudio.com/wiki/mmWave-radar/MR24HPC1_User_Manual-V1.5.pdf).
 
-我们来到Home Assistant的概述选项卡。我们对操作面板的基本功能进行了概述。
+关于仪表板的配置和参数的详细信息，我们在 ESPHome 文档中整理了详细的介绍，请点击链接阅读完整的文档和详细信息。
 
+<div class="get_one_now_container" style={{textAlign: 'center'}}>
+    <a class="get_one_now_item" href="https://deploy-preview-3383--esphome.netlify.app/components/sensor/seeed_mr24hpc1">
+            <strong><span><font color={'FFFFFF'} size={"4"}>ESPHome 文档 📕</font></span></strong>
+    </a>
+</div>
 
-首先，有一个**自定义信息输出开关**。左侧图标表示关闭信息输出，右侧图标表示打开信息输出。如果你想实时看到传感器返回的信息，那么你应该点击右边的闪电图标。
+<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/mmwave_kit/49.png" style={{width:700, height:'auto'}}/></div>
 
-<div align="center"><img width={400} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/69.png" /></div>
+### 第八步：配置 Home Assistant 面板
 
-卡片的底部是一个实时数据显示页面。在这里，您可以观察到毫米波在监测环境中的变化，并根据您的位置调整卡片中的参数。
-<div align="center"><img width={400} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/70.png" /></div>
+如果您觉得默认的卡片展示数据非常枯燥且不友好，Home Assistant 提供了多种现成的仪表板供您选择。
 
-由于篇幅限制，您可以参考以下两个文档，以了解更多关于传感器的使用信息和更详细的参数解释。
-
-- [24GHz毫米波人体静态存在模块Lite Wiki](https://wiki.seeedstudio.com/Radar_MR24HPC1/)
-
-- [24GHz毫米波人体静态存在模块Lite用户手册](https://files.seeedstudio.com/wiki/mmWave-radar/24GHz_mmWave_Sensor-Human_Static_Presence_Module_Lite_User_Manual.pdf)
-
-- [24GHz毫米波人体静态存在模块Lite传感器Datasheet](https://files.seeedstudio.com/wiki/mmWave-radar/24GHz_mmWave_Sensor-Human_Static_Presence_Module_Lite_Datasheet.pdf)
-
-
-### 步骤 9.配置Home Assistant面板
-
-
-如果你发现默认的卡片对展示数据非常无聊和不友好，Home Assistant提供了大量现成的仪表盘可供选择。
-
-
-您可以根据自己的喜好制作仪表盘。
+您可以创建一个适合您个人偏好的仪表板。
 
 <div align="center"><img width={800} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/73.png" /></div>
 
-例如，控制信息输出的选项变成了一个漂亮的开关。
+例如，将信息输出的控制选项变成一个漂亮的开关。
 
 <div align="center"><img width={600} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/74.png" /></div>
 
-将人类移动的速度转化为可视化的仪表板显示。
+将人体运动的速度转换成可视化的仪表板展示。
 
 <div align="center"><img width={600} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/75.png" /></div>
 
-这是我想到的。看起来它具备智能家居控制中心的条件。
+这就是我设计的内容，看起来像是一个智能家居控制中心。
 
 <div align="center"><img width={800} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/76.png" /></div>
 
-到目前为止，我们已经成功地结束了教程内容。
+到目前为止，我们已经成功完成了教程的内容。
 
+## 使用 XIAO ESP32C3 连接 Grove 到 Home Assistant
 
-## 使用XIAO ESP32C3将Grove连接到Home Assistant
+当然，XIAO ESP32C3 不仅仅支持将 24GHz mmWave 人体静态存在模块 Lite 集成到 Home Assistant，您可以在本文件中找到更多适用于您自己的教程。
 
+- [使用 XIAO ESP32C3 连接 Grove 到 Home Assistant](https://wiki.seeedstudio.com/Connect-Grove-to-Home-Assistant-ESPHome/)
 
-当然，除了支持Home Assistant中的24GHz毫米波人体静态存在模块Lite外，还有更多的功能，您可以在此文档中找到更多教程供自己使用。
+让您的创意发挥出来吧！
 
-
-- [使用XIAO ESP32C3连接Grove到Home Assistant](https://wiki.seeedstudio.com/Connect-Grove-to-Home-Assistant-ESPHome/)
-
-
-让你的创造力流动起来!
 ## 故障排除
 
-> A:如果上传过程中出现此提示，请断开XIAO ESP32C3与PC的连接。然后，按住BOOT按钮，在按住BOOT按钮的同时将单板连接到PC，然后释放它进入bootloader模式。此时，重新连接并上传固件就足够了。
-### FAQ1:我使用ESPhome Web工具上传固件时出现以下错误，如何修复?
+### 常见问题 1：在使用 ESPhome Web 工具上传固件时出现以下错误，我该如何修复？
+
 <div align="center"><img width={600} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/37.png" /></div>
 
-> A:如果上传过程中出现此提示，请断开XIAO ESP32C3与PC的连接。然后，按住BOOT按钮，在按住BOOT按钮的同时将单板连接到PC，然后释放它进入bootloader模式。此时，重新连接并上传固件就足够了。
+> 回答: 如果上传时出现此提示，断开 XIAO ESP32C3 与 PC 的连接。然后，在按住 BOOT 按钮的同时，将板卡连接到 PC，接着释放 BOOT 按钮，进入引导加载程序模式。此时，只需重新连接并再次上传固件即可。
 
-### FAQ 2:我不能在Linux下安装esphome flasher教程?
+### 常见问题 2：按照 esphome flasher 的教程，我在 Linux 下无法安装 esphome flasher？
 
-> A:执行以下命令时，需要选择系统版本，否则会报错。例如，我的计算机是Ubuntu 22.04，那么应该执行的命令如下所示。
+> 回答:在执行以下命令时，您需要选择适合您的系统版本，否则会出现错误。例如，如果我的计算机是 Ubuntu 22.04，那么应该执行如下命令。
 
 ```
 sudo apt install python3
@@ -1051,120 +638,117 @@ pip3 install -U \
 pip3 install esphomeflasher
 ```
 
-###常见问题3:我已经输入了正确的WiFi和密码，为什么我看不到XIAO ESP32C3的IP地址?
+### 常见问题 3：我填写了正确的 WiFi 和密码，为什么看不到 XIAO ESP32C3 的 IP 地址？
 
-A：当您遇到这个问题时，请检查XIAO ESP32C3的天线是否已连接到位。如果天线已经连接，请确保XIAO与LinkStar的距离尽可能不超过3米（除非您已经用更强大的天线替换了原天线）。
+> 回答: 当遇到此问题时，请检查 XIAO ESP32C3 的天线是否连接到位。如果天线已连接，请确保 XIAO 与 LinkStar 的距离不超过 3 米（除非您已更换了更强大的天线）。如果仍然无法看到 XIAO，可以使用 esphome flasher 软件查看 XIAO 的日志信息，并通过日志检查 XIAO 的连接状态。您可以重新插拔 XIAO 尝试重新搜索 WiFi 并连接。
 
-这里是对这个段落的内容进行解释和翻译。主要讲述的是关于XIAO ESP32C3设备天线连接的问题，以及如何解决这个问题的一些建议。
-如果仍然看不到XIAO，可以使用esphome flasher软件查看XIAO日志信息，通过日志查看XIAO连接情况。
-您可以重新插上小插口，让它尝试搜索WiFi并重新连接。
+<!-- ### 常见问题 4：我的 XIAO ESP32C3 已连接到网络，但为什么看不到传感器数据刷新？
 
-### FAQ 4:我的XIAO ESP32C3连接到网络了，但为什么我没有看到传感器数据刷新?
-
-:::提醒
-截至2023年6月1日，故障排除显示，如果您设置任何值或更改ESPHome仪表板中的任何场景，雷达有可能会下降。
-
-截至2023年7月31日，之前导致雷达完全死亡的问题现在已经修复，所以请更新这个教程物种的库文件和配置器以正常工作。
+:::caution
+截至 2023 年 6 月 1 日，故障排除表明，如果您在 ESPHome 仪表板中设置任何值或更改任何场景，可能会导致雷达停止工作。 
+截至 2023 年 7 月 31 日，之前会导致雷达完全停止工作的漏洞已经修复，因此请更新库文件和配置器，以确保本教程中的内容正常运行。
 :::
 
-A:在之前的维基内容中，我们使用默认的UART pin (D6, D7)接收和发送来自雷达的数据，但许多用户反馈说，需要重新电源雷达才能工作。为此，我们**更新了Wiki**内容和程序，将雷达的串口替换为**D2和D3**，经过测试，很好地解决了这个问题。
+> A: 在之前的 Wiki 内容中，我们使用了默认的 UART 引脚（D6、D7）来接收和发送雷达数据，但许多用户反馈，需要重新给雷达供电才能使其正常工作。对此，我们已 **更新了 Wiki** 内容和步骤，将雷达的串口更换为 **D2 和 D3**，经过测试，这解决了问题。
 
 <div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/esphome-pinconnect.png" style={{width:600, height:'auto'}}/></div>
 
-> **如果您还没有注意到Wiki的更新，我建议您重新连接雷达并按照本文教程的[步骤2和5](#configure-the- xiaesp32c3 -and-esphome-connection)重新编写编译和上传过程。**
+> **如果您没有注意到 Wiki 的更新，建议您重新接线雷达，并按照本文教程的 [第 2 步和第 5 步](#configure-the-xiao-esp32c3-and-esphome-connection) 重新编译和上传固件。**
 
->然而，一些用户回应说，即使更换了串口引脚，他们仍然不能使雷达正常工作。所以在这里，我们提出以下方法和步骤，检查问题发生在哪里，如果您仍然无法解决雷达工作的问题，**请将您的操作步骤提供给技术支持邮箱**，这样可以加快售后问题的处理。
+> 然而，也有部分用户反馈，即使更换了串口引脚，雷达仍然无法正常工作。在这种情况下，我们提出以下方法和步骤来检查问题所在，如果您仍然无法解决雷达工作问题， **请提供您的操作步骤给技术支持邮箱**, 这样可以加速售后问题的处理。
 
-**请按顺序检查以下排除项**
+**请按照以下排查顺序检查。**
 
-> **排除1:确保XIAO ESP32C3与部署了ESPHome的设备在同一局域网下。**
-> 如果XIAO ESP32C3与ESPHome设备不在同一局域网中，则在Home Assistant中看到的日志信息不完整，不能作为数据收集的依据。所以请再检查一下你的路由器，看看有没有XIAO的IP地址。
-> **排除2:检查数据实时传输按钮是否打开。**
+> **排查 1：确保 XIAO ESP32C3 与 ESPHome 部署设备处于同一局域网。**
 
-> 在网络上安装了XIAO并且成功添加了设备之后，您将能够在仪表板中看到雷达组件。请注意，实时数据传输按钮在默认情况下是关闭的，您需要打开它才能看到不断报告的雷达数据。
+> 如果 XIAO ESP32C3 不与 ESPHome 设备处于同一局域网，您在 Home Assistant 中看到的日志将不完整，无法作为数据收集的依据。请再次检查您的路由器，看看 XIAO 的 IP 地址是否出现。
+
+> **排查 2：检查是否开启数据实时传输按钮。**
+
+> 当 XIAO 连接到网络并成功添加设备后，您将在仪表板中看到雷达组件。请注意，默认情况下，实时数据传输按钮是关闭的，您需要开启它才能看到雷达数据的持续报告。
 
 <div align="center"><img width={500} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/69.png" /></div>
 
-> **排除3:检查雷达是否正常工作。**
+> **排查 3：检查雷达是否正常工作。**
 
-> 首先，我们需要确保雷达与XIAO ESP32C3很好地工作，这将允许我们快速识别是ESPHome还是产品的问题。请将以下代码上传至Arduino IDE中的XIAO ESP32C3，请注意雷达的**RX/TX引脚要连接到XIAO**的D2/D3
+> 我们需要首先确保雷达与 XIAO ESP32C3 正常工作，这将帮助我们快速判断问题是出在 ESPHome 还是产品上。请在 Arduino IDE 中将以下代码上传至 XIAO ESP32C3，请注意 **雷达的 RX/TX 引脚应连接到 XIAO 的 D2/D3**。
 
 ```cpp
 #include "Arduino.h"
 #include <humanstaticLite.h>
 #include <HardwareSerial.h>
 
-// can also try hardware serial with
+// 也可以尝试使用硬件串口
 HumanStaticLite radar = HumanStaticLite(&Serial1);
 
 void setup() {
-  // put your setup code here, to run once:
+  // 在此放置设置代码，仅运行一次：
   Serial.begin(115200);
   Serial1.begin(115200, SERIAL_8N1, 4, 5);
-  while(!Serial);   //When the serial port is opened, the program starts to execute.
+  while(!Serial);   // 当串口打开时，程序开始执行
   Serial.println("Ready");
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  radar.recvRadarBytes();           //Receive radar data and start processing
-  radar.showData();                 //Serial port prints a set of received data frames
-  delay(200);                       //Add time delay to avoid program jam
+  // 在此放置主循环代码，重复运行：
+  radar.recvRadarBytes();           // 接收雷达数据并开始处理
+  radar.showData();                 // 串口打印接收到的数据帧
+  delay(200);                       // 添加时间延迟以避免程序卡住
 }
 ```
 
-> 打开串口监视器，并设置波特率为115200，如果雷达工作正常，那么您应该看到许多数字打印出来。
+> 打开串口监视器并将波特率设置为115200，如果雷达正常工作，则应该看到大量数字输出。
 
-> 如果在执行此步骤后没有看到任何数据输出，请根据Wiki重新刷新雷达固件。我们为您提供两种升级固件的方式:[固件版本更新](https://wiki.seeedstudio.com/Radar_MR24HPC1/#firmware-version-updates)。
-> 如果您在更新固件后仍然没有听到任何消息，请不要吝啬，直接联系我们的技术支持团队。告诉他们你已经做了什么。
-> **排除4:XIAO、雷达在上述检查点工作正常，更换串口引脚后，仍无法获取雷达实时数据。**
+>如果您在执行此步骤时没有看到任何数据输出，请根据 Wiki 中的说明重新刷写雷达的固件。我们为您提供了两种更新固件的方式： [固件版本更新](https://wiki.seeedstudio.com/Radar_MR24HPC1/#firmware-version-updates).
 
-> 如果您已经将雷达的RX和TX引脚更换为D2/D3，并根据以上内容进行了仔细的故障排除，仍然无法获得实时数据消息，请联系我们的技术支持团队。在此之前，**请让我们知道雷达在Arduino环境下是否正常工作**以便我们分析和处理问题。
+> 如果您更新了固件后仍然没有任何输出，请不要犹豫，直接联系技术支持团队，并告知他们您已经执行的所有操作。
 
-<!-- > A: When we encounter this problem, we need to use the logs to understand the exact reason why the sensor is not returning data. The situation that has been found to be likely to be encountered so far is a situation where the sensor is not responding, then its logs will look like this.
+> **排除 4：XIAO 和雷达在上述检查点正常工作，但更换串口引脚后，仍然无法获取雷达实时数据。**
+
+> 如果您已经将雷达的 RX 和 TX 引脚更改为 D2/D3，并且按照上述步骤仔细排查，仍然无法获取实时数据，请联系技术支持团队。在此之前，**请告诉我们雷达在 Arduino 环境中是否正常工作**，这样我们可以帮助分析和解决问题。 -->
+
+<!-- > 回答: 遇到此问题时，我们需要通过日志来了解传感器未返回数据的确切原因。到目前为止，发现可能遇到的情况是传感器没有响应，此时其日志通常如下所示：
 
 <div align="center"><img width={600} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/71.png" /></div>
 
-> If you see a similar log, please double check the following three places.
-> 1. Whether the sensor is supplied with 5V.
-> 2. Are the RX and TX pins of the sensor connected correctly.
-> 3. Disconnect only the 5V wire from the sensor to the XIAO and reconnect it to allow the sensor to be powered up again.
+> 如果您看到类似的日志，请再次检查以下三个地方：
+> 1. 是否给传感器提供了 5V 电源。
+> 2. 传感器的 RX 和 TX 引脚是否正确连接。
+> 3. 断开传感器与 XIAO 之间的 5V 线，并重新连接，以确保传感器重新供电。
 
-> Generally speaking, the third point solves this problem. A normal log flow for data transfer should look like this.
+> 通常情况下，第三点可以解决问题。正常的数据传输日志应该如下所示：
 
 <div align="center"><img width={600} src="https://files.seeedstudio.com/wiki/homs-xiaoc3-linkstar/72.png" /></div> -->
 
-## FAQ5:我使用了Jlink flash固件，但是我得到了错误“Programming of range @address 0x08000000 failed (block verification error) Program failed failed to Program and verify target”?
+### 常见问题 4：我使用 Jlink 刷写固件时，出现了“编程范围 @address 0x08000000 失败（块验证错误）程序失败，无法编程和验证目标”错误，怎么办？
 
-当您使用Jlink flash固件时，如果发生此错误，那么您可能处于以下任何一种情况。
-1. 你的传感器不再正常工作，你不能从它接收任何信息。
+当您使用 Jlink 刷写固件并出现此错误时，可能是以下情况之一。
 
+1. 您的传感器完全无法正常工作，无法接收到任何消息。
 2. 您正在尝试使用无效或不正确的固件。
-:::提醒
-最初工作正常，请再次检查您正在使用正确的固件!所使用的固件因雷达和传感器模型而异!而且通过UART升级固件和通过Jlink升级固件是不一样的!请停止执行以下步骤。
+
+:::caution
+如果您的雷达最初是正常工作的，请再次检查您使用的是正确的固件！不同的雷达和传感器型号使用不同的固件！通过 UART 升级固件与通过 Jlink 升级固件的方式不同！请停止执行以下步骤。
 :::
 
 <details>
 
-<summary><strong>我已经确认我的产品在发生异常时得到这个错误信息</strong></summary>
+<summary><strong>我已经确认我的产品在异常情况下显示此错误消息</strong></summary>
 
-如果你的雷达根本不工作，那么有这个错误信息可能是正常的。
+如果您的雷达完全无法工作，那么出现此错误消息可能是正常的。
 
-由于雷达运行不正常，已经允许雷达触发读写保护机制，一般不允许用户对产品进行flash编程，所以需要解锁雷达的读写保护机制。
+因为雷达的异常操作已经触发了读写保护机制，通常情况下不允许用户再对产品进行刷写程序，所以我们需要解锁雷达的读写保护机制。
 
-由于不保护读写的高风险，我们在这里没有向公众公开不保护读写的方法，我们将把该方法放在[zip文件这里](https://files.seeedstudio.com/wiki/Radar_MR24HPCB1/ArteryICPProgrammer_V2.4.23.zip)中，以供需要的人使用。一旦异常雷达未受保护，可以再次更新固件以恢复正常运行。
+由于解锁读写保护存在较高风险，我们不会在此公开解锁方法，而是将该方法放在 [此处的ZIP 文件](https://files.seeedstudio.com/wiki/Radar_MR24HPCB1/ArteryICPProgrammer_V2.4.23.zip)，供需要的用户使用。一旦异常的雷达被解保护，固件就可以重新更新，以恢复正常工作。
 
 </details>
 
+## 技术支持与产品讨论
 
 
 
+感谢您选择我们的产品！我们致力于为您提供不同的支持，确保您使用我们的产品体验顺利。我们提供多种沟通渠道，以满足不同的需求和偏好。
 
-## 技术支持和产品讨论
-
-
-
-非常感谢您选择我们的产品！我们在此为您提供不同的支持，以确保您在使用我们产品的过程中获得尽可能顺畅的体验。我们提供多种沟通渠道，以满足不同的偏好和需求。
 <div class="button_tech_support_container">
 <a href="https://forum.seeedstudio.com/" class="button_forum"></a> 
 <a href="https://www.seeedstudio.com/contacts" class="button_email"></a>

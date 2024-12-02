@@ -6,8 +6,8 @@ keywords:
 image: https://files.seeedstudio.com/wiki/wiki-platform/S-tempor.png
 slug: /cn/XIAO_BLE
 last_update:
-  date: 10/30/2023
-  author: 吴飞飞
+  date: 11/13/2024
+  author: Agnes
 ---
 
 # Seeed Studio XIAO nRF52840 (Sense) 开发板
@@ -76,6 +76,12 @@ Seeed Studio XIAO nRF52840 将许多功能组装在一块小板上，有时可�
 
 这两个库支持的 Pin 定义可能略有不同，Seeed 会不断更新 wiki，直到它清晰为止。
 
+:::tip
+1. 如果使用 Seeed nRF52 开发板的板载封装，则可能无法编译 Serial 函数。解决方案是在代码中添加 “#include <Adafruit_TinyUSB.h>” 行。您可以从以下位置下载此软件包： https://github.com/adafruit/Adafruit_TinyUSB_Arduino
+
+2. 如果您更喜欢更简单的方法，您可以从一开始就选择支持 Seeed nRF52 mbed 的开发板。它支持编译 Serial 函数，无需额外修改。
+:::
+
 ## 开始
 
 首先，我们将Seeed Studio XIAO nRF52840（Sense）连接到计算机，并从Arduino IDE上传一个简单的代码，以检查电路板是否运行良好。
@@ -88,7 +94,7 @@ Seeed Studio XIAO nRF52840 将许多功能组装在一块小板上，有时可�
 - 1 x 电脑
 - 1 x USB Type-C 数据线
 
-:::提示
+:::tip
 某些 USB 电缆只能供电，无法传输数据。如果您没有 USB 数据线或不知道 USB 数据线是否可以传输数据，您可以查看[Seeed USB Type-C support USB 3.1](https://www.seeedstudio.com/USB-3-1-Type-C-to-A-Cable-1-Meter-3-1A-p-4085.html).
 :::
 通过 USB Type-C 数据线将 Seeed Studio XIAO nRF52840 （Sense） 连接到您的计算机。
@@ -168,30 +174,120 @@ Seeed Studio XIAO nRF52840 是低功耗的，这里我们提供一种验证方�
 
 - **步骤 1.** 使用 **JLink** Downloader 刷新Seeed Studio XIAO nRF52840 (Sense)的[引导加载程序固件](https://github.com/0hotpotman0/BLE_52840_Core/blob/main/bootloader/Seeed_XIAO_nRF52840_Sense/Seeed_XIAO_nRF52840_Sense_bootloader-0.6.1_s140_7.3.0.hex)。
 
-:::注意
+:::note
 如果您使用的是 Seeed Studio XIAO nRF52840 的出厂固件，或者从未对 Seeed Studio XIAO nRF52840 的固件进行过更改，则可以跳过此步骤。
 :::
 
 - **步骤 2.** 使用此处的库。`Seeed nRF52 Boards` 
 <p style={{textAlign: 'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO-BLE/XIAO_nrf528403.png" alt="pir" width={800} height="auto" /></p>
 
-- **步骤 3.** 在此处上传 [deep_sleep 演示](https://github.com/0hotpotman0/BLE_52840_Core/blob/main/libraries/Bluefruit52Lib/examples/Hardware/deep_Sleep/deep_Sleep.ino) 并使用**Arduino**运行它。
+- **步骤 3.** 在此处上传 deep_sleep 演示并使用 **Arduino** 运行
 
-- **步骤 4.** 将数字源表的电压调整为3.6V恒压
+```cpp
+// MIT 许可 (MIT)
+// Copyright (c) 2019 Ha Thach for Adafruit Industries
 
-- **步骤 5.** 将红色测试笔触摸到 BAT+，将黑色测试笔触摸到 BAT-
+#include "SdFat.h"
+#include "Adafruit_SPIFlash.h"
 
-<p style={{textAlign: 'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO-BLE/BLEpowerposition.png" alt="pir" width={500} height="auto" /></p>
+// 如果使用自定义 SPI 和 SS（例如 FRAM 扩展板），请取消注释
+// #define CUSTOM_CS   A5
+// #define CUSTOM_SPI  SPI
 
-- **步骤 6.** 输出显示电流约为**3 μA**
+#if defined(CUSTOM_CS) && defined(CUSTOM_SPI)
+  Adafruit_FlashTransport_SPI flashTransport(CUSTOM_CS, CUSTOM_SPI);
 
-<p style={{textAlign: 'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO-BLE/BLEpowerresult.jpg" alt="pir" width={500} height="auto" /></p>
+#elif defined(ARDUINO_ARCH_ESP32)
+  // ESP32 使用相同的闪存设备来存储代码
+  // 因此无需指定 SPI 和 SS
+  Adafruit_FlashTransport_ESP32 flashTransport;
 
-### 加速度计示例和低功耗
+#else
+  // 如果支持外部闪存（QSPI 或 SPI），则您的板子变种文件中应该已经定义了相关宏
+  // - EXTERNAL_FLASH_USE_QSPI
+  // - EXTERNAL_FLASH_USE_CS/EXTERNAL_FLASH_USE_SPI
+  #if defined(EXTERNAL_FLASH_USE_QSPI)
+    Adafruit_FlashTransport_QSPI flashTransport;
 
-我们非常感谢我们的社区合作伙伴**[daCoder](https://forum.seeedstudio.com/u/daCoder)** 对 XIAO nRF52840 低功耗模式的贡献。
+  #elif defined(EXTERNAL_FLASH_USE_SPI)
+    Adafruit_FlashTransport_SPI flashTransport(EXTERNAL_FLASH_USE_CS, EXTERNAL_FLASH_USE_SPI);
 
-你可以通过以下方式找到更多关于他所从事的项目的内容 **[这里](https://forum.seeedstudio.com/t/xiao-sense-accelerometer-examples-and-low-power/270801)**.
+  #else
+    #error No QSPI/SPI flash are defined on your board variant.h !
+  #endif
+#endif
+
+Adafruit_SPIFlash flash(&flashTransport);
+
+
+/*  如果您想使用特定的闪存设备，例如用于自定义开发板，首先在 Adafruit_SPIFlash\src\flash_devices.h 中查找设备
+ *  如果没有找到，您需要创建自己的设备定义，如下面的 W25Q80DLX_EXAMPLE。
+ *  这些定义需要根据您要使用的闪存设备的数据手册进行编辑。
+ *  如果不确定制造商 ID、内存类型和容量值，您可以尝试运行示例，并查看串口输出
+ *  闪存设备将以单一十六进制值（JDEC ID）报告这些值
+ *  例如，列表中的第一个设备 - W25Q80DLX - 将报告其 JDEC ID 为 0xef4014，由以下三个值组成：
+ *  manufacturer_id = 0xef
+ *  memory_type     = 0x40
+ *  capacity        = 0x14
+ *  在正确设置该宏后，您可以创建一个设备定义数组，如下所示，这可以包括来自 flash_devices.h 列表中的任何设备，也可以包括您自己在此定义的设备。
+ *  您需要更新第 71 行的变量，以反映数组中项的数量
+ *  还需要取消注释第 84 行并注释掉第 81 行，以便将此数组传递给闪存内存驱动程序。
+ */
+// 用户定义的闪存设备示例：
+//#define W25Q80DLX_EXAMPLE                                                               \
+//  {                                                                            \
+//    .total_size = (1 << 20), /* 1 MiB */                                       \
+//        .start_up_time_us = 5000, .manufacturer_id = 0xef,                     \
+//    .memory_type = 0x40, .capacity = 0x14, .max_clock_speed_mhz = 80,         \
+//    .quad_enable_bit_mask = 0x02, .has_sector_protection = false,              \
+//    .supports_fast_read = true, .supports_qspi = true,                         \
+//    .supports_qspi_writes = false, .write_status_register_split = false,       \
+//    .single_status_byte = false, .is_fram = false,                             \
+//  }
+
+/*
+ * 创建一个数据结构数组，并将上面定义的设置填充到该数组中。
+ * 我们使用两个设备，但如果需要，可以添加更多设备。
+ */
+//static const SPIFlash_Device_t my_flash_devices[] = {
+//    W25Q80DLX_EXAMPLE,
+//};
+/*
+ * 指定我们刚刚创建的数组中列出的不同设备的数量。如果您向数组中添加了更多设备，请更新此值以匹配。
+ */
+//const int flashDevices = 1;
+
+
+#include <bluefruit.h>
+void setup()
+{
+  flash.begin();
+  Bluefruit.begin(); 
+  if(flash.deepPowerDown() == false){
+    pinMode(LED_BUILTIN, OUTPUT);
+    digitalWrite(LED_BUILTIN, LOW);
+    while(1)
+    {
+      yield();
+    }
+  }
+  flash.end();
+
+  sd_power_system_off(); 
+}
+
+void loop()
+{
+  // 无需执行任何操作
+}
+```
+>>>>>>> docusaurus-version
+
+:::tip
+在此，我们要特别感谢作者提供代码  -> ***daCoder*** <-
+:::
+
+**如果您想了解此示例的更多详细信息， [点击这里](https://forum.seeedstudio.com/t/xiao-sense-accelerometer-examples-and-low-power/270801)**
 
 ## 电池充电电流
 
@@ -260,6 +356,19 @@ digitalWrite(P0_13, LOW);
 目前针对此问题，我们建议用户在电池充电过程中不要关闭 P0.14 （D14） 的 ADC 功能或将 P0.14 （D14） 设置为高电平。
 
 <p style={{textAlign: 'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO-BLE/14.png" alt="pir" width={800} height="auto" /></p>
+
+### Q4: 通电时绿色指示灯如何表现？
+
+<p style={{textAlign: 'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO-BLE/nRF_RGB.png" alt="nRF52840 RGB 原理图" width="120" height="auto" /></p>
+
+`P0.17`引脚用于控制绿色指示灯的状态，表示充电状态：
+
+- 低电平: 表示**正在充电**
+- 高电平：表示电池**未充电**或**已充满**。
+
+当处于低电平时，`RED_CHG` LED 将亮起。
+
+更多详情，请参见 PMIC 数据手册： [BQ25100](https://www.ti.com/lit/ds/symlink/bq25100a.pdf) 和 [XIAO nRF52840 数据手册](https://files.seeedstudio.com/wiki/XIAO-BLE/nRF52840_PS_v1.5.pdf)。
 
 ## 资源
 

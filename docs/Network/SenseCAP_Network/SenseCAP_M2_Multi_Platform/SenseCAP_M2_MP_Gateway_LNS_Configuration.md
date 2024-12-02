@@ -151,7 +151,7 @@ The MQTT integration exposes all events as documented by Event types.
 
 The default event topic is: 
 ```cpp
-application/APPLICATION\_ID/device/DEV\_EUI/event/EVENT
+application/APPLICATION_ID/device/DEV_EUI/event/EVENT
 ```
 
 Check [Event Types](https://www.chirpstack.io/docs/chirpstack/integrations/events.html) for more details.
@@ -181,7 +181,7 @@ You can find the Application id on your application tab:
 * To receive uplink messages from all devices under a certain gateway:
 
 ```cpp
-gateway/<GATEWAY\_EUI>/device/+/event/up
+gateway/<GATEWAY_EUI>/device/+/event/up
 ```
 
 * To receive all messages from all devices under the application:
@@ -251,7 +251,8 @@ The HTTP integration exposes all events as documented by [Event Type](https://ww
 
 **Example**:
 
-(main.py) 
+<details>
+<summary>main.py</summary>
 
 ```cpp
 from http.server import HTTPServer, BaseHTTPRequestHandler 
@@ -321,6 +322,7 @@ httpd = HTTPServer(('', 8090), Handler)
 httpd.serve\_forever() 
 ```
 
+</details>
 
 ### Downlink
 
@@ -331,7 +333,7 @@ It’s recommended to mark the downlink as retained, Then the command will not b
 :::
 
 
-The default Topic is：`application/APPLICATION\_ID/device/DEV\_EUI/command/down`
+The default Topic is：`application/APPLICATION_ID/device/DEV_EUI/command/down`
 
 `command`: Please check the downlink command in **Device User Manual** for more details.
 
@@ -352,6 +354,7 @@ The default Topic is：`application/APPLICATION\_ID/device/DEV\_EUI/command/down
 **Topic**:
 
 `application/dbf6\*\*\*\*6c92/device/2CF7F1C2\*\*\*/command/down`
+
 **Json：** 
 
 ```cpp
@@ -368,7 +371,7 @@ The default Topic is：`application/APPLICATION\_ID/device/DEV\_EUI/command/down
 } 
 ```
 
-1) Set the upload interval of the SenseCAP S210x LoRaWAN Sensors to 1min :
+2) Set the upload interval of the SenseCAP S210x LoRaWAN Sensors to 1min :
 
 **Topic**：
 
@@ -384,9 +387,8 @@ The default Topic is：`application/APPLICATION\_ID/device/DEV\_EUI/command/down
 
 "fPort":2, 
 
-"data":"AIkAESIBAJBQ
+"data":"AIkAESIBAJBQ" 
 
-" 
 } 
 ```
 

@@ -1,47 +1,52 @@
 ---
-description: Classify Dog and Cat from an image. 
+description: Classify Dog and Cat from an image.
 title: Image classification
 keywords:
-- tinyml course
+  - tinyml course
 image: https://files.seeedstudio.com/wiki/seeed_logo/logo_2023.png
 slug: /tinyml_course_Image_classification_project
 last_update:
-  date: 08/09/2023
+  date: 11/29/2024
   author: Salman
 ---
 
-# Image Classification
+Here we are going to build a tinyML project with XIAO ESP32S3-Sense to classify Dog and Cat in photo. Let's get started.
 
-Here we are going to build a tinyML project with XIAO ESPS3-Sense to classify Dog and Cat in photo. Let's get started. 
+### How it's working
 
-### How it's working. 
-We are running the machine learning model on our XIAO and feeding camera stream to it. Then the XIAO inference the result and predict with the help on onboard neiral network we implimented on. Let's build one. 
+We are running the machine learning model on our XIAO and feeding camera stream to it. Then the XIAO inference the result and predict with the help on onboard neiral network we implimented on. Let's build one.
 
-<div style={{textAlign:'center'}}><img src="https://github.com/salmanfarisvp/TinyML/blob/main/XIAO-esp32-S3-Sense/Image%20Recognition/src/img/digram.png?raw=true" style={{width:1000, height:'auto'}}/></div> 
-
+<div style={{textAlign:'center'}}><img src="https://github.com/salmanfarisvp/TinyML/blob/main/XIAO-esp32-S3-Sense/Image%20Recognition/src/img/digram.png?raw=true" style={{width:1000, height:'auto'}}/></div>
 
 #### Things needed
-* XIAO ESP32-Sense
-* <32GB MicroSD card 
-* Type-C Cable
-* Arduino IDE 
-* Edgeimpulse Account 
+
+- XIAO ESP32-Sense
+- <32GB MicroSD card
+- Type-C Cable
+- Arduino IDE
+- Edge Impulse Account
+
+:::info
+
+1. Use arduino-esp32 version 2.x as it's not compatible with 3.x.
+2. Enable PSRAM to enable the camera module/feature.
+
+:::
 
 ## Step 1. Collecting the Cat and Dog Image
 
-First step of machine learning project is to collect the dataset and here we need to collect Dog and Cat images. Here, We can collect the image in two methods. 
+First step of machine learning project is to collect the dataset and here we need to collect Dog and Cat images. Here, We can collect the image in two methods.
 
-1. Collect Images direclty from the XIAO-ESPS3 Sense and Save to SD card the upload to the EdgeImpulse
-2. Directly Collect the image via mobile phone, internet or open dataset then uploaded to the Edgeimpulse. 
-
+1. Collect Images directly from the XIAO-ESP32S3 Sense and Save to SD card the upload to the Edge Impulse
+2. Directly Collect the image via mobile phone, internet or open dataset then uploaded to the Edge Impulse.
 
 ### 1.1 Method 1: Collect Images via XIAO-ESP32S3 Sense
 
-Here we are collecting images using sense camera module and saving to the SD card, then later we will upload to the EdgeImpulse. 
+Here we are collecting images using sense camera module and saving to the SD card, then later we will upload to the EdgeImpulse.
 
 #### 1.1.1 Connect Camera
 
-If you are shopping for the XIAO ESP32S3 Sense, then you should also include an expansion board. This expansion board has a 1600*1200 OV2640 camera sensor, Onboard SD Card Slot and digital microphone.
+If you are shopping for the XIAO ESP32S3 Sense, then you should also include an expansion board. This expansion board has a 1600\*1200 OV2640 camera sensor, Onboard SD Card Slot and digital microphone.
 
 By installing the expansion board with XIAO ESP32S3 Sense, you can use the functions on the expansion board.
 
@@ -54,9 +59,9 @@ We now have a new fully XIAO ESP32S3 Sense-compatible powerful camera, the OV564
 <div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/img/ov5640.gif" style={{width:500, height:'auto'}}/></div>
 
 <div class="get_one_now_container" style={{textAlign: 'center'}}>
-				<a class="get_one_now_item" href="https://www.seeedstudio.com/OV5640-Camera-for-XIAO-ESP32S3-Sense-With-Heat-Sink-p-5739.html">
-				<strong><span><font color={'FFFFFF'} size={"4"}> Get One Now 🖱️</font></span></strong>
-				</a>
+    <a class="get_one_now_item" href="https://www.seeedstudio.com/OV5640-Camera-for-XIAO-ESP32S3-Sense-With-Heat-Sink-p-5739.html">
+    <strong><span><font color={'FFFFFF'} size={"4"}> Get One Now 🖱️</font></span></strong>
+    </a>
 </div>
 
 - **Step 1.** Download and Install the stable version of Arduino IDE according to your operating system.
@@ -66,16 +71,16 @@ We now have a new fully XIAO ESP32S3 Sense-compatible powerful camera, the OV564
     </a>
 </div>
 
-#### 1.1.2 Install XIAO-ESP32S3 Sense on Arduino. 
+#### 1.1.2 Install XIAO-ESP32S3 Sense on Arduino
 
 - **Step 1.** Add ESP32 board package to your Arduino IDE.
 
-    Navigate to **File > Preferences**, and fill **"Additional Boards Manager URLs"** with the url below:
-    *<https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json>*
+  Navigate to **File > Preferences**, and fill **"Additional Boards Manager URLs"** with the url below:
+  _<https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json>_
 
     <div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/img/6.png" style={{width:800, height:'auto'}}/></div>
 
-    Navigate to **Tools > Board > Boards Manager...**, type the keyword **esp32** in the search box, select the latest version of **esp32**, and install it.
+  Navigate to **Tools > Board > Boards Manager...**, type the keyword **esp32** in the search box, select the latest version of **esp32**, and install it.
 
     <div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/img/9.png" style={{width:1000, height:'auto'}}/></div>
 
@@ -93,53 +98,59 @@ Also, search for **xiao** in the development board on the left. select **XIAO_ES
 
 With this preparation, you can start writing programs for XIAO ESP32S3 to compile and upload.
 
-#### 1.2 Upload sketch that can take image and save to SD Card. 
+#### 1.2 Upload sketch that can take image and save to SD Card
 
 Download the sketch file from [here](https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/res/take_photos_command.ino.zip), and unzip in your computer and click on the "take_photos_command.ino" to open the sketch. Then select correct port and board for XIAO for upload.
 
 <div style={{textAlign:'center'}}><img src="https://github.com/salmanfarisvp/TinyML/blob/main/XIAO-esp32-S3-Sense/Image%20Recognition/src/img/img_CaptureSketch01.png?raw=true
 " style={{width:600, height:'auto'}}/></div>
 
-While taking photos, make sure to point to the image or object we need to collect as dataset. 
+While taking photos, make sure to point to the image or object we need to collect as dataset.
 
 <div style={{textAlign:'center'}}><img src="https://github.com/salmanfarisvp/TinyML/blob/main/XIAO-esp32-S3-Sense/Image%20Recognition/src/img/cat_image_snap.png?raw=true" style={{width:600, height:'auto'}}/></div>
 
-Since, it's a image classification we need to collect as many image to make system more stable. So collect more cute dog and cat images. 
+Since, it's a image classification we need to collect as many image to make system more stable. So collect more cute dog and cat images.
 
-### 1.2 Method 2: Upload images to the EdgeImpulse Direclty. 
-For this method, we need to collect images from internet or via phone. Luckly, we have service like [Kaggle](https://www.kaggle.com/) to provide us dataset for Dog and Cat images, please [see here](https://www.kaggle.com/datasets/tongpython/cat-and-dog). 
+### 1.2 Method 2: Upload images to the EdgeImpulse Direclty
 
-Once you collected the dataset, Open your EdgeImpulse project and Goto **Data acquisition** and select **+ Add data** and then choose **Upload data** option. 
+For this method, we need to collect images from internet or via phone. Luckly, we have service like [Kaggle](https://www.kaggle.com/) to provide us dataset for Dog and Cat images, please [see here](https://www.kaggle.com/datasets/tongpython/cat-and-dog).
+
+Once you collected the dataset, Open your EdgeImpulse project and Goto **Data acquisition** and select **+ Add data** and then choose **Upload data** option.
+
 <div style={{textAlign:'center'}}><img src="https://raw.githubusercontent.com/salmanfarisvp/TinyML/main/XIAO-esp32-S3-Sense/Image%20Recognition/src/img/collectData1.png" style={{width:600, height:'auto'}}/></div>
 
 From the page, Select uplaod modes as **"Select a folder"**, the select the files from the below option. Makesure to select the **"Automaticlly split between training and testing"** and Label as **"Infer from file name"**
+
 <div style={{textAlign:'center'}}><img src="https://github.com/salmanfarisvp/TinyML/blob/main/XIAO-esp32-S3-Sense/Image%20Recognition/src/img/DataCollection01.png?raw=true" style={{width:600, height:'auto'}}/></div>
 
-Once you uploaded done, you can see the window as below. 
+Once you uploaded done, you can see the window as below.
+
 <div style={{textAlign:'center'}}><img src="https://github.com/salmanfarisvp/TinyML/blob/main/XIAO-esp32-S3-Sense/Image%20Recognition/src/img/DataCollection02.png?raw=true" style={{width:600, height:'auto'}}/></div>
 
-## Step 2. Design Impulse and Training our Neural Network 
+## Step 2. Design Impulse and Training our Neural Network
+
 After collecting data for your project, you can now create your Impulse. A complete Impulse will consist of 3 main building blocks: input block, processing block and a learning block.
 
 1. To design an impulse, Select **Create an impulse** under the **Impulse design**.
-2. **Input block** : The input block indicates the type of input data you are training your model with. This can be time series (audio, vibration, movements) or images. Here we select the  Image data as Inputblock 
-3. **Processing blocks**: A processing block is basically a feature extractor. It consists of DSP (Digital Signal Processing) operations that are used to extract features that our model learns on. These operations vary depending on the type of data used in your project. Here we are using EdgeImpulse pre-build image as processing block. 
+2. **Input block** : The input block indicates the type of input data you are training your model with. This can be time series (audio, vibration, movements) or images. Here we select the Image data as Inputblock
+3. **Processing blocks**: A processing block is basically a feature extractor. It consists of DSP (Digital Signal Processing) operations that are used to extract features that our model learns on. These operations vary depending on the type of data used in your project. Here we are using EdgeImpulse pre-build image as processing block.
 4. **Learning blocks** : After adding your processing block, it is now time to add a learning block to make your impulse complete. A learning block is simply a neural network that is trained to learn on your data. Here we are using Transfer Learning (Images) it will fine tune a pre-trained image classification model on your data. Good performance even with relatively small image datasets.
-5. After Designing the impulse, click on **save impulse** to continue. 
+5. After Designing the impulse, click on **save impulse** to continue.
 
 <div style={{textAlign:'center'}}><img src="https://github.com/salmanfarisvp/TinyML/blob/main/XIAO-esp32-S3-Sense/Image%20Recognition/src/img/Impulse01.png?raw=true" style={{width:600, height:'auto'}}/></div>
 
-### Step 2.1: Feature extraction using processing block. 
-Here we will use DSP (Digital Signal Processing) operations that are used to extract features that our model learns on. These operations vary depending on the type of data used in your project. First we need set the parameters as below mentioned. 
+### Step 2.1: Feature extraction using processing block
+
+Here we will use DSP (Digital Signal Processing) operations that are used to extract features that our model learns on. These operations vary depending on the type of data used in your project. First we need set the parameters as below mentioned.
 
 <div style={{textAlign:'center'}}><img src="https://github.com/salmanfarisvp/TinyML/blob/main/XIAO-esp32-S3-Sense/Image%20Recognition/src/img/Impulse02.png?raw=true
 " style={{width:600, height:'auto'}}/></div>
 
-Once we set the parameters, we need to generate the features, click **generate features** to start the operation.   
+Once we set the parameters, we need to generate the features, click **generate features** to start the operation.
 
 <div style={{textAlign:'center'}}><img src="https://github.com/salmanfarisvp/TinyML/blob/main/XIAO-esp32-S3-Sense/Image%20Recognition/src/img/feature03.png?raw=true" style={{width:600, height:'auto'}}/></div>
 
-Once we generate the features, We need to configure the neural network that is trained to learn on your data. Here we are using Transfer Learning (Images) it will fine tune a pre-trained image classification model on your data. Good performance even with relatively small image datasets. Select the neural network as mentioned below and click **Start Training**. It will take some time and you need wait.  
+Once we generate the features, We need to configure the neural network that is trained to learn on your data. Here we are using Transfer Learning (Images) it will fine tune a pre-trained image classification model on your data. Good performance even with relatively small image datasets. Select the neural network as mentioned below and click **Start Training**. It will take some time and you need wait.
 
 <div style={{textAlign:'center'}}><img src="https://github.com/salmanfarisvp/TinyML/blob/main/XIAO-esp32-S3-Sense/Image%20Recognition/src/img/train2.png?raw=true" style={{width:600, height:'auto'}}/></div>
 
@@ -149,13 +160,13 @@ Once the training is done, we are ready to download our tinyML libray that creat
 
 The library will be downloaded automatically. And After that, add that to the arduino IDE. open your Arduino IDE, click on Sketch > Include Library > Add .ZIP Library.
 
-<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/Get_Started_With_Arduino/img/Add_Zip.png" style={{width:1000, height:'auto'}}/></div> 
+<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/Get_Started_With_Arduino/img/Add_Zip.png" style={{width:1000, height:'auto'}}/></div>
 
 Choose the zip file you just downloaded，and if the library install correct, you will see Library added to your libraries in the notice window. Which means the library is installed successfully.
 
-<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/Get_Started_With_Arduino/img/upload_complete.png" style={{width:1000, height:'auto'}}/></div> 
+<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/Get_Started_With_Arduino/img/upload_complete.png" style={{width:1000, height:'auto'}}/></div>
 
-## Step 3. Run the example sketch 
+## Step 3. Run the example sketch
 
 Even though Edge Impulse has not released its SDK for ESP32S3 using the ESP NN accelerator, thanks to Dmitry Maslov, we can have its assembly optimizations restored and fixed for ESP32-S3. This solution is not official yet, and EI will include it in EI SDK once they fix conflicts with other boards.
 
@@ -167,12 +178,18 @@ When the Build button is selected, a Zip file will be created and downloaded to 
 
 Before we use the downloaded library, we need to enable the **ESP NN** Accelerator. For that, you can download a preliminary version from the [project GitHub](https://github.com/Mjrovai/XIAO-ESP32S3-Sense/blob/main/ESP-NN.zip), unzip it, and replace the ESP NN folder with it under:`src/edge-impulse-sdk/porting/espressif/ESP-NN`, in your Arduino library folder.
 
+:::warning Attention
+
+- Remember to replace the ESP-NN folder, do not have an existing folder or change its name to restore it. simply remove it.
+- The order of the header file could affect the compilation, so make sure to keep the correct order of the header files.
+
+:::
+
 <div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/xiaoesp32s3_kws/10.png" style={{width:800, height:'auto'}}/></div>
 
-Copy the below inference code and paste to your Arduino IDE. 
+Copy the below inference code and paste to your Arduino IDE.
 
-```
-
+```cpp
 /* Edge Impulse Arduino examples
  * Copyright (c) 2022 EdgeImpulse Inc.
  *
@@ -505,14 +522,11 @@ static int ei_camera_get_data(size_t offset, size_t length, float *out_ptr)
 #if !defined(EI_CLASSIFIER_SENSOR) || EI_CLASSIFIER_SENSOR != EI_CLASSIFIER_SENSOR_CAMERA
 #error "Invalid model for current sensor"
 #endif
-
-
 ```
 
-Makesure to replace the **"#include <XIAO_esp32S3_CatDog2_inferencing.h>"** with the library you genenrated. The upload the code and point to the Cat or Dog images or actual once, we can see the results Serial monitor. 
+Make sure to replace the **"#include <XIAO_esp32S3_CatDog2_inferencing.h>"** with the library you generated. The upload the code and point to the Cat or Dog images or actual once, we can see the results Serial monitor.
 
-Congrats to you 🙌 on completing the tinyML image classification project. 
-
+Congrats to you 🙌 on completing the tinyML image classification project.
 
 ## Resources
 
@@ -558,33 +572,22 @@ Congrats to you 🙌 on completing the tinyML image classification project.
 
 ### Other
 
-- **[STP]** [XIAO ESP32S3 Sense housing design (top)](https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/res/XIAO-ESP32S3-Sense-housing-design(top).stp)
+- **[STP]** [XIAO ESP32S3 Sense housing design (top)](<https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/res/XIAO-ESP32S3-Sense-housing-design(top).stp>)
 
-- **[STP]** [XIAO ESP32S3 Sense housing design (bottom)](https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/res/XIAO-ESP32S3-Sense-housing-design(bottom).stp)
+- **[STP]** [XIAO ESP32S3 Sense housing design (bottom)](<https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/res/XIAO-ESP32S3-Sense-housing-design(bottom).stp>)
 
-
-*The remaining open source material is being compiled, so stay tuned!*
+_The remaining open source material is being compiled, so stay tuned!_
 
 ## Tech Support & Product Discussion
-
-
 
 Thank you for choosing our products! We are here to provide you with different support to ensure that your experience with our products is as smooth as possible. We offer several communication channels to cater to different preferences and needs.
 
 <div class="button_tech_support_container">
-<a href="https://forum.seeedstudio.com/" class="button_forum"></a> 
+<a href="https://forum.seeedstudio.com/" class="button_forum"></a>
 <a href="https://www.seeedstudio.com/contacts" class="button_email"></a>
 </div>
 
 <div class="button_tech_support_container">
-<a href="https://discord.gg/eWkprNDMU7" class="button_discord"></a> 
+<a href="https://discord.gg/eWkprNDMU7" class="button_discord"></a>
 <a href="https://github.com/Seeed-Studio/wiki-documents/discussions/69" class="button_discussion"></a>
 </div>
-
-
-
-
-
-
-
-

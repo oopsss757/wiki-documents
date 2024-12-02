@@ -82,7 +82,7 @@ First of all, you need to install the peripheral drivers for this board. These a
     <tr>
       <td>6.0</td>
       <td>36.3</td>
-      <td><a href="https://szseeedstudio-my.sharepoint.cn/:u:/g/personal/youjiang_yu_szseeedstudio_partner_onmschina_cn/Eal4wLeS_NdInqcXI24DA7IBZ0yHdgFwONkx8Guy5WUhnw?e=6P8KH5" target="_blank" rel="noopener noreferrer">Download</a></td>
+      <td><a href="https://seeedstudio88-my.sharepoint.com/:u:/g/personal/youjiang_yu_seeedstudio88_onmicrosoft_com/EQS4f032w2VIsYE-4Bs80K8BIRD7YGXgBdDq6umW3zCIlw?e=l0LWr0" target="_blank" rel="noopener noreferrer">Download</a></td>
     </tr>
     <tr>
       <td rowSpan={2}>Jetson Orin Nano 4GB</td>
@@ -93,7 +93,7 @@ First of all, you need to install the peripheral drivers for this board. These a
     <tr>
       <td>6.0</td>
       <td>36.3</td>
-      <td><a href="https://szseeedstudio-my.sharepoint.cn/:u:/g/personal/youjiang_yu_szseeedstudio_partner_onmschina_cn/Eal4wLeS_NdInqcXI24DA7IBZ0yHdgFwONkx8Guy5WUhnw?e=6P8KH5" target="_blank" rel="noopener noreferrer">Download</a></td>
+      <td><a href="https://seeedstudio88-my.sharepoint.com/:u:/g/personal/youjiang_yu_seeedstudio88_onmicrosoft_com/EQS4f032w2VIsYE-4Bs80K8BIRD7YGXgBdDq6umW3zCIlw?e=l0LWr0" target="_blank" rel="noopener noreferrer">Download</a></td>
     </tr>  
     <tr>
       <td rowSpan={2}>Jetson Orin Nano 8GB</td>
@@ -104,7 +104,7 @@ First of all, you need to install the peripheral drivers for this board. These a
     <tr>
       <td>6.0</td>
       <td>36.3</td>
-      <td><a href="https://szseeedstudio-my.sharepoint.cn/:u:/g/personal/youjiang_yu_szseeedstudio_partner_onmschina_cn/Eal4wLeS_NdInqcXI24DA7IBZ0yHdgFwONkx8Guy5WUhnw?e=6P8KH5" target="_blank" rel="noopener noreferrer">Download</a></td>
+      <td><a href="https://seeedstudio88-my.sharepoint.com/:u:/g/personal/youjiang_yu_seeedstudio88_onmicrosoft_com/EQS4f032w2VIsYE-4Bs80K8BIRD7YGXgBdDq6umW3zCIlw?e=l0LWr0" target="_blank" rel="noopener noreferrer">Download</a></td>
     </tr>
   </tbody>
 </table>

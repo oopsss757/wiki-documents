@@ -4,13 +4,14 @@ title: Connect to Helium
 keywords:
 - SenseCAP_T1000_tracker
 - Helium
-image: https://files.seeedstudio.com/wiki/wiki-platform/S-tempor.png
+image: https://files.seeedstudio.com/wiki/SenseCAP/Tracker/tracker.webp
 slug: /SenseCAP_T1000_tracker_Helium
 last_update:
-  date: 10/24/2023
+  date: 11/22/2024
   author: Jessie
 ---
 
+# Connecting SenseCAP T1000 to Helium
 
 ## Device Configuration
 
@@ -20,9 +21,11 @@ Before connecting to Helium, you need to configure the basic parameters of your 
 
 <p style={{textAlign: 'center'}}><img src="https://files.seeedstudio.com/wiki/SenseCAP/Tracker/heliumdevice.png" alt="pir" width={300} height="auto" /></p>
 
+## Helium Console Configuration
 
-## Helium Configuration
-
+The Helium console is no longer open for new accounts. The description for how to connect a T1000 to the Helium Console
+remains here for users that already have an account. For new users, please refer to the ChirpStack LNA steps above or determine
+the necessary steps for your particular LNA based on the two existing examples here.
 
 ### Add New Device
 
@@ -925,6 +928,79 @@ So if the upload interval you set is less than 4 minutes, real-time data will be
 
 
 
+## ChirpStack LNS
+
+
+For new users, to receive the data from a device on the Helium network it must be associated with an LNS (LoraWAN Network Server), typically use one of the [public LNSs](https://docs.helium.com/iot/find-a-lns-provider/), many of which use
+**ChirpStack**, but it's also possible to connect one's own LNS to Helium.
+
+
+For those familiar with the general process the TL;DR; is:
+
+- create an device profile with the appropriate region and the codec (see source below)<br/>
+- create device with `devEUI`, `appKey`, and a `app_eui` variable with the AppEUI, all three values coming from the `SenseCraft` App
+
+### Add device profile
+
+The first step is to add a device profile for the T1000 Tracker to your ChirpStack LNS.
+This tells the LNS how to decode the packets it receives from a T1000 as well as a number of other settings.
+
+In the ChirpStack dashboard select the `Device Profiles`  and click `Add device profile`.
+
+![image](https://github.com/user-attachments/assets/7e6984e2-178b-446e-afda-29dd033c662f)
+
+On the general tab, enter a device profile name you will recognize and select the appropriate region parameters.
+
+LoRaWAN MAC version: `1.0.4`<br/>
+
+The expected uplink interval can be set too, the main thing it controls is when the LNS user interface shows the device
+as active vs. inactive. It has no effect on the delivery of packets through the LNS.
+
+![image](https://github.com/user-attachments/assets/bb83141f-a447-437b-a29d-27e16a20ce7a)
+
+On the Codec tab select `JavaScript functions` and enter the codec:
+
+:::tip
+There are 2 versions of ChirpStack, select the appropriate one:
+
+[Decoder for ChirpStack V4](https://github.com/Seeed-Solution/SenseCAP-Decoder/blob/main/T1000/TTN/SenseCAP_T1000_TTN_Decoder.js)
+
+[Decoder for ChirpStack V3](https://github.com/Seeed-Solution/SenseCAP-Decoder/blob/main/T1000/ChirpStack/SenseCAP_T1000_ChirpStackV3_Decoder.js)
+:::
+
+![image](https://github.com/user-attachments/assets/bc572786-9853-4b29-baf1-d6f4349b4aa5)
+
+### Add Application and your Device
+
+The next step is to create an application and add actual devices to it.
+
+Go to the `Applications` section and add a new application.
+
+![image](https://github.com/user-attachments/assets/5dc700c6-7faa-4d65-9d94-aa2543f06254)
+
+Then add a device to the application and enter the `devEUI` as captured in the SenseCraft App earlier.
+
+![image](https://github.com/user-attachments/assets/93febc5b-bc8f-430b-83e0-55d89690355c)
+
+On the variables tab add a variable called `app_eui` with the `AppEUI` from the SenseCraft app as value:
+
+![image](https://github.com/user-attachments/assets/90e529d7-811b-49cd-902d-85e36b2f6313)
+
+Hitting submit will bring up a page asking for the `AppKey`, again as captured earlier using the SenseCraft app:
+
+![image](https://github.com/user-attachments/assets/db33a84c-c31f-402f-b9b1-53fa47fc497d)
+
+### View the device connection
+
+On the `LoRaWAN frames` tab you will see a spinner and then packets show up as they are received/sent.
+
+Press the button of your T1000 Tracker to cause it to take a measurement and send a `join request` to connect with the LNS.
+Once this happens, you should see something like this:
+
+![image](https://github.com/user-attachments/assets/060873cb-c1d8-40bd-9ad3-7333966d3558)
+
+Once the join process has been performed the T1000 sends data. The LNS responds back with some information about the network
+frequencies and such, but subsequent to that there should only be uplinks with data.
 
 
 

@@ -431,6 +431,9 @@ the max size of flash is 8KB the more information at the ATSAMD218A-MU datasheet
 
 - **[ZIP]** [Seeed Studio XIAO SAMD21 Certification files](https://files.seeedstudio.com/wiki/Seeeduino-XIAO/res/XIAO-SAMD21-Certification.zip)
 
+- 🔗 **[Kicad]** [Seeed Studio XIAO SAMD21 FootPrint](https://github.com/Seeed-Studio/OPL_Kicad_Library/tree/master/Seeed%20Studio%20XIAO%20Series%20Library)
+
+
 ## Course Resources
 
 <div align="middle"><img width="400" src="https://mjrovai.github.io/XIAO_Big_Power_Small_Board-ebook/cover.jpg" /></div>

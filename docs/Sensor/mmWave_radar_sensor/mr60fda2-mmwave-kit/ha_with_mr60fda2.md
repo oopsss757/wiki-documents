@@ -7,6 +7,7 @@ keywords:
 - MR60FDA2
 image: https://files.seeedstudio.com/wiki/mmwave-for-xiao/mr60/2-mmWave-45font.jpg
 slug: /ha_with_mr60fda2
+sidebar_position: 1
 last_update:
   date: 10/15/2024
   author: Spencer
@@ -308,7 +309,7 @@ To get started with ESPHome, follow these steps:
         update_interval: 1s
 
     uart:
-      id: uart_bus
+      id: seeed_mr60fda2_uart
       baud_rate: 115200
       rx_pin: 17
       tx_pin: 16
@@ -317,22 +318,20 @@ To get started with ESPHome, follow these steps:
 
     seeed_mr60fda2:
       id: my_seeed_mr60fda2
-
-    text_sensor:
-      - platform: seeed_mr60fda2
-        is_fall:
-          name: "Falling Information"
+      uart_id: seeed_mr60fda2_uart
 
     binary_sensor:
       - platform: seeed_mr60fda2
         people_exist:
           name: "Person Information"
+        fall_detected:
+          name: "Falling Information"
 
     button:
       - platform: seeed_mr60fda2
         get_radar_parameters:
           name: "Get Radar Parameters"
-        reset_radar:
+        factory_reset:
           name: "Reset"
 
     select:

@@ -1,859 +1,712 @@
 ---
 description: In this tutorial, we will embark on a journey to explore Zigbee application development using the XIAO ESP32C6 development board. The XIAO ESP32C6 is a compact yet powerful board that features the ESP32-C6 chip, which offers integrated Wi-Fi and Bluetooth Low Energy (BLE) connectivity. By leveraging the ESP Zigbee SDK, we can harness the full potential of the XIAO ESP32C6 and extend its capabilities to include Zigbee functionality.
-title: Quick start with Zigbee on XIAO ESP32C6 by Arduino
-image: https://files.seeedstudio.com/wiki/xiaoc6_zigbee/3.jpg
+title: XIAO ESP32C6 Zigbee Quick Start Guide (Arduino)
+image: https://files.seeedstudio.com/wiki/xiaoc6_zigbee/3.webp
 slug: /xiao_esp32c6_zigbee_arduino
 last_update:
-  date: 07/30/2024
-  author: Allen
+  date: 11/25/2024
+  author: Spencer
 ---
 
-# Quick start with Zigbee on XIAO ESP32C6 by Arduino
+## Overview
 
-<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/xiaoc6_zigbee/0.png" style={{width:800, height:'auto'}}/></div>
+This tutorial guides you through implementing [Zigbee](https://en.wikipedia.org/wiki/Zigbee) applications on the Seeed Studio **XIAO ESP32C6** development board. Powered by the ESP32-C6 chip, this board combines **Wi-Fi**, **Bluetooth Low Energy (BLE)**, and **Zigbee** connectivity, making it perfect for **IoT applications**. The examples in this guide use the **esp-arduino Zigbee SDK** to bring Zigbee functionality to life.
 
-Zigbee is a widely adopted wireless communication protocol that finds extensive use in home automation, smart energy management, and Internet of Things (IoT) applications. Known for its low power consumption, reliable data transmission, and mesh network capabilities, Zigbee is an excellent choice for building scalable and efficient wireless networks.
-
-Throughout this tutorial, we will cover the following key aspects:
-
-1. **Development Environment**: Setting up the development environment for XIAO ESP32C6 and ESP Zigbee SDK via Arduino.
-2. **Code Structure**: Analyzing the code structure and organization of the Zigbee_Light_Buld and Zigbee_Light_Switch examples.
-3. **Zigbee Device Data Models**: Understanding the Zigbee device data models and how they are defined within the code.
-4. **Zigbee Handling Mechanisms**: Exploring the initialization process and event handling mechanisms in Zigbee devices.
-5. **Communication Patterns**: Examining the communication patterns and message exchanges between Zigbee devices.
-
-So, let's embark on this exciting journey of Zigbee development with the XIAO ESP32C6 and unlock the full potential of this powerful wireless communication protocol!
-
-## Part 1.Hardware Preparation
-
-In this tutorial we will use **two** XIAO ESP32C6s as examples to explain Zigbee. you can jump and buy it through the link below. One as a **Zigbee End Device** and one as a **Zigbee Coordinator**.
-
-<div class="table-center">
-	<table>
-		<tr>
-			<th>Seeed Studio XIAO ESP32C6</th>
-			<th>Grove Shield For XIAO</th>
-		</tr>
-		<tr>
-			<td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32C6/img/xiaoc6.jpg" style={{width:250, height:'auto'}}/></div></td>
-			<td><div style={{textAlign:'center'}}><img src="https://media-cdn.seeedstudio.com/media/catalog/product/cache/bb49d3ec4ee05b6f018e93f896b8a25d/x/i/xiao_-preview-25.png" style={{width:250, height:'auto'}}/></div></td>
-		</tr>
-		<tr>
-			<td><div class="get_one_now_container" style={{textAlign: 'center'}}>
-				<a class="get_one_now_item" href="https://www.seeedstudio.com/Seeed-Studio-XIAO-ESP32C6-p-5884.html
-        ">
-				<strong><span><font color={'FFFFFF'} size={"4"}> Get One Now 🖱️</font></span></strong>
-				</a>
-			</div></td>
-			<td><div class="get_one_now_container" style={{textAlign: 'center'}}>
-				<a class="get_one_now_item" href="https://www.seeedstudio.com/Grove-Shield-for-Seeeduino-XIAO-p-4621.html
-        ">
-				<strong><span><font color={'FFFFFF'} size={"4"}> Get One Now 🖱️</font></span></strong>
-				</a>
-			</div></td>
-		</tr>
-		<tr>
-			<th>Seeed Studio Grove Red LED</th>
-			<th>Seeed Studio Grove Button</th>
-		</tr>
-		<tr>
-			<td><div style={{textAlign:'center'}}><img src="https://media-cdn.seeedstudio.com/media/catalog/product/cache/bb49d3ec4ee05b6f018e93f896b8a25d/h/t/httpsstatics3.seeedstudio.comseeedfile2018-09bazaar939479_1040300054.jpg" style={{width:250, height:'auto'}}/></div></td>
-			<td><div style={{textAlign:'center'}}><img src="https://media-cdn.seeedstudio.com/media/catalog/product/cache/bb49d3ec4ee05b6f018e93f896b8a25d/p/e/perspectiive.jpg" style={{width:250, height:'auto'}}/></div></td>
-		</tr>
-		<tr>
-			<td><div class="get_one_now_container" style={{textAlign: 'center'}}>
-				<a class="get_one_now_item" href="https://www.seeedstudio.com/Grove-Red-LED.html
-        ">
-				<strong><span><font color={'FFFFFF'} size={"4"}> Get One Now 🖱️</font></span></strong>
-				</a>
-			</div></td>
-			<td><div class="get_one_now_container" style={{textAlign: 'center'}}>
-				<a class="get_one_now_item" href="https://www.seeedstudio.com/Grove-Button.html
-        ">
-				<strong><span><font color={'FFFFFF'} size={"4"}> Get One Now 🖱️</font></span></strong>
-				</a>
-			</div></td>
-		</tr>
-	</table>
+<div style={{ textAlign: 'center' }}>
+  <img
+    src="https://files.seeedstudio.com/wiki/xiaoc6_zigbee/0.png"
+    style={{ width: 680, height: 'auto', "border-radius": '12.8px' }}
+  />
 </div>
 
-## Part 2.Enviroment Prepatation
-**Step 1.** Launch the Arduino application.
+### What You'll Learn
 
-<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/seeed_logo/arduino.jpg" style={{width:800, height:'auto'}}/></div>
+:::note Prerequisite: Arduino Development Setup
 
-<div class="download_arduino_container" style={{textAlign: 'center'}}>
-    <a class="download_arduino_item" href="https://www.arduino.cc/en/software"><strong><span><font color={'FFFFFF'} size={"4"}>Download Arduino IDE</font></span></strong>
-    </a>
-</div>
+If you haven't prepared your Arduino IDE, refer to the **[Getting Started Guide](https://chatgpt.com/xiao_esp32c6_getting_started/#software-preparation)**. Make sure the **esp-arduino board version** is **v3.0.6 or later**, which supports Zigbee functionality.
 
-**Step 2.** Select your development board model and add it to the Arduino IDE.
+:::
 
-- If you want to use **Seeed Studio XIAO ESP32C6** for the later routines, please refer to **[this tutorial](https://wiki.seeedstudio.com/xiao_esp32c6_getting_started/)** to finish adding.
+This guide focuses on the essentials of using Zigbee with the XIAO ESP32C6, ensuring a clear understanding of its practical applications:
 
-## Part 3.Program Structure
+1. [Zigbee Overview](#zigbee_overview): Understand the Zigbee protocol and its network structure.
+2. [Zigbee Arduino Examples](#examples): Implement Zigbee examples like light bulbs and switches on the ESP32-C6.
 
-### Zigbee Light Bulb
+## Zigbee Overview {#zigbee_overview}
 
-In this section, we will explore how the Zigbee HA On/Off Light example code is structured based on the Zigbee data model. By understanding the relationship between the code and the data model, you will gain insights into how to interpret and modify the code according to your specific requirements.
+Zigbee is a **low-power**, **low-bandwidth** wireless communication protocol based on the IEEE 802.15.4 standard. It is tailored for IoT scenarios such as **home automation**, **smart cities**, and **industrial control**, offering robust mesh networking capabilities for reliable communication in dynamic environments.
 
-Before diving into the code, it's essential to grasp the key concepts of the Zigbee data model:
+### Zigbee Data Model
 
-- **Node**: A node represents a single ESP32-H2 based product and a network node in the Zigbee network. A node can have multiple endpoints.
+Zigbee communication relies on the **Zigbee Cluster Library (ZCL)**, which defines how devices organize their functionality and interact. Key components include:
 
-- **Endpoint**: An endpoint, identified by a number between 1 and 240, defines an application running on a Zigbee node. A node can have multiple endpoints, each serving a different purpose or representing a separate device.
+1. **Device Types**
+    Zigbee devices (e.g., switches, sensors, lights) are pre-defined with specific behaviors, grouped into functional **Clusters**.
 
-- **Cluster**: A cluster, identified by a 16-bit number, is an application object that defines the functionality and data associated with an endpoint. Clusters contain attributes and commands.
+2. **Clusters**
+    Clusters are logical groupings of:
 
-- **Attribute**: An attribute, identified by a 16-bit number, represents the current state or a physical quantity within a cluster.
+   - **Attributes**: Represent device states, like brightness or temperature.
+   - **Commands**: Trigger actions, such as turning a light on or setting brightness to 50%.
+
+   Examples:
+
+   - **On/Off Cluster**: Controls binary states like power.
+   - **Level Control Cluster**: Adjusts intensity or brightness.
+   - **Temperature Measurement Cluster**: Sends temperature readings.
+   - **Scenes Cluster**: Saves and recalls preset configurations.
+
+3. **Attributes & Commands**
+    Attributes store device data (e.g., state, configuration), while commands initiate actions.
 
 <div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/xiaoc6_zigbee/datamodel.png" style={{width:800, height:'auto'}}/></div>
 
-Now, let's examine the HA On/Off Light example code and see how it maps to the Zigbee data model.
+### Zigbee Network Architecture
 
+A Zigbee network consists of three primary node types:
 
-1. Creating the Endpoint
+1. **Zigbee Coordinator (ZC)**  
+   - Serves as the central hub of the network.  
+   - Handles network creation, device authentication, and address allocation.  
+   - Responsible for initializing and managing the network.  
+   - Each Zigbee network can have only **one Coordinator**.  
 
-In the example code, the `esp_zb_on_off_light_ep_create()` function is used to create a HA on/off light endpoint. This function defines the endpoint ID, device ID, and the associated clusters.
+2. **Zigbee Router (ZR)**  
+   - Extends the network range by relaying messages between devices.  
+   - Supports additional devices joining the network.  
+   - Typically mains-powered to ensure constant operation and reliable message relaying.  
+   - Battery-powered Routers are possible but less common due to higher energy demands.  
+
+3. **Zigbee End Device (ZED)**  
+   - Lightweight and power-efficient devices that communicate with a parent node (either a Coordinator or Router).  
+   - Do not route messages to other devices.  
+   - Optimized for battery operation and typically enter sleep modes to conserve energy.
+
+:::note
+
+- **Addressing and Routing**:
+  - Zigbee uses a 16-bit addressing scheme. Devices communicate through a mix of direct and indirect addressing.  
+  - Routing decisions are made by Routers using algorithms like AODV (Ad hoc On-demand Distance Vector).  
+
+- **Power Management**:
+  - Zigbee End Devices are optimized for low power consumption. They often operate in sleep mode and only wake when needed.  
+  - Routers and the Coordinator are generally mains-powered for consistent availability.
+
+:::
+
+#### Network Topologies
+
+Zigbee supports three primary network topologies, depending on the application requirements and environment:
+
+#### 1. Mesh Topology
+
+- A single Coordinator and multiple Routers form a self-healing, robust network.  
+- Devices can dynamically reroute messages if a communication path is disrupted, ensuring high reliability.  
+- Ideal for large-scale networks requiring wide coverage and redundancy.  
+
+  <div style={{textAlign:'center'}}><img src="https://mermaid.ink/svg/pako:eNptkcEOgjAQRH9lsydI5CDcuIo_oJ5MLxu6AlG6pLYmxvjvVlFSgj3NtG9nmvaBtWjGEgGgsTS0cKiUgXFtRKzuDDmxSRKZNIUsy2An3rFdJ8koYJ2m_0YjNp_YPGK_OR9ua3TFt67mEBs0jGYWHeOjLqbYYsHlMff3bKrMZ5XLGxZzvJjhoRlX2LPtqdPhPR_vYYWu5Z4VlkFqsmeFyjwDR97J_m5qLJ31vEIrvml_xg-aHFcdhQ_psTzR5Rp2BzJHkZ9_vgDkroUg" style={{width:380, height:'auto', "border-radius": '1px'}}/></div>
+
+- **Key Features**:  
+  - Dynamic rerouting ensures high reliability.  
+  - Supports large networks with scalable coverage.  
+  - Self-healing mechanisms increase fault tolerance.  
+
+#### 2. Tree Topology
+
+- The Coordinator acts as the root of a hierarchical structure, with Routers forming branches.  
+- Each branch can have multiple End Devices or additional Routers, creating a tree-like structure.  
+- Communication depends on hierarchical paths, which introduces potential single points of failure.  
+
+  <div style={{textAlign:'center'}}><img src="https://mermaid.ink/svg/pako:eNqF0MEKwjAMBuBXCTmt4A5OT7s6X0A9SS9hjW7omlFbQcR3tzqVFQV7yl--_IdcsRbDWCIA7B31DWwqbWF4CxFnWkteXJaNglKQ5zmsJHh20ywbBpgq9Wt1ZIuPLUb21fN0S2sqPrc1x9o4wxCS6p-8SPh3e5HyWcJn__g84XOlcIIdu45aE093fSxr9A13rLGMoyF30KjtLToKXtYXW2PpXeAJOgn7BssdHU8xhd6Q56qlePzu89uT3Yq88-0OO1R_gA" style={{width:600, height:'auto', "border-radius": '1px'}}/></div>
+
+- **Key Features**:  
+  - Works well for structured environments.  
+  - Easier to set up and manage than a mesh network.  
+  - Vulnerable to branch failure, which can disconnect entire sub-networks.  
+
+#### 3. Star Topology
+
+- All devices communicate directly with the Coordinator.  
+- Simple to deploy, but the Coordinator is a single point of failure.  
+- Best suited for small networks where devices are located close to the Coordinator.  
+
+  <div style={{textAlign:'center'}}><img src="https://mermaid.ink/svg/pako:eNqNkMEKwjAMhl8l5LTCdth269X5BHqSXsIat6JtR20FGXt3K0Nx4MGc_i_kCyEz9l4zSgSAIdA0wrFTDtbaeR-0cRR9KIovEAKqqoK90x3fTc91UeQMK0AtxK8NW6XZKM0_SrtRWiGwRMvBktH5_vm1QGEc2bJCmaOmcFGo3JLnKEV_eLgeZQyJSww-DSPKM11vmdKkKXJnKH_AfroTuZP3b16etDldgQ" style={{width:480, height:'auto', "border-radius": '1px'}}/></div>
+
+- **Key Features**:  
+  - Easy to set up and manage.  
+  - Limited scalability due to range and device capacity constraints.  
+  - Reliance on the Coordinator for all communication reduces fault tolerance.  
+
+After get a quick view of these concepts, let's get started with the Zigbee development on XIAO ESP32C6.
+
+## Arduino Examples {#examples}
+
+Refer to [Zigbee examples - Arduino](https://github.com/espressif/arduino-esp32/tree/master/libraries/Zigbee/examples)
+
+### Example 1: Light Bulb and Light Switch {#Light_Bulb_switch}
+
+First, prepare two XIAO ESP32C6s, one as a **Zigbee Light Bulb** and the other as a **Zigbee Light Switch**.
+
+Use the `Zigbee_On_Off_Light` and `Zigbee_On_Off_Switch` examples to understand how Zigbee-enabled devices interact in real-world scenarios. Ready to begin? Let's dive into development!
+
+#### Zigbee Light Bulb
+
+Ensure you've opt for `Zigbee ED(end device)` for Zigbee Mode.
+
+some constants:
 
 ```cpp
-static void esp_zb_task(void *pvParameters)
-{
-    esp_zb_cfg_t zb_nwk_cfg = ESP_ZB_ZED_CONFIG();
-    esp_zb_init(&zb_nwk_cfg);
-    esp_zb_on_off_light_cfg_t light_cfg = ESP_ZB_DEFAULT_ON_OFF_LIGHT_CONFIG();
-    esp_zb_ep_list_t *esp_zb_on_off_light_ep = esp_zb_on_off_light_ep_create(HA_ESP_LIGHT_ENDPOINT, &light_cfg);
-    esp_zb_device_register(esp_zb_on_off_light_ep);
-    esp_zb_core_action_handler_register(zb_action_handler);
-    esp_zb_set_primary_network_channel_set(ESP_ZB_PRIMARY_CHANNEL_MASK);
+#define LED_PIN               LED_BUILTIN
+#define BUTTON_PIN            9  // ESP32-C6/H2 Boot button
+#define ZIGBEE_LIGHT_ENDPOINT 10
+```
 
-    //Erase NVRAM before creating connection to new Coordinator
-    //esp_zb_nvram_erase_at_start(true); //Comment out this line to erase NVRAM data if you are conneting to new Coordinator
+- `LED_PIN` is used to control the built-in LED.
+- `BUTTON_PIN` is for the factory reset button.
+- `ZIGBEE_LIGHT_ENDPOINT` represents the Zigbee endpoint for the light bulb, which acts like a service identifier in the network.
 
-    ESP_ERROR_CHECK(esp_zb_start(false));
-    esp_zb_main_loop_iteration();
+##### Define the Zigbee Light Device
+
+```cpp
+ZigbeeLight zbLight = ZigbeeLight(ZIGBEE_LIGHT_ENDPOINT);
+```
+
+This line defines a `ZigbeeLight` object with an endpoint ID. Endpoints are used to represent different functionalities within a Zigbee device.
+
+##### Device State Control Function
+
+The `setLED()` function controls the LED status:
+
+```cpp
+void setLED(bool value) {
+  digitalWrite(LED_PIN, value);
 }
 ```
 
-2. Registering the Device
+The `setLED()` function accepts a boolean value and sets the LED state accordingly, turning it on or off based on the input value.
 
-After creating the endpoint, the `esp_zb_device_register()` function is called to register the Zigbee device with the created endpoint.
+##### `setup()` Function
+
+The `setup()` function initializes the device, including the LED, button, and Zigbee settings.
 
 ```cpp
-esp_zb_device_register(esp_zb_on_off_light_ep);
+void setup() {
+  pinMode(LED_PIN, OUTPUT);
+  digitalWrite(LED_PIN, LOW);
 ```
 
-3. Attribute Callback
-
-The example code registers an attribute change callback using `esp_zb_core_action_handler_register()`. This callback is invoked when certain attributes are modified, allowing you to handle attribute changes based on your application logic.
+First, we configure the LED pin as an output and turn it off initially.
 
 ```cpp
-esp_zb_core_action_handler_register(zb_action_handler);
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
 ```
 
-In the `zb_action_handler` function, you can implement the desired behavior when the on/off attribute changes, such as controlling the LED light.
-
-4. Zigbee Stack Configuration and Starting
-
-The example code configures the Zigbee end-device using `ESP_ZB_ZED_CONFIG()` and initializes the Zigbee stack using `esp_zb_init()`. The stack is then started with `esp_zb_start()`, and the main loop is handled by `esp_zb_main_loop_iteration()`.
-
+The button pin is configured as an input with an internal pull-up resistor.
 
 ```cpp
-esp_zb_cfg_t zb_nwk_cfg = ESP_ZB_ZED_CONFIG();
-esp_zb_init(&zb_nwk_cfg);
-...
-ESP_ERROR_CHECK(esp_zb_start(false));
-esp_zb_main_loop_iteration();
+  zbLight.setManufacturerAndModel("Espressif", "ZBLightBulb");
 ```
 
-The `esp_zb_app_signal_handler` function is responsible for handling various signals from the Zigbee application layer.
+This sets the manufacturer and model name for the device, which helps identify it on the Zigbee network.
 
 ```cpp
-void esp_zb_app_signal_handler(esp_zb_app_signal_t *signal_struct)
-{
-    uint32_t *p_sg_p       = signal_struct->p_app_signal;
-    esp_err_t err_status = signal_struct->esp_err_status;
-    esp_zb_app_signal_type_t sig_type = (esp_zb_app_signal_type_t)*p_sg_p;
-    switch (sig_type) {
-    case ESP_ZB_ZDO_SIGNAL_SKIP_STARTUP:
-        log_i("Zigbee stack initialized");
-        esp_zb_bdb_start_top_level_commissioning(ESP_ZB_BDB_MODE_INITIALIZATION);
-        break;
-    case ESP_ZB_BDB_SIGNAL_DEVICE_FIRST_START:
-    case ESP_ZB_BDB_SIGNAL_DEVICE_REBOOT:
-        if (err_status == ESP_OK) {
-            log_i("Start network steering");
-            esp_zb_bdb_start_top_level_commissioning(ESP_ZB_BDB_MODE_NETWORK_STEERING);
-        } else {
-            /* commissioning failed */
-            log_w("Failed to initialize Zigbee stack (status: %s)", esp_err_to_name(err_status));
-        }
-        break;
-    case ESP_ZB_BDB_SIGNAL_STEERING:
-        if (err_status == ESP_OK) {
-            esp_zb_ieee_addr_t extended_pan_id;
-            esp_zb_get_extended_pan_id(extended_pan_id);
-            log_i("Joined network successfully (Extended PAN ID: %02x:%02x:%02x:%02x:%02x:%02x:%02x:%02x, PAN ID: 0x%04hx, Channel:%d, Short Address: 0x%04hx)",
-                     extended_pan_id[7], extended_pan_id[6], extended_pan_id[5], extended_pan_id[4],
-                     extended_pan_id[3], extended_pan_id[2], extended_pan_id[1], extended_pan_id[0],
-                     esp_zb_get_pan_id(), esp_zb_get_current_channel(), esp_zb_get_short_address());
-        } else {
-            log_i("Network steering was not successful (status: %s)", esp_err_to_name(err_status));
-            esp_zb_scheduler_alarm((esp_zb_callback_t)bdb_start_top_level_commissioning_cb, ESP_ZB_BDB_MODE_NETWORK_STEERING, 1000);
-        }
-        break;
-    default:
-        log_i("ZDO signal: %s (0x%x), status: %s", esp_zb_zdo_signal_to_string(sig_type), sig_type,
-                 esp_err_to_name(err_status));
-        break;
+  zbLight.onLightChange(setLED);
+```
+
+This registers `setLED()` as a callback function, which gets called whenever there is a change in the light state.
+
+```cpp
+  Zigbee.addEndpoint(&zbLight);
+```
+
+We add `zbLight` as an endpoint to the Zigbee core. This allows other Zigbee devices to interact with this endpoint.
+
+```cpp
+  Zigbee.begin();
+```
+
+Finally, we call `Zigbee.begin()` to initialize the Zigbee stack and start the device as an end device in the network.
+
+##### `loop()` Function
+
+The main loop handles button presses for performing a factory reset:
+
+```cpp
+void loop() {
+  if (digitalRead(BUTTON_PIN) == LOW) {
+    delay(100);  // Key debounce handling
+    int startTime = millis();
+    while (digitalRead(BUTTON_PIN) == LOW) {
+      delay(50);
+      if ((millis() - startTime) > 3000) {
+        Serial.printf("Resetting Zigbee to factory settings, reboot.\n");
+        Zigbee.factoryReset();
+      }
     }
+  }
+  delay(100);
 }
 ```
 
-1. First, the function retrieves the signal type `sig_type` and error status `err_status` from the passed `esp_zb_app_signal_t` structure.
+This code checks if the button is pressed:
 
-2. Then, it uses a switch statement to perform different actions based on the signal type:
+- If pressed, it waits for 100 ms (for debounce handling).
+- If the button remains pressed for more than 3 seconds, it triggers a factory reset by calling `Zigbee.factoryReset()`.
 
-   - `ESP_ZB_ZDO_SIGNAL_SKIP_STARTUP`: This signal indicates skipping the startup of the Zigbee stack. In this case, we initialize the Zigbee stack and then call the `esp_zb_bdb_start_top_level_commissioning` function to start the top-level commissioning process with the mode set to `ESP_ZB_BDB_MODE_INITIALIZATION`.
+This feature is useful for users when they need to reconfigure the device due to network or pairing issues.
 
-   - `ESP_ZB_BDB_SIGNAL_DEVICE_FIRST_START` and `ESP_ZB_BDB_SIGNAL_DEVICE_REBOOT`: These signals indicate the first start or reboot of the device. If the error status is `ESP_OK`, we perform some initialization tasks, such as deferred driver initialization. Then, we check if the device is in the factory new state. If it is, we start the network steering process; otherwise, we output a message indicating that the device has rebooted. If the error status is not `ESP_OK`, we output a message indicating that the Zigbee stack initialization failed.
-
-   - `ESP_ZB_BDB_SIGNAL_STEERING`: This signal indicates the result of the network steering process. If the error status is `ESP_OK`, it means the device successfully joined the network. In this case, we output some network information, such as the PAN ID, channel number, and short address. If the error status is not `ESP_OK`, it means the network steering failed, and we output an error message. Then, we use the `esp_zb_scheduler_alarm` function to set a timer to restart the network steering process after a 1-second delay.
-
-   - Other signals: We simply output the signal name, type, and error status.
-
-The purpose of this function is to perform appropriate actions based on different Zigbee application layer signals. It is one of the core parts of a Zigbee application. It handles critical processes such as device startup, initialization, and network joining.
-
-### Zigbee Light Switch
-
-For the Zigbee Coordinator device(Light Switch), its initialisation and RTOS tasks are similar to the End Device, except that in the RTOS tasks, there is less step of registering the callback function.
-
-So for Zigbee Coordinator, the most critical part is to search and match the corresponding device, and issue control commands to the device.
-
-```cpp
-void esp_zb_app_signal_handler(esp_zb_app_signal_t *signal_struct)
-{
-    uint32_t *p_sg_p       = signal_struct->p_app_signal;
-    esp_err_t err_status = signal_struct->esp_err_status;
-    esp_zb_app_signal_type_t sig_type = (esp_zb_app_signal_type_t)*p_sg_p;
-    esp_zb_zdo_signal_device_annce_params_t *dev_annce_params = NULL;
-    switch (sig_type) {
-    case ESP_ZB_ZDO_SIGNAL_SKIP_STARTUP:
-        log_i("Zigbee stack initialized");
-        esp_zb_bdb_start_top_level_commissioning(ESP_ZB_BDB_MODE_INITIALIZATION);
-        break;
-    case ESP_ZB_BDB_SIGNAL_DEVICE_FIRST_START:
-    case ESP_ZB_BDB_SIGNAL_DEVICE_REBOOT:
-        if (err_status == ESP_OK) {
-            log_i("Start network formation");
-            esp_zb_bdb_start_top_level_commissioning(ESP_ZB_BDB_MODE_NETWORK_FORMATION);
-        } else {
-            log_e("Failed to initialize Zigbee stack (status: %s)", esp_err_to_name(err_status));
-        }
-        break;
-    case ESP_ZB_BDB_SIGNAL_FORMATION:
-        if (err_status == ESP_OK) {
-            esp_zb_ieee_addr_t extended_pan_id;
-            esp_zb_get_extended_pan_id(extended_pan_id);
-            log_i("Formed network successfully (Extended PAN ID: %02x:%02x:%02x:%02x:%02x:%02x:%02x:%02x, PAN ID: 0x%04hx, Channel:%d, Short Address: 0x%04hx)",
-                     extended_pan_id[7], extended_pan_id[6], extended_pan_id[5], extended_pan_id[4],
-                     extended_pan_id[3], extended_pan_id[2], extended_pan_id[1], extended_pan_id[0],
-                     esp_zb_get_pan_id(), esp_zb_get_current_channel(), esp_zb_get_short_address());
-            esp_zb_bdb_start_top_level_commissioning(ESP_ZB_BDB_MODE_NETWORK_STEERING);
-        } else {
-            log_i("Restart network formation (status: %s)", esp_err_to_name(err_status));
-            esp_zb_scheduler_alarm((esp_zb_callback_t)bdb_start_top_level_commissioning_cb, ESP_ZB_BDB_MODE_NETWORK_FORMATION, 1000);
-        }
-        break;
-    case ESP_ZB_BDB_SIGNAL_STEERING:
-        if (err_status == ESP_OK) {
-            log_i("Network steering started");
-        }
-        break;
-    case ESP_ZB_ZDO_SIGNAL_DEVICE_ANNCE:
-        dev_annce_params = (esp_zb_zdo_signal_device_annce_params_t *)esp_zb_app_signal_get_params(p_sg_p);
-        log_i("New device commissioned or rejoined (short: 0x%04hx)", dev_annce_params->device_short_addr);
-        esp_zb_zdo_match_desc_req_param_t  cmd_req;
-        cmd_req.dst_nwk_addr = dev_annce_params->device_short_addr;
-        cmd_req.addr_of_interest = dev_annce_params->device_short_addr;
-        esp_zb_zdo_find_on_off_light(&cmd_req, user_find_cb, NULL);
-        break;
-    default:
-        log_i("ZDO signal: %s (0x%x), status: %s", esp_zb_zdo_signal_to_string(sig_type), sig_type,
-                 esp_err_to_name(err_status));
-        break;
-    }
-}
-```
-
-Let's go through the different cases and their functionalities:
-
-1. `ESP_ZB_ZDO_SIGNAL_SKIP_STARTUP`:
-   - This signal indicates that the Zigbee stack initialization should be skipped.
-   - It logs a message indicating the initialization of the Zigbee stack.
-   - It starts the top-level commissioning process with the mode set to `ESP_ZB_BDB_MODE_INITIALIZATION`.
-
-2. `ESP_ZB_BDB_SIGNAL_DEVICE_FIRST_START` and `ESP_ZB_BDB_SIGNAL_DEVICE_REBOOT`:
-   - These signals indicate that the device has started up for the first time or has rebooted.
-   - If the error status is `ESP_OK`, it logs messages about the deferred driver initialization status and whether the device started up in factory-reset mode or not.
-   - If the device is in factory-new mode, it starts the network formation process by calling `esp_zb_bdb_start_top_level_commissioning` with the mode set to `ESP_ZB_BDB_MODE_NETWORK_FORMATION`.
-   - If the device is not in factory-new mode, it logs a message indicating that the device has rebooted.
-   - If the error status is not `ESP_OK`, it logs an error message.
-
-3. `ESP_ZB_BDB_SIGNAL_FORMATION`:
-   - This signal indicates the status of the network formation process.
-   - If the error status is `ESP_OK`, it retrieves the extended PAN ID, logs information about the formed network (PAN ID, channel, short address), and starts the network steering process by calling `esp_zb_bdb_start_top_level_commissioning` with the mode set to `ESP_ZB_BDB_MODE_NETWORK_STEERING`.
-   - If the error status is not `ESP_OK`, it logs a message to restart the network formation and schedules an alarm to call `bdb_start_top_level_commissioning_cb` after a delay of 1000 milliseconds.
-
-4. `ESP_ZB_BDB_SIGNAL_STEERING`:
-   - This signal indicates the status of the network steering process.
-   - If the error status is `ESP_OK`, it logs a message indicating that network steering has started.
-
-5. `ESP_ZB_ZDO_SIGNAL_DEVICE_ANNCE`:
-   - This signal is triggered when a new device is commissioned or rejoins the network.
-   - It retrieves the device announcement parameters and logs a message with the short address of the new device.
-   - It prepares a match descriptor request (`esp_zb_zdo_match_desc_req_param_t`) with the destination and address of interest set to the new device's short address.
-   - It calls `esp_zb_zdo_find_color_dimmable_light` to find a color dimmable light device and specifies `user_find_cb` as the callback function.
-
-6. `ESP_ZB_NWK_SIGNAL_PERMIT_JOIN_STATUS`:
-   - This signal indicates the status of the network's permit join state.
-   - If the error status is `ESP_OK`, it logs a message indicating whether the network is open for joining and the duration for which it is open. If the network is closed, it logs a warning message.
-
-7. Default case:
-   - For any other signal types, it logs a general message with the signal type and error status.
-
-Overall, this code handles various Zigbee-related events and performs actions such as initializing the Zigbee stack, forming a network, steering the network, handling device announcements, and finding color dimmable light devices.
-
-The rest of the example is addressing the logic for keystroke stabilisation and keystroke interrupts. If you are interested, you can read and understand it by yourself.
-
-
-## Part 4.Zigbee Light Effect
-
-This section we will connect the devices and upload the codes to two peices of XIAO ESP32C6 and see the effect.
-
-### Step 1.Hardware Connection
-
-<div class="table-center">
-	<table>
-		<tr>
-			<th>XIAO ESP32C6 connect to bulb via D9</th>
-			<th>XIAO ESP32C6 connect to switch via D0</th>
-		</tr>
-		<tr>
-			<td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32C6/img/xiaoc6_zigbee_arduino/light.jpg" style={{width:500, height:'auto'}}/></div></td>
-			<td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32C6/img/xiaoc6_zigbee_arduino/switch.jpg" style={{width:500, height:'auto'}}/></div></td>
-		</tr>
-	</table>
-</div>
-
-### Step 2.Set Arduino Serial Port to Debug Level
-
-We need to set to debug level to see serial port message from Zigbee light and switch later.
-
-<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32C6/img/xiaoc6_zigbee_arduino/1.png" style={{width:800, height:'auto'}}/></div>
-
-### Step 3.Upload Light Bulb Codes
-
-```cpp
-
+```cpp title=Zigbee_On_Off_Light.ino showLineNumbers
 #ifndef ZIGBEE_MODE_ED
 #error "Zigbee end device mode is not selected in Tools->Zigbee mode"
 #endif
 
-#include "esp_zigbee_core.h"
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "ha/esp_zigbee_ha_standard.h"
+#include "Zigbee.h"
 
-#define LED_PIN D10
+#define LED_PIN               LED_BUILTIN
+#define BUTTON_PIN            9  // ESP32-C6/H2 Boot button
+#define ZIGBEE_LIGHT_ENDPOINT 10
 
-/* Default End Device config */
-#define ESP_ZB_ZED_CONFIG()                                     \
-    {                                                           \
-        .esp_zb_role = ESP_ZB_DEVICE_TYPE_ED,                   \
-        .install_code_policy = INSTALLCODE_POLICY_ENABLE,       \
-        .nwk_cfg = {                                            \
-            .zed_cfg = {                                        \
-                .ed_timeout = ED_AGING_TIMEOUT,                 \
-                .keep_alive = ED_KEEP_ALIVE,                    \
-            },                                                  \
-        },                                                      \
-    }
+ZigbeeLight zbLight = ZigbeeLight(ZIGBEE_LIGHT_ENDPOINT);
 
-#define ESP_ZB_DEFAULT_RADIO_CONFIG()                           \
-    {                                                           \
-        .radio_mode = ZB_RADIO_MODE_NATIVE,                        \
-    }
-
-#define ESP_ZB_DEFAULT_HOST_CONFIG()                            \
-    {                                                           \
-        .host_connection_mode = ZB_HOST_CONNECTION_MODE_NONE,      \
-    }
-
-/* Zigbee configuration */
-#define INSTALLCODE_POLICY_ENABLE       false    /* enable the install code policy for security */
-#define ED_AGING_TIMEOUT                ESP_ZB_ED_AGING_TIMEOUT_64MIN
-#define ED_KEEP_ALIVE                   3000    /* 3000 millisecond */
-#define HA_ESP_LIGHT_ENDPOINT           10    /* esp light bulb device endpoint, used to process light controlling commands */
-#define ESP_ZB_PRIMARY_CHANNEL_MASK     ESP_ZB_TRANSCEIVER_ALL_CHANNELS_MASK  /* Zigbee primary channel mask use in the example */
-
-/********************* Zigbee functions **************************/
-static void bdb_start_top_level_commissioning_cb(uint8_t mode_mask)
-{
-    ESP_ERROR_CHECK(esp_zb_bdb_start_top_level_commissioning(mode_mask));
-}
-
-void esp_zb_app_signal_handler(esp_zb_app_signal_t *signal_struct)
-{
-    uint32_t *p_sg_p       = signal_struct->p_app_signal;
-    esp_err_t err_status = signal_struct->esp_err_status;
-    esp_zb_app_signal_type_t sig_type = (esp_zb_app_signal_type_t)*p_sg_p;
-    switch (sig_type) {
-    case ESP_ZB_ZDO_SIGNAL_SKIP_STARTUP:
-        log_i("Zigbee stack initialized");
-        esp_zb_bdb_start_top_level_commissioning(ESP_ZB_BDB_MODE_INITIALIZATION);
-        break;
-    case ESP_ZB_BDB_SIGNAL_DEVICE_FIRST_START:
-    case ESP_ZB_BDB_SIGNAL_DEVICE_REBOOT:
-        if (err_status == ESP_OK) {
-            log_i("Start network steering");
-            esp_zb_bdb_start_top_level_commissioning(ESP_ZB_BDB_MODE_NETWORK_STEERING);
-        } else {
-            /* commissioning failed */
-            log_w("Failed to initialize Zigbee stack (status: %s)", esp_err_to_name(err_status));
-        }
-        break;
-    case ESP_ZB_BDB_SIGNAL_STEERING:
-        if (err_status == ESP_OK) {
-            esp_zb_ieee_addr_t extended_pan_id;
-            esp_zb_get_extended_pan_id(extended_pan_id);
-            log_i("Joined network successfully (Extended PAN ID: %02x:%02x:%02x:%02x:%02x:%02x:%02x:%02x, PAN ID: 0x%04hx, Channel:%d, Short Address: 0x%04hx)",
-                     extended_pan_id[7], extended_pan_id[6], extended_pan_id[5], extended_pan_id[4],
-                     extended_pan_id[3], extended_pan_id[2], extended_pan_id[1], extended_pan_id[0],
-                     esp_zb_get_pan_id(), esp_zb_get_current_channel(), esp_zb_get_short_address());
-        } else {
-            log_i("Network steering was not successful (status: %s)", esp_err_to_name(err_status));
-            esp_zb_scheduler_alarm((esp_zb_callback_t)bdb_start_top_level_commissioning_cb, ESP_ZB_BDB_MODE_NETWORK_STEERING, 1000);
-        }
-        break;
-    default:
-        log_i("ZDO signal: %s (0x%x), status: %s", esp_zb_zdo_signal_to_string(sig_type), sig_type,
-                 esp_err_to_name(err_status));
-        break;
-    }
-}
-
-static esp_err_t zb_action_handler(esp_zb_core_action_callback_id_t callback_id, const void *message)
-{
-    esp_err_t ret = ESP_OK;
-    switch (callback_id) {
-    case ESP_ZB_CORE_SET_ATTR_VALUE_CB_ID:
-        ret = zb_attribute_handler((esp_zb_zcl_set_attr_value_message_t *)message);
-        break;
-    default:
-        log_w("Receive Zigbee action(0x%x) callback", callback_id);
-        break;
-    }
-    return ret;
-}
-
-static void esp_zb_task(void *pvParameters)
-{
-    esp_zb_cfg_t zb_nwk_cfg = ESP_ZB_ZED_CONFIG();
-    esp_zb_init(&zb_nwk_cfg);
-    esp_zb_on_off_light_cfg_t light_cfg = ESP_ZB_DEFAULT_ON_OFF_LIGHT_CONFIG();
-    esp_zb_ep_list_t *esp_zb_on_off_light_ep = esp_zb_on_off_light_ep_create(HA_ESP_LIGHT_ENDPOINT, &light_cfg);
-    esp_zb_device_register(esp_zb_on_off_light_ep);
-    esp_zb_core_action_handler_register(zb_action_handler);
-    esp_zb_set_primary_network_channel_set(ESP_ZB_PRIMARY_CHANNEL_MASK);
-
-    //Erase NVRAM before creating connection to new Coordinator
-    //esp_zb_nvram_erase_at_start(true); //Comment out this line to erase NVRAM data if you are conneting to new Coordinator
-
-    ESP_ERROR_CHECK(esp_zb_start(false));
-    esp_zb_main_loop_iteration();
-}
-
-/* Handle the light attribute */
-
-static esp_err_t zb_attribute_handler(const esp_zb_zcl_set_attr_value_message_t *message)
-{
-    esp_err_t ret = ESP_OK;
-    bool light_state = 0;
-
-    if(!message){
-      log_e("Empty message");
-    }
-    if(message->info.status != ESP_ZB_ZCL_STATUS_SUCCESS){
-      log_e("Received message: error status(%d)", message->info.status);
-    }
-
-    log_i("Received message: endpoint(%d), cluster(0x%x), attribute(0x%x), data size(%d)", message->info.dst_endpoint, message->info.cluster,
-             message->attribute.id, message->attribute.data.size);
-    if (message->info.dst_endpoint == HA_ESP_LIGHT_ENDPOINT) {
-        if (message->info.cluster == ESP_ZB_ZCL_CLUSTER_ID_ON_OFF) {
-            if (message->attribute.id == ESP_ZB_ZCL_ATTR_ON_OFF_ON_OFF_ID && message->attribute.data.type == ESP_ZB_ZCL_ATTR_TYPE_BOOL) {
-                light_state = message->attribute.data.value ? *(bool *)message->attribute.data.value : light_state;
-                log_i("Light sets to %s", light_state ? "On" : "Off");
-                // Here is the code to turn on/off your LED
-                if(light_state == 1){
-                  digitalWrite(LED_PIN, HIGH);
-                }else{
-                  digitalWrite(LED_PIN, LOW);
-                }
-
-            }
-        }
-    }
-    return ret;
+/********************* RGB LED functions **************************/
+void setLED(bool value) {
+  digitalWrite(LED_PIN, value);
 }
 
 /********************* Arduino functions **************************/
 void setup() {
-    // Init Zigbee
-    esp_zb_platform_config_t config = {
-        .radio_config = ESP_ZB_DEFAULT_RADIO_CONFIG(),
-        .host_config = ESP_ZB_DEFAULT_HOST_CONFIG(),
-    };
-    ESP_ERROR_CHECK(esp_zb_platform_config(&config));
+  // Init LED and turn it OFF (if LED_PIN == RGB_BUILTIN, the rgbLedWrite() will be used under the hood)
+  pinMode(LED_PIN, OUTPUT);
+  digitalWrite(LED_PIN, LOW);
 
-    // initialize LED pin
-    pinMode(LED_PIN, OUTPUT);
-    
-    // turn off LED
-    digitalWrite(LED_PIN, LOW);
+  // Init button for factory reset
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
 
-    // Start Zigbee task
-    xTaskCreate(esp_zb_task, "Zigbee_main", 4096, NULL, 5, NULL);
+  //Optional: set Zigbee device name and model
+  zbLight.setManufacturerAndModel("Espressif", "ZBLightBulb");
+
+  // Set callback function for light change
+  zbLight.onLightChange(setLED);
+
+  //Add endpoint to Zigbee Core
+  log_d("Adding ZigbeeLight endpoint to Zigbee Core");
+  Zigbee.addEndpoint(&zbLight);
+
+  // When all EPs are registered, start Zigbee. By default acts as ZIGBEE_END_DEVICE
+  log_d("Calling Zigbee.begin()");
+  Zigbee.begin();
 }
 
 void loop() {
-    //empty, zigbee running in task
+  // Checking button for factory reset
+  if (digitalRead(BUTTON_PIN) == LOW) {  // Push button pressed
+    // Key debounce handling
+    delay(100);
+    int startTime = millis();
+    while (digitalRead(BUTTON_PIN) == LOW) {
+      delay(50);
+      if ((millis() - startTime) > 3000) {
+        // If key pressed for more than 3secs, factory reset Zigbee and reboot
+        Serial.printf("Resetting Zigbee to factory settings, reboot.\n");
+        Zigbee.factoryReset();
+      }
+    }
+  }
+  delay(100);
 }
 ```
 
-### Step 4.Upload Light Switch Codes
+#### Zigbee Light Switch
+
+Here, the XIAO ESP32C6 serves as the **Zigbee Coordinator**, responsible for controlling other Zigbee devices. Here, the **Zigbee Switch** represents the controller, which binds to a Zigbee light device and controls it through commands such as toggling the light on or off.
+
+##### Include and Definitions
 
 ```cpp
+#include "Zigbee.h"
 
+#define SWITCH_ENDPOINT_NUMBER 5
+#define GPIO_INPUT_IO_TOGGLE_SWITCH 9
+#define PAIR_SIZE(TYPE_STR_PAIR) (sizeof(TYPE_STR_PAIR) / sizeof(TYPE_STR_PAIR[0]))
+```
+
+- `SWITCH_ENDPOINT_NUMBER` is defined as `5`. It represents the endpoint of the switch. Just like in the light bulb example, the endpoint number is used to define the specific function within a Zigbee device.
+- `GPIO_INPUT_IO_TOGGLE_SWITCH` refers to GPIO pin `9`, which acts as the switch button.
+- `PAIR_SIZE()` is a macro used to calculate the size of a given array, used here to handle button configurations.
+
+##### Switch Configuration Types and Functions
+
+The code defines several enumerations and data structures related to switch functionality:
+
+```cpp
+typedef enum {
+  SWITCH_ON_CONTROL,
+  SWITCH_OFF_CONTROL,
+  SWITCH_ONOFF_TOGGLE_CONTROL,
+  SWITCH_LEVEL_UP_CONTROL,
+  SWITCH_LEVEL_DOWN_CONTROL,
+  SWITCH_LEVEL_CYCLE_CONTROL,
+  SWITCH_COLOR_CONTROL,
+} SwitchFunction;
+
+typedef struct {
+  uint8_t pin;
+  SwitchFunction func;
+} SwitchData;
+
+typedef enum {
+  SWITCH_IDLE,
+  SWITCH_PRESS_ARMED,
+  SWITCH_PRESS_DETECTED,
+  SWITCH_PRESSED,
+  SWITCH_RELEASE_DETECTED,
+} SwitchState;
+```
+
+- **`SwitchFunction`** enumerates different functions the switch can perform, such as turning the light on, off, toggling, adjusting brightness, etc.
+- **`SwitchData`** is a struct that pairs a GPIO pin with a specific function, which allows for better organization when adding multiple buttons with different functionalities.
+- **`SwitchState`** represents different states of the switch during user interaction (e.g., idle, pressed, released).
+
+##### Instantiating the Zigbee Switch
+
+```cpp
+static SwitchData buttonFunctionPair[] = {{GPIO_INPUT_IO_TOGGLE_SWITCH, SWITCH_ONOFF_TOGGLE_CONTROL}};
+ZigbeeSwitch zbSwitch = ZigbeeSwitch(SWITCH_ENDPOINT_NUMBER);
+```
+
+- **`buttonFunctionPair`** is an array defining the functions of the buttons. Here, the button connected to `GPIO 9` will be used for toggling the light on or off.
+- **`zbSwitch`** creates an instance of `ZigbeeSwitch`, with endpoint number `5`.
+
+##### Zigbee Functions and GPIO Interrupt Handling
+
+```cpp
+static void onZbButton(SwitchData *button_func_pair) {
+  if (button_func_pair->func == SWITCH_ONOFF_TOGGLE_CONTROL) {
+    zbSwitch.lightToggle();  // Sends a toggle command to the light.
+  }
+}
+```
+
+**`onZbButton()`** is called whenever a button is pressed. In this case, it sends a Zigbee command to toggle the light.
+
+###### Handling GPIO Events
+
+```cpp
+static void IRAM_ATTR onGpioInterrupt(void *arg) {
+  xQueueSendFromISR(gpio_evt_queue, (SwitchData *)arg, NULL);
+}
+```
+
+**`onGpioInterrupt()`** is the interrupt service routine (ISR) for handling GPIO pin interrupts. It places an event in a queue whenever the button is pressed.
+
+```cpp
+static void enableGpioInterrupt(bool enabled) {
+  for (int i = 0; i < PAIR_SIZE(buttonFunctionPair); ++i) {
+    if (enabled) {
+      enableInterrupt((buttonFunctionPair[i]).pin);
+    } else {
+      disableInterrupt((buttonFunctionPair[i]).pin);
+    }
+  }
+}
+```
+
+**`enableGpioInterrupt()`** enables or disables the GPIO interrupt, depending on whether the parameter `enabled` is `true` or `false`.
+
+##### Setup Function
+
+```cpp
+void setup() {
+  Serial.begin(115200);
+  while (!Serial) {
+    delay(10);
+  }
+
+  zbSwitch.setManufacturerAndModel("Espressif", "ZigbeeSwitch");
+  zbSwitch.allowMultipleBinding(true);
+
+  Zigbee.addEndpoint(&zbSwitch);
+  Zigbee.setRebootOpenNetwork(180);
+
+  for (int i = 0; i < PAIR_SIZE(buttonFunctionPair); i++) {
+    pinMode(buttonFunctionPair[i].pin, INPUT_PULLUP);
+    gpio_evt_queue = xQueueCreate(10, sizeof(SwitchData));
+    if (gpio_evt_queue == 0) {
+      log_e("Queue was not created and must not be used");
+      while (1);
+    }
+    attachInterruptArg(buttonFunctionPair[i].pin, onGpioInterrupt, (void *)(buttonFunctionPair + i), FALLING);
+  }
+
+  Zigbee.begin(ZIGBEE_COORDINATOR);
+
+  Serial.println("Waiting for Light to bound to the switch");
+  while (!zbSwitch.isBound()) {
+    Serial.printf(".");
+    delay(500);
+  }
+
+  std::list<zb_device_params_t *> boundLights = zbSwitch.getBoundDevices();
+  for (const auto &device : boundLights) {
+    Serial.printf("Device on endpoint %d, short address: 0x%x\n", device->endpoint, device->short_addr);
+    Serial.printf(
+      "IEEE Address: %02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X\n", device->ieee_addr[0], device->ieee_addr[1], device->ieee_addr[2], device->ieee_addr[3],
+      device->ieee_addr[4], device->ieee_addr[5], device->ieee_addr[6], device->ieee_addr[7]
+    );
+    Serial.printf("Light manufacturer: %s", zbSwitch.readManufacturer(device->endpoint, device->short_addr));
+    Serial.printf("Light model: %s", zbSwitch.readModel(device->endpoint, device->short_addr));
+  }
+  Serial.println();
+}
+```
+
+- **Serial Communication Initialization**: Initializes serial for debugging.
+- **Device Information**: Sets manufacturer and model, allows multiple devices to bind, and adds an endpoint to Zigbee core.
+- **Network Initialization**: Opens the Zigbee network for `180` seconds after reboot to allow devices to join.
+- **Button Initialization**: Sets up GPIO pins for the buttons, creates a queue to handle GPIO interrupts, and attaches interrupts to the buttons.
+- **Wait for Binding**: The coordinator waits until it binds to a light device before proceeding. Once bound, it prints the bound device information.
+
+##### Loop Function
+
+```cpp
+void loop() {
+  uint8_t pin = 0;
+  SwitchData buttonSwitch;
+  static SwitchState buttonState = SWITCH_IDLE;
+  bool eventFlag = false;
+
+  if (xQueueReceive(gpio_evt_queue, &buttonSwitch, portMAX_DELAY)) {
+    pin = buttonSwitch.pin;
+    enableGpioInterrupt(false);
+    eventFlag = true;
+  }
+  while (eventFlag) {
+    bool value = digitalRead(pin);
+    switch (buttonState) {
+      case SWITCH_IDLE:           buttonState = (value == LOW) ? SWITCH_PRESS_DETECTED : SWITCH_IDLE; break;
+      case SWITCH_PRESS_DETECTED: buttonState = (value == LOW) ? SWITCH_PRESS_DETECTED : SWITCH_RELEASE_DETECTED; break;
+      case SWITCH_RELEASE_DETECTED:
+        buttonState = SWITCH_IDLE;
+        (*onZbButton)(&buttonSwitch);
+        break;
+      default: break;
+    }
+    if (buttonState == SWITCH_IDLE) {
+      enableGpioInterrupt(true);
+      eventFlag = false;
+      break;
+    }
+    vTaskDelay(10 / portTICK_PERIOD_MS);
+  }
+
+  static uint32_t lastPrint = 0;
+  if (millis() - lastPrint > 10000) {
+    lastPrint = millis();
+    zbSwitch.printBoundDevices();
+  }
+}
+```
+
+- The **loop function** manages button presses by reading from the interrupt queue (`gpio_evt_queue`) and updating the `buttonState` accordingly.
+- When the button is pressed and released (`SWITCH_RELEASE_DETECTED`), the `onZbButton()` callback is invoked to toggle the light.
+- Every **10 seconds**, the bound lights are printed for monitoring purposes.
+
+```cpp title=Zigbee_On_Off_Switch.ino showLineNumbers
 #ifndef ZIGBEE_MODE_ZCZR
 #error "Zigbee coordinator mode is not selected in Tools->Zigbee mode"
 #endif
 
-#include "esp_zigbee_core.h"
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "ha/esp_zigbee_ha_standard.h"
+#include "Zigbee.h"
+
+#define SWITCH_ENDPOINT_NUMBER 5
 
 /* Switch configuration */
-#define GPIO_INPUT_IO_TOGGLE_SWITCH  GPIO_NUM_9
-#define PAIR_SIZE(TYPE_STR_PAIR) (sizeof(TYPE_STR_PAIR) / sizeof(TYPE_STR_PAIR[0]))
+#define GPIO_INPUT_IO_TOGGLE_SWITCH 9
+#define PAIR_SIZE(TYPE_STR_PAIR)    (sizeof(TYPE_STR_PAIR) / sizeof(TYPE_STR_PAIR[0]))
 
 typedef enum {
-    SWITCH_ON_CONTROL,
-    SWITCH_OFF_CONTROL,
-    SWITCH_ONOFF_TOGGLE_CONTROL,
-    SWITCH_LEVEL_UP_CONTROL,
-    SWITCH_LEVEL_DOWN_CONTROL,
-    SWITCH_LEVEL_CYCLE_CONTROL,
-    SWITCH_COLOR_CONTROL,
-} switch_func_t;
+  SWITCH_ON_CONTROL,
+  SWITCH_OFF_CONTROL,
+  SWITCH_ONOFF_TOGGLE_CONTROL,
+  SWITCH_LEVEL_UP_CONTROL,
+  SWITCH_LEVEL_DOWN_CONTROL,
+  SWITCH_LEVEL_CYCLE_CONTROL,
+  SWITCH_COLOR_CONTROL,
+} SwitchFunction;
 
 typedef struct {
-    uint8_t pin;
-    switch_func_t func;
-} switch_func_pair_t;
+  uint8_t pin;
+  SwitchFunction func;
+} SwitchData;
 
 typedef enum {
-    SWITCH_IDLE,
-    SWITCH_PRESS_ARMED,
-    SWITCH_PRESS_DETECTED,
-    SWITCH_PRESSED,
-    SWITCH_RELEASE_DETECTED,
-} switch_state_t;
+  SWITCH_IDLE,
+  SWITCH_PRESS_ARMED,
+  SWITCH_PRESS_DETECTED,
+  SWITCH_PRESSED,
+  SWITCH_RELEASE_DETECTED,
+} SwitchState;
 
-static switch_func_pair_t button_func_pair[] = {
-    {GPIO_INPUT_IO_TOGGLE_SWITCH, SWITCH_ONOFF_TOGGLE_CONTROL}
-};
+static SwitchData buttonFunctionPair[] = {{GPIO_INPUT_IO_TOGGLE_SWITCH, SWITCH_ONOFF_TOGGLE_CONTROL}};
 
-/* Default Coordinator config */
-#define ESP_ZB_ZC_CONFIG()                                      \
-    {                                                           \
-        .esp_zb_role = ESP_ZB_DEVICE_TYPE_COORDINATOR,          \
-        .install_code_policy = INSTALLCODE_POLICY_ENABLE,       \
-        .nwk_cfg = {                                            \
-            .zczr_cfg = {                                       \
-                .max_children = MAX_CHILDREN,                   \
-            },                                                  \
-        }                                                       \
-    }
+ZigbeeSwitch zbSwitch = ZigbeeSwitch(SWITCH_ENDPOINT_NUMBER);
 
-#define ESP_ZB_DEFAULT_RADIO_CONFIG()                           \
-    {                                                           \
-        .radio_mode = ZB_RADIO_MODE_NATIVE,                        \
-    }
-
-#define ESP_ZB_DEFAULT_HOST_CONFIG()                            \
-    {                                                           \
-        .host_connection_mode = ZB_HOST_CONNECTION_MODE_NONE,      \
-    }
-
-typedef struct light_bulb_device_params_s {
-    esp_zb_ieee_addr_t ieee_addr;
-    uint8_t  endpoint;
-    uint16_t short_addr;
-} light_bulb_device_params_t;
-
-/* Zigbee configuration */
-#define MAX_CHILDREN                    10          /* the max amount of connected devices */
-#define INSTALLCODE_POLICY_ENABLE       false    /* enable the install code policy for security */
-#define HA_ONOFF_SWITCH_ENDPOINT        1          /* esp light switch device endpoint */
-#define ESP_ZB_PRIMARY_CHANNEL_MASK     ESP_ZB_TRANSCEIVER_ALL_CHANNELS_MASK  /* Zigbee primary channel mask use in the example */
-
-/********************* Define functions **************************/
-static void esp_zb_buttons_handler(switch_func_pair_t *button_func_pair)
-{
-    if (button_func_pair->func == SWITCH_ONOFF_TOGGLE_CONTROL) {
-        /* implemented light switch toggle functionality */
-        esp_zb_zcl_on_off_cmd_t cmd_req;
-        cmd_req.zcl_basic_cmd.src_endpoint = HA_ONOFF_SWITCH_ENDPOINT;
-        cmd_req.address_mode = ESP_ZB_APS_ADDR_MODE_DST_ADDR_ENDP_NOT_PRESENT;
-        cmd_req.on_off_cmd_id = ESP_ZB_ZCL_CMD_ON_OFF_TOGGLE_ID;
-        log_i("Send 'on_off toggle' command");
-        esp_zb_zcl_on_off_cmd_req(&cmd_req);
-    }
-}
-
-static void bdb_start_top_level_commissioning_cb(uint8_t mode_mask)
-{
-    ESP_ERROR_CHECK(esp_zb_bdb_start_top_level_commissioning(mode_mask));
-}
-
-static void bind_cb(esp_zb_zdp_status_t zdo_status, void *user_ctx)
-{
-    if (zdo_status == ESP_ZB_ZDP_STATUS_SUCCESS) {
-        log_i("Bound successfully!");
-        if (user_ctx) {
-            light_bulb_device_params_t *light = (light_bulb_device_params_t *)user_ctx;
-            log_i("The light originating from address(0x%x) on endpoint(%d)", light->short_addr, light->endpoint);
-            free(light);
-        }
-    }
-}
-
-static void user_find_cb(esp_zb_zdp_status_t zdo_status, uint16_t addr, uint8_t endpoint, void *user_ctx)
-{
-    if (zdo_status == ESP_ZB_ZDP_STATUS_SUCCESS) {
-        log_i("Found light");
-        esp_zb_zdo_bind_req_param_t bind_req;
-        light_bulb_device_params_t *light = (light_bulb_device_params_t *)malloc(sizeof(light_bulb_device_params_t));
-        light->endpoint = endpoint;
-        light->short_addr = addr;
-        esp_zb_ieee_address_by_short(light->short_addr, light->ieee_addr);
-        esp_zb_get_long_address(bind_req.src_address);
-        bind_req.src_endp = HA_ONOFF_SWITCH_ENDPOINT;
-        bind_req.cluster_id = ESP_ZB_ZCL_CLUSTER_ID_ON_OFF;
-        bind_req.dst_addr_mode = ESP_ZB_ZDO_BIND_DST_ADDR_MODE_64_BIT_EXTENDED;
-        memcpy(bind_req.dst_address_u.addr_long, light->ieee_addr, sizeof(esp_zb_ieee_addr_t));
-        bind_req.dst_endp = endpoint;
-        bind_req.req_dst_addr = esp_zb_get_short_address();
-        log_i("Try to bind On/Off");
-        esp_zb_zdo_device_bind_req(&bind_req, bind_cb, (void *)light);
-    }
-}
-
-void esp_zb_app_signal_handler(esp_zb_app_signal_t *signal_struct)
-{
-    uint32_t *p_sg_p       = signal_struct->p_app_signal;
-    esp_err_t err_status = signal_struct->esp_err_status;
-    esp_zb_app_signal_type_t sig_type = (esp_zb_app_signal_type_t)*p_sg_p;
-    esp_zb_zdo_signal_device_annce_params_t *dev_annce_params = NULL;
-    switch (sig_type) {
-    case ESP_ZB_ZDO_SIGNAL_SKIP_STARTUP:
-        log_i("Zigbee stack initialized");
-        esp_zb_bdb_start_top_level_commissioning(ESP_ZB_BDB_MODE_INITIALIZATION);
-        break;
-    case ESP_ZB_BDB_SIGNAL_DEVICE_FIRST_START:
-    case ESP_ZB_BDB_SIGNAL_DEVICE_REBOOT:
-        if (err_status == ESP_OK) {
-            log_i("Start network formation");
-            esp_zb_bdb_start_top_level_commissioning(ESP_ZB_BDB_MODE_NETWORK_FORMATION);
-        } else {
-            log_e("Failed to initialize Zigbee stack (status: %s)", esp_err_to_name(err_status));
-        }
-        break;
-    case ESP_ZB_BDB_SIGNAL_FORMATION:
-        if (err_status == ESP_OK) {
-            esp_zb_ieee_addr_t extended_pan_id;
-            esp_zb_get_extended_pan_id(extended_pan_id);
-            log_i("Formed network successfully (Extended PAN ID: %02x:%02x:%02x:%02x:%02x:%02x:%02x:%02x, PAN ID: 0x%04hx, Channel:%d, Short Address: 0x%04hx)",
-                     extended_pan_id[7], extended_pan_id[6], extended_pan_id[5], extended_pan_id[4],
-                     extended_pan_id[3], extended_pan_id[2], extended_pan_id[1], extended_pan_id[0],
-                     esp_zb_get_pan_id(), esp_zb_get_current_channel(), esp_zb_get_short_address());
-            esp_zb_bdb_start_top_level_commissioning(ESP_ZB_BDB_MODE_NETWORK_STEERING);
-        } else {
-            log_i("Restart network formation (status: %s)", esp_err_to_name(err_status));
-            esp_zb_scheduler_alarm((esp_zb_callback_t)bdb_start_top_level_commissioning_cb, ESP_ZB_BDB_MODE_NETWORK_FORMATION, 1000);
-        }
-        break;
-    case ESP_ZB_BDB_SIGNAL_STEERING:
-        if (err_status == ESP_OK) {
-            log_i("Network steering started");
-        }
-        break;
-    case ESP_ZB_ZDO_SIGNAL_DEVICE_ANNCE:
-        dev_annce_params = (esp_zb_zdo_signal_device_annce_params_t *)esp_zb_app_signal_get_params(p_sg_p);
-        log_i("New device commissioned or rejoined (short: 0x%04hx)", dev_annce_params->device_short_addr);
-        esp_zb_zdo_match_desc_req_param_t  cmd_req;
-        cmd_req.dst_nwk_addr = dev_annce_params->device_short_addr;
-        cmd_req.addr_of_interest = dev_annce_params->device_short_addr;
-        esp_zb_zdo_find_on_off_light(&cmd_req, user_find_cb, NULL);
-        break;
-    default:
-        log_i("ZDO signal: %s (0x%x), status: %s", esp_zb_zdo_signal_to_string(sig_type), sig_type,
-                 esp_err_to_name(err_status));
-        break;
-    }
-}
-
-static void esp_zb_task(void *pvParameters)
-{
-    esp_zb_cfg_t zb_nwk_cfg = ESP_ZB_ZC_CONFIG();
-    esp_zb_init(&zb_nwk_cfg);
-    esp_zb_on_off_switch_cfg_t switch_cfg = ESP_ZB_DEFAULT_ON_OFF_SWITCH_CONFIG();
-    esp_zb_ep_list_t *esp_zb_on_off_switch_ep = esp_zb_on_off_switch_ep_create(HA_ONOFF_SWITCH_ENDPOINT, &switch_cfg);
-    esp_zb_device_register(esp_zb_on_off_switch_ep);
-    esp_zb_set_primary_network_channel_set(ESP_ZB_PRIMARY_CHANNEL_MASK);
-    ESP_ERROR_CHECK(esp_zb_start(false));
-    esp_zb_main_loop_iteration();
+/********************* Zigbee functions **************************/
+static void onZbButton(SwitchData *button_func_pair) {
+  if (button_func_pair->func == SWITCH_ONOFF_TOGGLE_CONTROL) {
+    // Send toggle command to the light
+    zbSwitch.lightToggle();
+  }
 }
 
 /********************* GPIO functions **************************/
 static QueueHandle_t gpio_evt_queue = NULL;
 
-static void IRAM_ATTR gpio_isr_handler(void *arg)
-{
-    xQueueSendFromISR(gpio_evt_queue, (switch_func_pair_t *)arg, NULL);
+static void IRAM_ATTR onGpioInterrupt(void *arg) {
+  xQueueSendFromISR(gpio_evt_queue, (SwitchData *)arg, NULL);
 }
 
-static void switch_gpios_intr_enabled(bool enabled)
-{
-    for (int i = 0; i < PAIR_SIZE(button_func_pair); ++i) {
-        if (enabled) {
-            enableInterrupt((button_func_pair[i]).pin);
-        } else {
-            disableInterrupt((button_func_pair[i]).pin);
-        }
+static void enableGpioInterrupt(bool enabled) {
+  for (int i = 0; i < PAIR_SIZE(buttonFunctionPair); ++i) {
+    if (enabled) {
+      enableInterrupt((buttonFunctionPair[i]).pin);
+    } else {
+      disableInterrupt((buttonFunctionPair[i]).pin);
     }
+  }
 }
 
 /********************* Arduino functions **************************/
 void setup() {
-    // Init Zigbee
-    esp_zb_platform_config_t config = {
-        .radio_config = ESP_ZB_DEFAULT_RADIO_CONFIG(),
-        .host_config = ESP_ZB_DEFAULT_HOST_CONFIG(),
-    };
 
-    ESP_ERROR_CHECK(esp_zb_platform_config(&config));
+  Serial.begin(115200);
+  while (!Serial) {
+    delay(10);
+  }
 
-    // Init button switch 
-    for (int i = 0; i < PAIR_SIZE(button_func_pair); i++) {
-        pinMode(button_func_pair[i].pin, INPUT_PULLUP);
-        /* create a queue to handle gpio event from isr */
-        gpio_evt_queue = xQueueCreate(10, sizeof(switch_func_pair_t));
-        if ( gpio_evt_queue == 0) {
-            log_e("Queue was not created and must not be used");
-            while(1);
-        }
-        attachInterruptArg(button_func_pair[i].pin, gpio_isr_handler, (void *) (button_func_pair + i), FALLING);
+  //Optional: set Zigbee device name and model
+  zbSwitch.setManufacturerAndModel("Espressif", "ZigbeeSwitch");
+
+  //Optional to allow multiple light to bind to the switch
+  zbSwitch.allowMultipleBinding(true);
+
+  //Add endpoint to Zigbee Core
+  log_d("Adding ZigbeeSwitch endpoint to Zigbee Core");
+  Zigbee.addEndpoint(&zbSwitch);
+
+  //Open network for 180 seconds after boot
+  Zigbee.setRebootOpenNetwork(180);
+
+  // Init button switch
+  for (int i = 0; i < PAIR_SIZE(buttonFunctionPair); i++) {
+    pinMode(buttonFunctionPair[i].pin, INPUT_PULLUP);
+    /* create a queue to handle gpio event from isr */
+    gpio_evt_queue = xQueueCreate(10, sizeof(SwitchData));
+    if (gpio_evt_queue == 0) {
+      log_e("Queue was not created and must not be used");
+      while (1);
     }
+    attachInterruptArg(buttonFunctionPair[i].pin, onGpioInterrupt, (void *)(buttonFunctionPair + i), FALLING);
+  }
 
-    // Start Zigbee task
-    xTaskCreate(esp_zb_task, "Zigbee_main", 4096, NULL, 5, NULL);
+  // When all EPs are registered, start Zigbee with ZIGBEE_COORDINATOR mode
+  log_d("Calling Zigbee.begin()");
+  Zigbee.begin(ZIGBEE_COORDINATOR);
+
+  Serial.println("Waiting for Light to bound to the switch");
+  //Wait for switch to bound to a light:
+  while (!zbSwitch.isBound()) {
+    Serial.printf(".");
+    delay(500);
+  }
+
+  // Optional: read manufacturer and model name from the bound light
+  std::list<zb_device_params_t *> boundLights = zbSwitch.getBoundDevices();
+  //List all bound lights
+  for (const auto &device : boundLights) {
+    Serial.printf("Device on endpoint %d, short address: 0x%x\n", device->endpoint, device->short_addr);
+    Serial.printf(
+      "IEEE Address: %02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X\n", device->ieee_addr[0], device->ieee_addr[1], device->ieee_addr[2], device->ieee_addr[3],
+      device->ieee_addr[4], device->ieee_addr[5], device->ieee_addr[6], device->ieee_addr[7]
+    );
+    Serial.printf("Light manufacturer: %s", zbSwitch.readManufacturer(device->endpoint, device->short_addr));
+    Serial.printf("Light model: %s", zbSwitch.readModel(device->endpoint, device->short_addr));
+  }
+
+  Serial.println();
 }
 
 void loop() {
-    // Handle button switch in loop()
-    uint8_t pin = 0;
-    switch_func_pair_t button_func_pair;
-    static switch_state_t switch_state = SWITCH_IDLE;
-    bool evt_flag = false;
+  // Handle button switch in loop()
+  uint8_t pin = 0;
+  SwitchData buttonSwitch;
+  static SwitchState buttonState = SWITCH_IDLE;
+  bool eventFlag = false;
 
-    /* check if there is any queue received, if yes read out the button_func_pair */
-    if (xQueueReceive(gpio_evt_queue, &button_func_pair, portMAX_DELAY)) {
-        pin =  button_func_pair.pin;
-        switch_gpios_intr_enabled(false);
-        evt_flag = true;
+  /* check if there is any queue received, if yes read out the buttonSwitch */
+  if (xQueueReceive(gpio_evt_queue, &buttonSwitch, portMAX_DELAY)) {
+    pin = buttonSwitch.pin;
+    enableGpioInterrupt(false);
+    eventFlag = true;
+  }
+  while (eventFlag) {
+    bool value = digitalRead(pin);
+    switch (buttonState) {
+      case SWITCH_IDLE:           buttonState = (value == LOW) ? SWITCH_PRESS_DETECTED : SWITCH_IDLE; break;
+      case SWITCH_PRESS_DETECTED: buttonState = (value == LOW) ? SWITCH_PRESS_DETECTED : SWITCH_RELEASE_DETECTED; break;
+      case SWITCH_RELEASE_DETECTED:
+        buttonState = SWITCH_IDLE;
+        /* callback to button_handler */
+        (*onZbButton)(&buttonSwitch);
+        break;
+      default: break;
     }
-    while (evt_flag) {
-        bool value = digitalRead(pin);
-        switch (switch_state) {
-        case SWITCH_IDLE:
-            switch_state = (value == LOW) ? SWITCH_PRESS_DETECTED : SWITCH_IDLE;
-            break;
-        case SWITCH_PRESS_DETECTED:
-            switch_state = (value == LOW) ? SWITCH_PRESS_DETECTED : SWITCH_RELEASE_DETECTED;
-            break;
-        case SWITCH_RELEASE_DETECTED:
-            switch_state = SWITCH_IDLE;
-            /* callback to button_handler */
-            (*esp_zb_buttons_handler)(&button_func_pair);
-            break;
-        default:
-            break;
-        }
-        if (switch_state == SWITCH_IDLE) {
-            switch_gpios_intr_enabled(true);
-            evt_flag = false;
-            break;
-        }
-        vTaskDelay(10 / portTICK_PERIOD_MS);
+    if (buttonState == SWITCH_IDLE) {
+      enableGpioInterrupt(true);
+      eventFlag = false;
+      break;
     }
+    vTaskDelay(10 / portTICK_PERIOD_MS);
+  }
+
+  // print the bound lights every 10 seconds
+  static uint32_t lastPrint = 0;
+  if (millis() - lastPrint > 10000) {
+    lastPrint = millis();
+    zbSwitch.printBoundDevices();
+  }
 }
 ```
 
-### Step 5.Final Effect
+#### Demonstration
 
-After upload the codes to 2 pieces of XIAO ESP32C6(light bulb and light switch), you can see some message from serial port like below image. When you click the switch, the bulb will turn on or off.
-
-:::tip
-If the message from serial port not like below image, you can click the reset button on XIAO ESP32C6 or replug to reboot it.
-:::
-
-<div class="table-center">
-	<table>
-		<tr>
-			<th>Zigbee bulb</th>
-			<th>Zigbee switch</th>
-		</tr>
-		<tr>
-			<td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32C6/img/xiaoc6_zigbee_arduino/2.png" style={{width:500, height:'auto'}}/></div></td>
-			<td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32C6/img/xiaoc6_zigbee_arduino/3.png" style={{width:500, height:'auto'}}/></div></td>
-		</tr>
-	</table>
-</div>
-
-Here is the final effect. You can use switch to control the bulb via Zigbee.
-
-<div class="table-center">
-<iframe width="800" height="500" src="https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32C6/img/xiaoc6_zigbee_arduino/video.mp4?autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-</div>
+<iframe
+  className="youtube-video-r"
+  src="https://www.youtube.com/embed/Z2NROYx7hcQ"
+  title="XIAO Zigbe Light bulb/switch Example"
+  frameBorder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  style={{ width: '380px', height: '640px' }}
+></iframe>
 
 Congratulations on successfully completing your Zigbee-controlled lighting project! There are many more exciting Zigbee applications waiting for you to explore. Keep up the great work!
+
+## Reference
+
+- [Zigbee Examples- Arduino](https://github.com/espressif/arduino-esp32/blob/master/libraries/Zigbee/examples)
+- [ESP Zigbee SDK](https://docs.espressif.com/projects/esp-zigbee-sdk/en/latest/esp32c6/introduction.html)
+- [Arduino Core for ESP32 gets a Zigbee wrapper library](https://www.cnx-software.com/2024/08/23/arduino-core-for-esp32-gets-a-zigbee-wrapper-library/)
 
 ## Tech Support & Product Discussion
 
 Thank you for choosing our products! We are here to provide you with different support to ensure that your experience with our products is as smooth as possible. We offer several communication channels to cater to different preferences and needs.
 
-<div class="table-center">
-  <div class="button_tech_support_container">
-  <a href="https://forum.seeedstudio.com/" class="button_forum"></a> 
-  <a href="https://www.seeedstudio.com/contacts" class="button_email"></a>
-  </div>
+<div class="button_tech_support_container">
+<a href="https://forum.seeedstudio.com/" class="button_forum"></a>
+<a href="https://www.seeedstudio.com/contacts" class="button_email"></a>
+</div>
 
-  <div class="button_tech_support_container">
-  <a href="https://discord.gg/eWkprNDMU7" class="button_discord"></a> 
-  <a href="https://github.com/Seeed-Studio/wiki-documents/discussions/69" class="button_discussion"></a>
-  </div>
+<div class="button_tech_support_container">
+<a href="https://discord.gg/eWkprNDMU7" class="button_discord"></a>
+<a href="https://github.com/Seeed-Studio/wiki-documents/discussions/69" class="button_discussion"></a>
 </div>

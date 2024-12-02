@@ -79,8 +79,8 @@ sidebar_position: 0
 	</tr>
     <tr>
 	    <th>Interface</th>
-	    <td>2x UART, 2x IIC, 2x SPI, 18x Analog, 18x Digital, ALL PWM, 1x User LED, 1x Charge LED <br></br> 1x Reset button, </td>
-	    <td>2x UART, 2x IIC, 2x SPI, 18x Analog, 18x Digital, ALL PWM, 1x User LED, 1x Charge LED <br></br> 1x Reset button, </td>
+	    <td>2x UART, 1x IIC, 2x SPI, 18x Analog, 18x Digital, ALL PWM, 1x User LED, 1x Charge LED <br></br> 1x Reset button, </td>
+	    <td>2x UART, 1x IIC, 2x SPI, 18x Analog, 18x Digital, ALL PWM, 1x User LED, 1x Charge LED <br></br> 1x Reset button, </td>
 	</tr>
     <tr>
 	    <th>Dimensions</th>
@@ -97,8 +97,8 @@ sidebar_position: 0
 	</tr>
     <tr>
         <th>Low Power Consumption Model</th>
-        <td>Normal: <strong>3.7V/6.71 mA</strong> <br></br> Sleep Model: <strong>3.7V/1.91mA</strong> <br></br> Deep Sleep Model: <strong>3.7V/4.66μA</strong></td>
-        <td>Normal: <strong>3.7V/6.71 mA</strong> <br></br> Sleep Model: <strong>3.7V/1.91mA</strong> <br></br> Deep Sleep Model: <strong>3.7V/4.66μA</strong></td>
+        <td>Normal: <strong>3.7V/6.71 mA</strong> <br></br> Sleep Model: <strong>3.7V/1.91mA</strong> <br></br> Deep Sleep Model: <strong>3.7V/1.95μA</strong></td>
+        <td>Normal: <strong>3.7V/6.71 mA</strong> <br></br> Sleep Model: <strong>3.7V/1.91mA</strong> <br></br> Deep Sleep Model: <strong>3.7V/1.95μA</strong></td>
     </tr>
     <tr>
         <th>Working Temperature</th>
@@ -117,7 +117,7 @@ sidebar_position: 0
 - **Powerful security**:Powerful security features of Secure Vault, including secure boot, encryption, random number generation, tamper proof, secure debugging, etc.
 - **Ultra-small size**:
 - **Rich on-chip resources**:Maximum 1536KB Flash and 256KB RAM, with ample storage space.
-- **Rich interfaces**:Integrated with 12 bit 1Msps ADC, temperature sensor, analog comparator, DCDC and other rich peripherals, and up to 22 Pin, 2 USART, 2 low-power UART, 2 I2C and other interfaces
+- **Rich interfaces**:Integrated with 12 bit 1Msps ADC, temperature sensor, analog comparator, DCDC and other rich peripherals, and up to 22 Pin, 2 USART, 2 low-power UART, 1 IIC and other interfaces.
 
 
 
@@ -129,19 +129,19 @@ sidebar_position: 0
 	    <th>XIAO MG24 Sense indication diagram</th>
 	</tr>
 	<tr>
-	    <td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO_MG24/Getting_Start/aaa.png" style={{width:700, height:'auto'}}/></div></td>
+	    <td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO_MG24/Getting_Start/XIAO_MG24_Sense_indication_diagram.png" style={{width:700, height:'auto'}}/></div></td>
 	</tr>
   	<tr>
 	    <th>XIAO MG24 indication diagram</th>
 	</tr>
 	<tr>
-	    <td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO_MG24/Getting_Start/bbb.png" style={{width:700, height:'auto'}}/></div></td>
+	    <td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO_MG24/Getting_Start/XIAO_MG24_indication_diagram.png" style={{width:700, height:'auto'}}/></div></td>
 	</tr>
     <tr>
 	    <th>XIAO MG24/ XIAO MG24(Sense) Pin List</th>
 	</tr>
     <tr>
-	    <td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO_MG24/Getting_Start/ccc.png" style={{width:1000, height:'auto'}}/></div></td>
+	    <td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO_MG24/Getting_Start/modifyMG24.png" style={{width:1000, height:'auto'}}/></div></td>
 	</tr>
 </table>
 
@@ -489,20 +489,24 @@ void loop()
 }
 
 ```
+
+<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/XIAO_MG24/Getting_Start/100.png" style={{width:1000, height:'auto'}}/></div>
+
 ## Resources
 
 ### For Seeed Studio XIAO MG24 Sense
 
-- 📄 **[PDF]** [MG24 datasheet](https://files.seeedstudio.com/wiki/XIAO_MG24/Getting_Start/mg24-group-datasheet.PDF)
-- 📄 **[PDF]** [Seeed Studio XIAO MG24 Sense Schematic](https://files.seeedstudio.com/wiki/XIAO_MG24/Getting_Start/XIAO_MG24_SCH.pdf)
-- 📄 **[PDF]** [MG24 Wireless SoC](https://files.seeedstudio.com/wiki/XIAO_MG24/Getting_Start/efr32xg24_rm.pdf)
-- 📄 **[Kicad]** [MG24 FootOut](https://files.seeedstudio.com/wiki/XIAO_MG24/Getting_Start/XIAO_MG24_SMD.kicad_mod)
+- 📄 **[PDF]** [Seeed Studio XIAO MG24 Sense datasheet](https://files.seeedstudio.com/wiki/XIAO_MG24/Getting_Start/mg24-group-datasheet.PDF)
+- 📄 **[PDF]** [Seeed Studio XIAO MG24 Sense Schematic](https://files.seeedstudio.com/wiki/XIAO_MG24/Getting_Start/XIAO_MGM240S_KICAD_Prj.pdf)
+- 📄 **[PDF]** [Seeed Studio XIAO MG24 Sense Wireless SoC](https://files.seeedstudio.com/wiki/XIAO_MG24/Getting_Start/efr32xg24_rm.pdf)
+- 🔗 **[Kicad]** [Seeed Studio XIAO MG24 Sense FootPrint](https://github.com/Seeed-Studio/OPL_Kicad_Library/tree/master/Seeed%20Studio%20XIAO%20Series%20Library)
+
 
 ### For Seeed Studio XIAO MG24
-- 📄 **[PDF]** [MG24 datasheet](https://files.seeedstudio.com/wiki/XIAO_MG24/Getting_Start/mg24-group-datasheet.PDF)
-- 📄 **[PDF]** [Seeed Studio XIAO MG24 Schematic](https://files.seeedstudio.com/wiki/XIAO_MG24/Getting_Start/XIAO_MG24_SCH.pdf)
-- 📄 **[PDF]** [MG24 Wireless SoC](https://files.seeedstudio.com/wiki/XIAO_MG24/Getting_Start/efr32xg24_rm.pdf)
-- 📄 **[Kicad]** [MG24 FootOut](https://files.seeedstudio.com/wiki/XIAO_MG24/Getting_Start/XIAO_MG24_SMD.kicad_mod)
+- 📄 **[PDF]** [Seeed Studio XIAO MG24 datasheet](https://files.seeedstudio.com/wiki/XIAO_MG24/Getting_Start/mg24-group-datasheet.PDF)
+- 📄 **[PDF]** [Seeed Studio XIAO MG24 Schematic](https://files.seeedstudio.com/wiki/XIAO_MG24/Getting_Start/XIAO_MGM240S_KICAD_Prj.pdf)
+- 📄 **[PDF]** [Seeed Studio XIAO MG24 Wireless SoC](https://files.seeedstudio.com/wiki/XIAO_MG24/Getting_Start/efr32xg24_rm.pdf)
+- 🔗 **[Kicad]** [Seeed Studio XIAO MG24 FootPrint](https://github.com/Seeed-Studio/OPL_Kicad_Library/tree/master/Seeed%20Studio%20XIAO%20Series%20Library)
 
 
 

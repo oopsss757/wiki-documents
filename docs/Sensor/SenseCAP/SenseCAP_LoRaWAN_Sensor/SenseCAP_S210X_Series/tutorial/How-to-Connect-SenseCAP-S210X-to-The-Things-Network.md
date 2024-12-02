@@ -3,15 +3,15 @@ description: Connect to The Things Network
 title: Connect to The Things Network
 keywords:
 - SenseCAP Sensor_Probe&Accessories
-image: https://files.seeedstudio.com/wiki/wiki-platform/S-tempor.png
+image: https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/003.webp
 last_update:
-  date: 2/14/2023
-  author: Matthew
+  date: 11/25/2024
+  author: Leo
 ---
 
 # Connect to The Things Network
  
-## 1. The Things Network	
+## The Things Network	
 The Things Stack is an enterprise grade LoRaWAN network server, built on an open-source core. The Things Stack allows you to build and manage LoRaWAN networks on your own hardware or in the cloud.
 
 ![](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/003.png)
@@ -41,13 +41,15 @@ Set the corresponding frequency band based on the frequency band of the gateway.
 
 (1) Click the “Setting” and select the platform is “The Things Network”.
 
-![wecom-temp-81208-6d8da19d41a879a504ad54c71bf4961c](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/008.jpeg)  
-![wecom-temp-73569-56429bfa7490c37c5ec3c5b2fc8ba435](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/009.jpeg)
+![wecom-temp-81208-6d8da19d41a879a504ad54c71bf4961c](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/008.png) 
 
 (2) Select the Frequency Plan, if your gateway is US915, set the sensor to US915.
+
+![wecom-temp-73569-56429bfa7490c37c5ec3c5b2fc8ba435](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/009.png)
+
 (3) The device uses OTAA to join the LoRaWAN network by default. So, we can set the device EUI, App EUI and APP Key here.
 
-![](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/010.png)
+![](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/0010.png)
 
 |**Parameter**|**Type**|
 | - | - |
@@ -64,7 +66,7 @@ Set the corresponding frequency band based on the frequency band of the gateway.
 
 (5) Click the “Send” button, send the setting to the sensor for it to take effect. 
 
-![](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/011.png)
+![](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/0011.png)
 
 (6) Click the “Home” button, the App will disconnect the Bluetooth connection.
 
@@ -84,26 +86,26 @@ Then, the sensor will reboot.
 ### Gateway Registration on TTN
 Create a Gateway on the TTN console based on actual information.
 
-![](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/012.png)
+![](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/0012.png)
 ### Create the Application
 Create an application on your TTN console. Within applications, you can register and manage end devices and their network data. After setting up your device fleet, use one of our many integration options to pass relevant data to your external services.
 
-![](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/013.png)
+![](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/0013.png)
 
 
 
 ## Add Sensor to TTN Console
 (1) Select the Application you have created, and click the ‘Register end device’ to add end your device.
 
-![](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/014.png)
+![](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/0014.png)
 
 (2) Select the end device in the LoRaWAN Device Repository.
 
-![](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/015.png)
+![](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/0015.png)
 
 And then based on the brand, configure items like the ones below.
 
-![](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/016.png)
+![](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/0016.png)
 
 - End device brand: Select SenseCAP.
 - Model: Select your sensor model. (If not, use manual add)
@@ -125,32 +127,34 @@ For Helium network, please refer to:
 
 *https://docs.helium.com/lorawan-on-helium/frequency-plans*	
 
-![](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/017.png)
+![](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/0017.png)
 
 (3) Configure ‘Provisioning information’.
 
-![](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/018.png)
+![](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/0018.png)
 
 - JoinEUI: which means the **APP EUI**, you can get it from SenseCAP Mate App.
 
-![](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/019.png)
+![](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/0019.png)
 
 - Device EUI/ App Key: Get it from the configuration page via SenseCAP Mate App. Like the below picture.
 
-![](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/020.png)
+![](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/0020.png)
 
-![](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/021.png)
+![](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/0021.png)
 
 
 (4) Register end device. 
 
 After you finish the above items, Click the “Register end device” to save your modification.
 
-**\*Note:** If joining the network successfully, LED will **flashes fast for 2s**.
+:::tip note
+If joining the network successfully, LED will **flashes fast for 2s**.
+:::
 
 ## Check Data on TTN Console
 On the Data page, data package is uploading. For the format of the payload, refer to the section of Payload Decoding.
 
-![](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/022.png)
+![](https://files.seeedstudio.com/wiki/SenseCAPS210X/TTN_Network/0022.png)
 
 

@@ -221,7 +221,7 @@ Since you have downloaded the zip Library, open your Arduino IDE, click on **Ske
 
 <div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/Get_Started_With_Arduino/img/Add_Zip.png" style={{width:800, height:'auto'}}/></div>
 
-If you want to use the RTC function on the expansion board, then you also need to search and install the **I2C BM8563 RTC** library.
+We need to use the RTC function on the round display, so you also need to search and install the **I2C BM8563 RTC** library.
 
 <div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/round_display_for_xiao/63.png" style={{width:800, height:'auto'}}/></div>
 
@@ -247,20 +247,6 @@ If you need to use the **TFT_eSPI** library, then proceed to **step 5**. If you 
 For the content of Round Display, our tutorial will focus on the use of **TFT_eSPI**.
 :::
 
-### Compatibility Test for Round Display and XIAO
-
-We made a Compatibility Test for Round Display and XIAO. You can take a look before you use.
-
-|         | TFT library | Arduino GFX |
-|---------|-----|-----|
-| XIAO SAMD21 | ❌  | ❌  |
-| XIAO RP2040 | ❌  | ❌  |
-| XIAO RA4M1  | ❌  | ❌  |
-| XIAO nRF52840 non mbed version| ✅  | ❌  |
-| XIAO nRF52840 mbed version| ❌  | ✅  |
-| XIAO ESP32C3 | ✅  | ✅  |
-| XIAO ESP32C6 | ✅  | ❌  |
-| XIAO ESP32S3 | ✅  | ✅  |
 
 
 ### Arduino Library Overview
@@ -275,7 +261,44 @@ As we can probably tell from the above tutorial, Round Display mainly uses **LVG
 
 ## Light up your Round Display
 
-Once the hardware and software are ready, we start uploading our first example program. This sample program can be used to check if the Round Display's RTC clock, SD card and touch functions are working properly.
+### Demo 1: TFT Clock
+
+Once the hardware and software are ready, we start uploading our first example program. This sample program can be used to check if the Round Display's RTC clock are working properly. Because this demo requires a small amount of memory, suitable for all XIAO models. 
+
+:::tip
+If you want to modify this demo to implement more complex displays, please be mindful of the memory size of the XIAO you are using. The specific size can be found on the introduction page of that XIAO.
+:::
+
+You can find this sample program in the Arduino IDE under **File -> Examples -> Seeed Arduino Round display -> TFT_Clock**.
+
+<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/round_display_for_xiao/r1.png" style={{width:600, height:'auto'}}/></div>
+
+Just select the XIAO you are using and the port number where the XIAO is located, compile and upload it.
+
+Make sure the Round Display switch is toggled to the ON position.
+
+<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/round_display_for_xiao/59.jpg" style={{width:400, height:'auto'}}/></div>
+
+If the program runs smoothly, you will see the following effect.
+
+<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/round_display_for_xiao/r3.png" style={{width:600, height:'auto'}}/></div>
+
+### Demo 2: Hareware Test
+
+Because the HardwareTest demo is a bit complex and occupies a larger amount of memory, some XIAO models may fail to run successfully due to insufficient memory. We have created a test table for your reference, using TFT library and Arduino GFX library.
+
+|         | TFT library | Arduino GFX |
+|---------|-----|-----|
+| XIAO SAMD21 | ❌  | ❌  |
+| XIAO RP2040 | ❌  | ❌  |
+| XIAO RA4M1  | ❌  | ❌  |
+| XIAO nRF52840 non mbed version| ✅  | ❌  |
+| XIAO nRF52840 mbed version| ❌  | ✅  |
+| XIAO ESP32C3 | ✅  | ✅  |
+| XIAO ESP32C6 | ✅  | ❌  |
+| XIAO ESP32S3 | ✅  | ✅  |
+
+This sample program can be used to check if the Round Display's RTC clock, SD card and touch functions are working properly.
 
 You can find this sample program in the Arduino IDE under **File -> Examples -> Seeed Arduino Round display -> HardwareTest**.
 

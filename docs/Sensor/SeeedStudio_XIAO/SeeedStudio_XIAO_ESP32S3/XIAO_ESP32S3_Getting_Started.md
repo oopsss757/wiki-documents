@@ -1,6 +1,6 @@
 ---
-description: Getting Started with Seeed Studio XIAO ESP32S3.
-title: Getting Started with Seeed Studio XIAO ESP32S3 (Sense)
+description: Getting Started with Seeed Studio XIAO ESP32S3 Series.
+title: Getting Started with Seeed Studio XIAO ESP32S3 Series
 keywords:
 - esp32s3
 - xiao
@@ -14,17 +14,19 @@ last_update:
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Getting Started with Seeed Studio XIAO ESP32S3 (Sense)
+# Getting Started with Seeed Studio XIAO ESP32S3 Series
 
 <div class="table-center">
 	<table align="center">
 		<tr>
 			<th>Seeed Studio XIAO ESP32S3</th>
 			<th>Seeed Studio XIAO ESP32S3 Sense</th>
+			<th>Seeed Studio XIAO ESP32S3 Plus</th>
 		</tr>
 		<tr>
 			<td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/img/xiaoesp32s3.jpg" style={{width:250, height:'auto'}}/></div></td>
 			<td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/img/xiaoesp32s3sense.jpg" style={{width:250, height:'auto'}}/></div></td>
+			<td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/img/xiaoesp32s3plus.png" style={{width:250, height:'auto'}}/></div></td>
 		</tr>
 		<tr>
 			<td><div class="get_one_now_container" style={{textAlign: 'center'}}>
@@ -34,6 +36,11 @@ import TabItem from '@theme/TabItem';
 			</div></td>
 			<td><div class="get_one_now_container" style={{textAlign: 'center'}}>
 				<a class="get_one_now_item" href="https://www.seeedstudio.com/XIAO-ESP32S3-Sense-p-5639.html">
+				<strong><span><font color={'FFFFFF'} size={"4"}> Get One Now 🖱️</font></span></strong>
+				</a>
+			</div></td>
+			<td><div class="get_one_now_container" style={{textAlign: 'center'}}>
+				<a class="get_one_now_item" href="https://wiki.seeedstudio.com/xiao_esp32s3_getting_started/">
 				<strong><span><font color={'FFFFFF'} size={"4"}> Get One Now 🖱️</font></span></strong>
 				</a>
 			</div></td>
@@ -52,75 +59,80 @@ Seeed Studio XIAO ESP32S3 Sense integrates camera sensor, digital microphone and
 <table align="center">
 	<tr>
 	    <th>Item</th>
-	    <th>Seeed Studio XIAO ESP32S3</th>
-        <th>Seeed Studio XIAO ESP32S3 Sense</th>
+	    <th style={{width:300, height:'auto'}}>Seeed Studio XIAO ESP32S3</th>
+        <th style={{width:300, height:'auto'}}>Seeed Studio XIAO ESP32S3 Sense</th>
+		<th style={{width:300, height:'auto'}}>Seeed Studio XIAO ESP32S3 Plus</th>
 	</tr>
 	<tr>
 	    <th>Processor</th>
-	    <td align="center" colspan="2">ESP32-S3R8 <br></br> Xtensa LX7 dual-core, 32-bit processor that operates at up to 240 MHz </td>
+	    <td align="center" colspan="3">ESP32-S3R8 <br></br> Xtensa LX7 dual-core, 32-bit processor that operates at up to 240 MHz </td>
 	</tr>
 	<tr>
 	    <th>Wireless</th>
-	    <td align="center" colspan="2">Complete 2.4GHz Wi-Fi subsystem <br></br> BLE: Bluetooth 5.0, Bluetooth mesh</td>
+	    <td align="center" colspan="3">Complete 2.4GHz Wi-Fi subsystem <br></br> BLE: Bluetooth 5.0, Bluetooth mesh</td>
 	</tr>
     <tr>
 	    <th>Built-in Sensors</th>
 	    <td align="center"> - </td>
         <td align="center">OV2640 camera sensor for 1600*1200 <br></br> Digital microphone</td>
+		<td align="center"> - </td>
 	</tr>
     <tr>
 	    <th>Memory</th>
 	    <td align="center">On-chip 8M PSRAM & 8MB Flash</td>
         <td align="center">On-chip 8M PSRAM & 8MB Flash <br></br> Onboard SD Card Slot, supporting 32GB FAT</td>
+		<td align="center">On-chip 8M PSRAM & 16MB Flash <br></br> Onboard SD Card Slot, supporting 32GB FAT</td>
 	</tr>
     <tr>
 	    <th>Interface</th>
 	    <td>1x UART, 1x IIC, 1x IIS, 1x SPI, 11x GPIOs (PWM), 9x ADC, 1x User LED, 1x Charge LED  <br></br> 1x Reset button, 1x Boot button</td>
-        <td>1x UART, 1x IIC, 1x IIS, 1x SPI, 11x GPIOs (PWM), 9x ADC, 1x User LED, 1x Charge LED, 1x B2B Connector (with 2 additional GPIOs)  <br></br> 1x Reset button, 1x Boot button</td>
+        <td>1x UART, 1x IIC, 1x IIS, 1x SPI, 11x GPIOs (PWM), 9x ADC, 1x User LED, 1x Charge LED, 1x B2B Connector (with 2 additional GPIOs), 1x Reset button, 1x Boot button</td>
+		<td><strong>2</strong>x UART, 1x IIC, 1x IIS, <strong>2</strong>x SPI, <strong>18</strong>x GPIOs (PWM), 9x ADC, 1x JTAG, <strong>1x Camera interface</strong>, <strong>1x Microphone interface</strong>, 1x User LED, 1x Charge LED, 1x B2B Connector, 1x Reset button, 1x Boot button</td>
 	</tr>
     <tr>
 	    <th>Dimensions</th>
 	    <td align="center">21 x 17.8mm</td>
         <td align="center">21 x 17.8 x 15mm (with expansion board)</td>
+		<td align="center">21 x 17.8 x 15mm (with expansion board)</td>
 	</tr>
     <tr>
 	    <th rowspan="5">Power</th>
-	    <td colspan="2" align="center">Input voltage (Type-C): 5V <br></br> Input voltage (BAT): 4.2V</td>
+	    <td colspan="3" align="center">Input voltage (Type-C): 5V <br></br> Input voltage (BAT): 4.2V</td>
 	</tr>
     <tr>
 	    <td>Circuit operating Voltage  (ready to operate): <br></br> - Type-C: 5V@<strong>19mA</strong> <br></br> - BAT: 3.8V@<strong>22mA</strong></td>
-        <td>Circuit operating Voltage  (ready to operate): <br></br> - Type-C: 5V@<strong>38.3mA</strong> <br></br> - BAT: 3.8V@<strong>43.2mA</strong> (with expansion board)</td>
+        <td colspan="2">Circuit operating Voltage  (ready to operate): <br></br> - Type-C: 5V@<strong>38.3mA</strong> <br></br> - BAT: 3.8V@<strong>43.2mA</strong> (with expansion board)</td>
 	</tr>
 	<tr>
 	    <td align="center"> - </td>
-        <td>Webcam Web application: <br></br> - Type-C: <br></br> - - Average power consumption: 5V/<strong>138mA</strong> <br></br> - - Photo moment: 5V/<strong>341mA</strong> <br></br> - Battery: <br></br> - - Average power consumption: 3.8V/<strong>154mA</strong> <br></br> - - Photo moment: 3.8V/<strong>304mA</strong></td>
+        <td colspan="2">Webcam Web application: <br></br> - Type-C: <br></br> - - Average power consumption: 5V/<strong>138mA</strong> <br></br> - - Photo moment: 5V/<strong>341mA</strong> <br></br> - Battery: <br></br> - - Average power consumption: 3.8V/<strong>154mA</strong> <br></br> - - Photo moment: 3.8V/<strong>304mA</strong></td>
 	</tr>
 	<tr>
 	    <td align="center"> - </td>
-        <td>Microphone recording & SD card writing:  <br></br> - Type-C: <br></br> - - Average power consumption: 5V/<strong>46.5mA</strong> <br></br> - - Peak power consumption: 5V/<strong>89.6mA</strong> <br></br> - Battery: <br></br> - - Average power consumption: 3.8V/<strong>54.4mA</strong> <br></br> - - Peak power consumption: 3.8V/<strong>108mA</strong></td>
+        <td colspan="2">Microphone recording & SD card writing:  <br></br> - Type-C: <br></br> - - Average power consumption: 5V/<strong>46.5mA</strong> <br></br> - - Peak power consumption: 5V/<strong>89.6mA</strong> <br></br> - Battery: <br></br> - - Average power consumption: 3.8V/<strong>54.4mA</strong> <br></br> - - Peak power consumption: 3.8V/<strong>108mA</strong></td>
 	</tr>
     <tr>
 	    <td align="center">Charging battery current: <strong>100mA</strong></td>
-		<td align="center">Charging battery current: <strong>100mA</strong></td>
+		<td colspan="2">Charging battery current: <strong>100mA</strong></td>
 	</tr>
     <tr>
         <th>Low Power Consumption Model</th>
         <td>Modem-sleep Model: <strong>3.8V/25 mA</strong> <br></br> Light-sleep Model: <strong>3.8V/2 mA</strong> <br></br> Deep Sleep Model: <strong>3.8V/14 μA</strong></td>
-        <td>Without any peripherals: <br></br> - Modem-sleep Model: <strong>3.8V/25.5 mA</strong> <br></br> - Light-sleep Model: <strong>3.8V/2.4 mA</strong> <br></br> - Deep Sleep Model: <strong>3.8V/63.768 μA</strong> <br></br> Connect the camera: <br></br> - Modem-sleep Model: <strong>3.8V/44.57 mA</strong> <br></br> - Light-sleep Model: <strong>3.8V/5.47 mA</strong> <br></br> - Deep Sleep Model: <strong>3.8V/3.00 mA</strong> <br></br> Connecting an SD Card: <br></br> - Modem-sleep Model: <strong>3.8V/32.8 mA</strong> <br></br> - Light-sleep Model: <strong>3.8V/3.48 mA</strong> <br></br> - Deep Sleep Model: <strong>3.8V/1.08 mA</strong><br></br> Simultaneously connect the camera and the SD card: <br></br> - Modem-sleep Model: <strong>3.8V/55.72 mA</strong> <br></br> - Light-sleep Model: <strong>3.8V/6.56 mA</strong> <br></br> - Deep Sleep Model: <strong>3.8V/3.98 mA</strong></td>
+        <td colspan="2">Without any peripherals: <br></br> - Modem-sleep Model: <strong>3.8V/25.5 mA</strong> <br></br> - Light-sleep Model: <strong>3.8V/2.4 mA</strong> <br></br> - Deep Sleep Model: <strong>3.8V/63.768 μA</strong> <br></br> Connect the camera: <br></br> - Modem-sleep Model: <strong>3.8V/44.57 mA</strong> <br></br> - Light-sleep Model: <strong>3.8V/5.47 mA</strong> <br></br> - Deep Sleep Model: <strong>3.8V/3.00 mA</strong> <br></br> Connecting an SD Card: <br></br> - Modem-sleep Model: <strong>3.8V/32.8 mA</strong> <br></br> - Light-sleep Model: <strong>3.8V/3.48 mA</strong> <br></br> - Deep Sleep Model: <strong>3.8V/1.08 mA</strong><br></br> Simultaneously connect the camera and the SD card: <br></br> - Modem-sleep Model: <strong>3.8V/55.72 mA</strong> <br></br> - Light-sleep Model: <strong>3.8V/6.56 mA</strong> <br></br> - Deep Sleep Model: <strong>3.8V/3.98 mA</strong></td>
     </tr>
     <tr>
         <th>Wi-Fi Enabled Power Consumption</th>
         <td align="center">Active Model: <strong>~ 100 mA</strong></td>
-        <td align="center">Active Model: <strong>~ 110 mA</strong> (with expansion board)</td>
+        <td colspan="2" align="center">Active Model: <strong>~ 110 mA</strong> (with expansion board)</td>
     </tr>
     <tr>
         <th>BLE Enabled Power Consumption</th>
         <td align="center">Active Model: <strong>~ 85 mA</strong></td>
-        <td align="center">Active Model: <strong>~ 102 mA</strong> (with expansion board)</td>
+        <td colspan="2" align="center">Active Model: <strong>~ 102 mA</strong> (with expansion board)</td>
     </tr> 
     <tr>
         <th>Working Temperature</th>
-        <td colspan="2" align="center">-40°C ~ 65°C</td>
+        <td colspan="3" align="center">-40°C ~ 65°C</td>
     </tr>
 </table>
 
@@ -129,13 +141,16 @@ Seeed Studio XIAO ESP32S3 Sense integrates camera sensor, digital microphone and
 - **Powerful MCU Board**: Incorporate the ESP32S3 32-bit, dual-core, Xtensa processor chip operating up to 240 MHz, mounted multiple development ports, Arduino / MicroPython supported
 - **Advanced Functionality** (for Sense): Detachable OV2640 camera sensor for 1600*1200 resolution, compatible with OV5640 camera sensor, intergating additional digital microphone
 - **Elaborate Power Design**: Lithium battery charge management capability, offer 4 power consumption model which allows for deep sleep mode with power consumption as low as 14μA
-- **Great Memory for more Possibilities**: Offer 8MB PSRAM and 8MB FLASH, supporting SD card slot for external 32GB FAT memory 
+- **Great Memory for more Possibilities**: Offer 8MB PSRAM and 8MB FLASH (16MB in **Plus** version), supporting SD card slot for external 32GB FAT memory 
 - **Outstanding RF performance**: Support 2.4GHz Wi-Fi and BLE dual wireless communication, support 100m+ remote communication when connected with U.FL antenna
 - **Thumb-sized Compact Design**: 21 x 17.8mm, adopting the classic form factor of XIAO, suitable for space limited projects like wearable devices
 
 ## Hardware Overview
 
 Before everything starts, it is quite essential to have some basic parameters of the product. The following table provides information about the characteristics of Seeed Studio XIAO ESP32S3.
+
+<Tabs>
+<TabItem  value="(Sense)" label="XIAO ESP32S3/XIAO ESP32S3 Sense" default>
 
 <table align="center">
 	<tr>
@@ -157,6 +172,37 @@ Before everything starts, it is quite essential to have some basic parameters of
 	    <td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/img/2.jpg" style={{width:1000, height:'auto'}}/></div></td>
 	</tr>
 </table>
+
+</TabItem>
+<TabItem value="Plus" label="XIAO ESP32S3 Plus" default>
+
+<table align="center">
+	<tr>
+		<th>XIAO ESP32S3 Plus front indication diagram</th>
+	</tr>
+	<tr>
+		<td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/img/plus_front.png
+		" style={{width:700, height:'auto'}}/></div></td>
+	</tr>
+	<tr>
+		<th>XIAO ESP32S3 Plus back indication diagram</th>
+	</tr>
+	<tr>
+		<td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/img/plus_back.png
+		" style={{width:700, height:'auto'}}/></div></td>
+	</tr>
+	<tr>
+	<th>XIAO ESP32S3 Plus Pin List</th>
+	</tr>
+	<tr>
+		<td><div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/img/plus_pinout.png
+		" style={{width:1000, height:'auto'}}/></div></td>
+	</tr>
+</table>
+
+</TabItem>
+
+</Tabs>
 
 - 5V - This is 5v out from the USB port. You can also use this as a voltage input but you must have some sort of diode (schottky, signal, power) between your external power source and this pin with anode to battery, cathode to 5V pin.
 - 3V3 - This is the regulated output from the onboard regulator. You can draw 700mA
@@ -329,6 +375,11 @@ The larger option provides superior cooling, which is ideal for high-performance
 
 <div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/img/pin-dual-heat-sink-install.png" style={{width:400, height:'auto'}}/></div>
 
+
+:::note
+If you want to use the BAT pin of the XIAO ESP32S3 Plus, this case dual heat sink is not suitable for it.
+:::
+
   </TabItem>
 </Tabs>
 
@@ -410,10 +461,20 @@ After you have downloaded the above zip, please unzip it and you will see two fi
 - **Step 4.** Select your board and port.
 
 On top of the Arduino IDE, you can select the port directly. This is likely to be COM3 or higher (**COM1** and **COM2** are usually reserved for hardware serial ports).
+<Tabs>
+<TabItem value="(Sense)" label="for XIAO ESP32S2 (Sense)" default>
 
 Also, search for **xiao** in the development board on the left. select **XIAO_ESP32S3**.
 
 <div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/img/10.png" style={{width:600, height:'auto'}}/></div>
+
+</TabItem>
+<TabItem value="Plus" label="for XIAO ESP32S3 Plus" default>
+
+It will be released soon; keep tuned for future updates.
+
+</TabItem>
+</Tabs>
 
 With this preparation, you can start writing programs for XIAO ESP32S3 to compile and upload.
 
@@ -619,6 +680,7 @@ To flash the firmware, simply run the appropriate `.bat` file. If the flashing p
 - **[XLSX]** [Seeed Studio XIAO ESP32S3 pinout sheet](https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/res/XIAO_ESP32S3_Sense_Pinout.xlsx)
 - **[STEP]** [Seeed Studio XIAO ESP32S3 3D Model](https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/res/seeed-studio-xiao-esp32s3-3d_model.zip)
 - **[ZIP]** [Seeed Studio XIAO ESP32S3 Certification files](https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/res/XIAO_ESP32S3_Certification.zip)
+- 🔗 **[Kicad]** [Seeed Studio XIAO ESP32S3 FootPrint](https://github.com/Seeed-Studio/OPL_Kicad_Library/tree/master/Seeed%20Studio%20XIAO%20Series%20Library)
 
 ### For Seeed Studio XIAO ESP32S3 Sense
 
@@ -632,7 +694,7 @@ To flash the firmware, simply run the appropriate `.bat` file. If the flashing p
 - **[ZIP]** [Seeed Studio XIAO ESP32S3 Sense Factory firmware](https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/res/XIAO-ESP32S3-Sense-firmware-20240814.zip)
 - **[XLSX]** [Seeed Studio XIAO ESP32S3 Sense pinout sheet](https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/res/XIAO_ESP32S3_Sense_Pinout.xlsx)
 - **[STEP]** [Seeed Studio XIAO ESP32S3 Sense 3D Model](https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/res/seeed-studio-xiao-esp32s3-sense-3d_model.zip)
-
+- 🔗 **[Kicad]** [Seeed Studio XIAO ESP32S3 Sense FootPrint](https://github.com/Seeed-Studio/OPL_Kicad_Library/tree/master/Seeed%20Studio%20XIAO%20Series%20Library)
 ## Course Resources
 
 <div align="middle"><img width="400" src="https://mjrovai.github.io/XIAO_Big_Power_Small_Board-ebook/cover.jpg" /></div>

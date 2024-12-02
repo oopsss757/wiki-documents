@@ -33,6 +33,20 @@ Please read here to learn and understand the basic operation of Watcher so that 
 
 ### Power On
 
+:::caution
+Please use a power plug that is compatible with the Watcher; the Watcher must be powered by a 5V power supply and may burn out if you use a non-compliant power adapter or a power supply with a voltage greater than 5V!
+
+<div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/watcher_getting_started/adapter.jpg" style={{width:350, height:'auto'}}/></div>
+
+The chart above shows the recommended adapter specifications. If you don't know where you can purchase the right adapter, you can choose to buy it directly at the link below.
+
+<div class="get_one_now_container" style={{textAlign: 'center'}}>
+    <a class="get_one_now_item" href="https://www.seeedstudio.com/USB-Power-Adapter-for-Raspberry-Pi-4-5V-3A-p-4089.html">
+            <strong><span><font color={'FFFFFF'} size={"4"}> Get One Now 🖱️</font></span></strong>
+    </a>
+</div>
+:::
+
 To power on your Watcher device, press and hold the wheel button located on the upper right corner for approximately 3 seconds until the Seeed Studio logo appears on the screen.
 
 <div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/watcher_getting_started/power_on.gif" style={{width:650, height:'auto'}}/></div>

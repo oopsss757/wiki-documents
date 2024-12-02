@@ -23,6 +23,14 @@ In this wiki, we will explore the exciting possibilities that arise when Watcher
 
 Throughout this wiki, we will dive into the details of reading and interpreting the data output from Watcher's UART interface. Additionally, we will provide comprehensive tutorials on how to parse and utilize this data using popular development boards and platforms, including XIAO, Arduino, Raspberry Pi, and Jetson.
 
+## SenseCAP Watcher Advanced Configuration
+
+<div class="table-center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Ono_v759R0Y" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+SenseCAP Watcher is the first physical LLM agent for intelligent places, capable of monitoring scenes,  triggering action, and interacting based on commands. This video will introduce how SenseCAP Watcher selects scene-trigger models based on task analysis: on-device model and LLM model. We will also show how to configure the RGB light and Display&Sound alert, and the notification push mode: APP, UART, HTTP.
+
 ## Watcher UART wiring
 
 When you are ready to use the UART for message alarms, please connect the Watcher to your MCU as follows.

@@ -446,6 +446,7 @@ You will see the following output when flashing is successful
 - 🔗 **[Link]** [Platform IO for Seeed Studio XIAO ESP32](https://docs.platformio.org/en/latest/boards/espressif32/seeed_xiao_esp32c3.html)
 - 🔗 **[WiKi]** [First Look at the Seeed Studio XIAO ESP32C3](https://sigmdel.ca/michel/ha/xiao/xiao_esp32c3_intro_en.html)  A great intro to the XIAO ESP32C3, covering key features and basic usage.
 - 📚 **[Ebook]** [XIAO: Big Power, Small Board Mastering Arduino and TinyML](https://mjrovai.github.io/XIAO_Big_Power_Small_Board-ebook/) Excellent guide for mastering Arduino and TinyML on XIAO boards.
+- 🔗 **[Kicad]** [Seeed Studio XIAO ESP32C3 FootPrint](https://github.com/Seeed-Studio/OPL_Kicad_Library/tree/master/Seeed%20Studio%20XIAO%20Series%20Library)
 
 ## Course Resources
 
