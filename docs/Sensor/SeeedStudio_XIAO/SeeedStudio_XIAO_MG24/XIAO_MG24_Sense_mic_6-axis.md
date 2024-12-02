@@ -317,7 +317,6 @@ void loop() {
 If all goes well, you will see the following effect, the brightness of the LEDs will change according to the volume of the sound.
 
 <div style={{textAlign:'center'}}><img src="https://files.seeedstudio.com/wiki/mg24_mic/test.gif" style={{width:720, height:'auto'}}/></div>
-
 ## 6-Axis IMU
 6-Axis IMU (Inertial Measurement Unit) Sensors like the **LSM6DS3TR-C** integrate accelerometers and gyroscopes to measure the motion and orientation of an object in three-dimensional space. Specifically, the LSM6DS3TR-C has the following features:
 **Accelerometer function:**
