@@ -220,8 +220,6 @@ void initLDMA(uint32_t *buffer, uint32_t size) {
 
 #include <stdint.h> 
 
-
-
 float findMaxAverage(uint32_t arr[], int size, int n) {
     uint32_t maxElements[N];
 
